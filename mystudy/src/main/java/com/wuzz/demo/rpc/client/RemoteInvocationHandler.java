@@ -16,14 +16,14 @@ public class RemoteInvocationHandler implements InvocationHandler {
 
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-//组装请求
+        //组装请求
         RpcRequest request = new RpcRequest();
         request.setClassName(method.getDeclaringClass().getName());
         request.setMethodName(method.getName());
         request.setParameters(args);
-//通过tcp传输协议进行传输
+        //通过tcp传输协议进行传输
         TCPTransport tcpTransport = new TCPTransport(this.host, this.port);
-//发送请求
+        //发送请求
         return tcpTransport.send(request);
     }
 }
