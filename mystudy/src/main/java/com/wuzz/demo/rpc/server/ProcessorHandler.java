@@ -46,8 +46,9 @@ public class ProcessorHandler implements Runnable {
         }
     }
 
-    private Object invoke(RpcRequest request) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-//一下均为反射操作，目的是通过反射调用服务
+    private Object invoke(RpcRequest request) throws InvocationTargetException, IllegalAccessException,
+            NoSuchMethodException {
+        //一下均为反射操作，目的是通过反射调用服务
         Object[] args = request.getParameters();
         Class<?>[] types = new Class[args.length];
         for (int i = 0; i < args.length; i++) {
