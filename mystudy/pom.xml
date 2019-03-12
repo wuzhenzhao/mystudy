@@ -6,8 +6,12 @@
 
     <groupId>com.wuzz.demo</groupId>
     <artifactId>study</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-<dependencies>
+    <modules>
+        <module>dubbo-study</module>
+    </modules>
+    <dependencies>
     <dependency>
         <groupId>org.jsoup</groupId>
         <artifactId>jsoup</artifactId>
