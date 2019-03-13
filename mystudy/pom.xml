@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>dubbo-study</module>
+        <module>spring-cloud-study</module>
     </modules>
     <dependencies>
     <dependency>
