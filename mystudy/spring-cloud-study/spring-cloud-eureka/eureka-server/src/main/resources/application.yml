@@ -1,10 +1,13 @@
 server:
   port: 7001
+
+# eureka注册中心，不会盲目清楚已经注册的服务列表内的任何微服务，这是他的自我保护机制，
+# 当微服务长时间没有客户端请求，即没有心跳，便会启动自我保护，
 eureka:
   instance:
     hostname: eureka7001.com
   client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://eureka7001.com:8081/eureka/
+    registerWithEureka: false #表示是否注册Eureka服务器,因为自身作为服务注册中心，所以为false
+    fetchRegistry: false #是否从eureka上获取注册信息,因为自身作为服务注册中心，所以为false
+    serviceUrl: #http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/ #集群版
+      defaultZone: http://localhost:7001/eureka/
