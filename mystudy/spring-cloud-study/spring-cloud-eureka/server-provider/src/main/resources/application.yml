@@ -1,0 +1,41 @@
+server:
+  port: 8001
+
+# eureka注册中心，不会盲目清楚已经注册的服务列表内的任何微服务，这是他的自我保护机制，
+# 当微服务长时间没有客户端请求，即没有心跳，便会启动自我保护，
+#eureka:
+#  instance:
+#    hostname: eureka7001.com
+#  client:
+#    registerWithEureka: false #表示是否注册Eureka服务器,因为自身作为服务注册中心，所以为false
+#    fetchRegistry: false #是否从eureka上获取注册信息,因为自身作为服务注册中心，所以为false
+#    serviceUrl:
+#      defaultZone: http://eureka7001.com:8081/eureka/
+
+spring:
+  application:
+    name: cloud-provider-dept #服务注册到Eureka上使用的名称
+#  datasource: #数据库的配置
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: org.gjt.mm.mysql.Driver
+#    url: jdbc:mysql://localhost:3306/mysql?characterEncoding=utf8
+#    username: root
+#    password: zhenzhao123456
+#    dbcp2:
+#      min-idle: 2
+#      initial-size: 5
+#      max-total: 5
+#      max-wait-millis: 200
+eureka:
+  client:
+    service-url:  # 集群情况下如下，如果是单机版，只需要配置单机版Eureka地址
+      defaultZone: http://localhost:7001/eureka/ #,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: cloud-provider-dept8001
+    prefer-ip-address: true #访问路径显示IP地址
+
+info:   # 在Eureka上点击服务时会跳转到个404页面，可配置这里让他跳转到服务简介的一个页面，信息如下配置
+  app.name: wuzz
+  company.name: www.newings.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
