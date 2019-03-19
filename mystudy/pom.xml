@@ -17,6 +17,7 @@
         <module>rabbitmq-study</module>
         <module>netty-study</module>
         <module>rpc-study</module>
+        <module>design-pattern-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
