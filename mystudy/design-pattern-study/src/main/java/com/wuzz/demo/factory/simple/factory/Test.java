@@ -1,4 +1,4 @@
-package com.wuzz.demo.factory_pattern.simple_factory;
+package com.wuzz.demo.factory.simple.factory;
 
 /**
  * Create with IntelliJ IDEA
