@@ -1,6 +1,4 @@
-package com.wuzz.demo.proxy.myjdkproxy;
-
-import com.wuzz.demo.proxy.staticproxy.Person;
+package com.wuzz.demo.proxy.customjdkproxy;
 
 import java.lang.reflect.Method;
 

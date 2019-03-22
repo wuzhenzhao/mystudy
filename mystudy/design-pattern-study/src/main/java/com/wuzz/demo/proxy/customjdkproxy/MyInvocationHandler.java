@@ -1,4 +1,4 @@
-package com.wuzz.demo.proxy.myjdkproxy;
+package com.wuzz.demo.proxy.customjdkproxy;
 
 import java.lang.reflect.Method;
 

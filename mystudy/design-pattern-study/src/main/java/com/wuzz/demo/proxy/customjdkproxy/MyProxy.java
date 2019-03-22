@@ -1,4 +1,4 @@
-package com.wuzz.demo.proxy.myjdkproxy;
+package com.wuzz.demo.proxy.customjdkproxy;
 
 import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
