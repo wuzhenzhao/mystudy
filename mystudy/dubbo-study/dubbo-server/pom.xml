@@ -10,6 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dubbo-server</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>dubbo-api</module>
+        <module>dubbo-provider</module>
+    </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

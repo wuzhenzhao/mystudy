@@ -11,6 +11,9 @@
 
     <artifactId>spring-cloud-ribbon</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>ribbon-server</module>
+    </modules>
 
 
 </project>

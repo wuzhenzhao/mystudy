@@ -1,0 +1,17 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: feign-server #服务注册到Eureka上使用的名称
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    instance-id: feign-server-9002
+    prefer-ip-address: true #访问路径显示IP地址
+feign:
+  hystrix:
+    enabled: true

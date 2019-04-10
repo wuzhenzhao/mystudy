@@ -15,6 +15,10 @@
         <module>spring-cloud-eureka</module>
         <module>spring-cloud-ribbon</module>
         <module>spring-cloud-eureka</module>
+        <module>spring-cloud-config</module>
+        <module>spring-cloud-feign</module>
+        <module>spring-cloud-hystrix</module>
+        <module>spring-cloud-zuul</module>
     </modules>
 
 
