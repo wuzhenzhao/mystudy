@@ -11,5 +11,12 @@
 
     <artifactId>springboot-study</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.4.2.Final</version>
+        </dependency>
+    </dependencies>
 
 </project>
