@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Create with IntelliJ IDEA
@@ -21,6 +22,9 @@ public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
         log.info("服务启动成功");
+
+        ClassPathXmlApplicationContext classPathXmlApplicationContext =
+                new ClassPathXmlApplicationContext("application.properties");
 
     }
 

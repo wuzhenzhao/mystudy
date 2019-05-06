@@ -11,5 +11,11 @@
 
     <artifactId>activemq-study</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.15.0</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,7 +1,9 @@
 package com.wuzz.demo.mvc.controller;
 
+import com.wuzz.demo.mvc.annotation.WuzzAutowired;
 import com.wuzz.demo.mvc.annotation.WuzzController;
 import com.wuzz.demo.mvc.annotation.WuzzRequestMapping;
+import com.wuzz.demo.mvc.service.ServiceDemo;
 
 import java.io.IOException;
 
@@ -16,10 +18,13 @@ import java.io.IOException;
 @WuzzRequestMapping("/wuzz")
 public class TestController  extends BaseController{
 
+    @WuzzAutowired
+    private ServiceDemo serviceDemo;
+
     @WuzzRequestMapping("/index.do")
     public void index() {
         try {
-            response.getWriter().write("index");
+            response.getWriter().write("index"+serviceDemo.get("wuzz"));
         } catch (IOException e) {
             e.printStackTrace();
         }

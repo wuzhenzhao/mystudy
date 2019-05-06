@@ -3,6 +3,7 @@ package com.wuzz.demo.mvc.servlet;
 import com.wuzz.demo.mvc.annotation.WuzzAutowired;
 import com.wuzz.demo.mvc.annotation.WuzzController;
 import com.wuzz.demo.mvc.annotation.WuzzRequestMapping;
+import com.wuzz.demo.mvc.annotation.WuzzService;
 import com.wuzz.demo.mvc.controller.BaseController;
 
 import javax.servlet.ServletConfig;
@@ -18,8 +19,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,13 +37,14 @@ import java.util.Map;
 public class WuzzDispacherServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    //存储contro实例
-    private Map<String, Object> controllers = new HashMap<String, Object>();
-    //被反射调用的method
-    private Map<String, Object> methods = new HashMap<String, Object>();
+    //保存url和Method的对应关系 可以抽象成一个对象Handler
+    private Map<String, Method> handlerMapping = new HashMap<String, Method>();
+
+    //保存扫描的所有的类名
+    private List<String> classNames = new ArrayList<String>();
 
     //存放所扫描出来的类及其实例
-    Map<String, Class<?>> ioc = new HashMap<>();
+    private Map<String, Object> ioc = new HashMap<String, Object>();
 
     public WuzzDispacherServlet() {
         super();
@@ -63,14 +66,24 @@ public class WuzzDispacherServlet extends HttpServlet {
         //这里拿到uri : /wuzz/index.do
         String uri = req.getRequestURI();
         //从方法map里获取到映射到的方法实例 : public void com.example.demo.annotation.TestController.index()
-        Method method = (Method) methods.get(uri);
+        //处理成相对路径
+        if (!this.handlerMapping.containsKey(uri)) {
+            resp.getWriter().write("404 Not Found!!!");
+            return;
+        }
+
+
+        Method method = this.handlerMapping.get(uri);
+        //通过反射拿到method所在class，拿到class之后还是拿到class的名称
+        //再调用toLowerFirstCase获得beanName
+        String beanName = toLowerFirstCase(method.getDeclaringClass().getSimpleName());
         //1.单例
 //      Object controller = controllers.get(method.getDeclaringClass().getName());
         //2.多例
         BaseController controller;
         try {
             //获取实例
-            controller = (BaseController) method.getDeclaringClass().newInstance();
+            controller = (BaseController) ioc.get(beanName);
             //初始化该controller的请求与响应
             //也就是我们的请求中参数怎么通过requset.getParam方法拿到的原因
             System.out.println(req.getRequestURI());
@@ -87,9 +100,6 @@ public class WuzzDispacherServlet extends HttpServlet {
         } catch (InvocationTargetException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 
@@ -97,27 +107,24 @@ public class WuzzDispacherServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         //获取基础扫描包： 这里设定为com.wuzz.demo
         String basePackage = config.getInitParameter("basePackage");
-        try {
-            //1 扫描包得到所有的class 并且注入ioc
-            doScanner(basePackage);
 
-            //实际上这里中间可以扫描@Service @Autowired 注解实现自动的依赖注入
-            //可参考DispacherServlet 的初始化流程
-            //可参考DispacherServlet#initStrategies(ApplicationContext context)
+        //1 扫描包得到所有的class 并且注入ioc
+        doScanner(basePackage);
+        //2、初始化扫描到的类，并且将它们放入到ICO容器之中
+        doInstance();
 
-            //2、初始化HandlerMapping
-            initHandlerMapping();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        //3.实际上这里中间可以扫描@Service @Autowired 注解实现自动的依赖注入
+        //可参考DispacherServlet 的初始化流程
+        //可参考DispacherServlet#initStrategies(ApplicationContext context)
+        doAutowired();
+        //4、初始化HandlerMapping
+        initHandlerMapping();
+
     }
 
     //扫描出相关的类
-    private Map<String, Class<?>> doScanner(String scanPackage) {
+    private void doScanner(String scanPackage) {
+
         //scanPackage = com.gupaoedu.demo ，存储的是包路径
         //转换为文件路径，实际上就是把.替换为/就OK了
         //classpath
@@ -131,60 +138,82 @@ public class WuzzDispacherServlet extends HttpServlet {
                     continue;
                 }
                 String className = (scanPackage + "." + file.getName().replace(".class", ""));
-                try {
-                    ioc.put(className, Class.forName(className));
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                classNames.add(className);
             }
         }
-        return ioc;
     }
 
+    private void doInstance() {
+        //初始化，为DI做准备
+        if (classNames.isEmpty()) {
+            return;
+        }
 
-    //初始化url和Method的一对一对应关系
-    private void initHandlerMapping() throws IllegalAccessException, InstantiationException {
-        //获取迭代器进行迭代
-        Iterator<String> itro = ioc.keySet().iterator();
-        while (itro.hasNext()) {
-            //获取类的全类名，例如我包里有个类com.wuzz.demo.annotation.RequestMapping
-            String className = itro.next();
-            Class clazz = ioc.get(className);
-            String path = "";
-            //判断该类是否有我指定的Controller.class注解
-            if (clazz.isAnnotationPresent(WuzzController.class)) {
-//                  System.out.println(clazz.getName() + "被标记为controller");
-                //判断clazz是否存在注解@RequestMapping
-                if (clazz.isAnnotationPresent(WuzzRequestMapping.class)) {
-                    //取出注解的值 放入path
-                    WuzzRequestMapping reqAnno = (WuzzRequestMapping) clazz.getAnnotation(WuzzRequestMapping.class);
-                    //拿到controller上注解@RequestMapping指定的值
-                    path = reqAnno.value().toString();
-                }
-                //将对应的类的全类名及实例存入map
-                controllers.put(className, clazz.newInstance());
-                Method[] ms = clazz.getMethods();//拿到控制类所有公开方法遍历
-                for (Method method : ms) {
-                    //如果不存在该注解  就进入下一轮
-                    if (!method.isAnnotationPresent(WuzzRequestMapping.class)) {
-                        continue;
+        try {
+            for (String className : classNames) {
+                Class<?> clazz = Class.forName(className);
+
+                //什么样的类才需要初始化呢？
+                //加了注解的类，才初始化，怎么判断？
+                //为了简化代码逻辑，主要体会设计思想，只举例 @Controller和@Service,
+                // @Componment...就一一举例了
+                if (clazz.isAnnotationPresent(WuzzController.class)) {
+                    Object instance = clazz.newInstance();
+                    //Spring默认类名首字母小写
+                    String beanName = toLowerFirstCase(clazz.getSimpleName());
+                    ioc.put(beanName, instance);
+                } else if (clazz.isAnnotationPresent(WuzzService.class)) {
+                    //1、自定义的beanName
+                    WuzzService service = clazz.getAnnotation(WuzzService.class);
+                    String beanName = service.value();
+                    //2、默认类名首字母小写
+                    if ("".equals(beanName.trim())) {
+                        beanName = toLowerFirstCase(clazz.getSimpleName());
                     }
-                    //将拿到的controller上与方法上的@RequestMapping注解的值拼起来  与该方法的实例存入map
-                    //例如：/wuzz/index=public void com.example.demo.annotation.TestController.index()
-                    methods.put(path + method.getAnnotation(WuzzRequestMapping.class).value(), method);
-                }
-            }
-        }
 
+                    Object instance = clazz.newInstance();
+                    ioc.put(beanName, instance);
+                    //3、根据类型自动赋值,投机取巧的方式
+                    for (Class<?> i : clazz.getInterfaces()) {
+                        if (ioc.containsKey(i.getName())) {//接口若有多个实现
+                            throw new Exception("The “" + i.getName() + "” is exists!!");
+                        }
+                        //把接口的类型直接当成key了
+                        ioc.put(i.getName(), instance);
+                    }
+                } else {
+                    continue;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
-    //自动依赖注入 暂时无这个逻辑
+    //如果类名本身是小写字母，确实会出问题
+    //但是我要说明的是：这个方法是我自己用，private的
+    //传值也是自己传，类也都遵循了驼峰命名法
+    //默认传入的值，存在首字母小写的情况，也不可能出现非字母的情况
+
+    //为了简化程序逻辑，就不做其他判断了，大家了解就OK
+    //其实用写注释的时间都能够把逻辑写完了
+    private String toLowerFirstCase(String simpleName) {
+        char[] chars = simpleName.toCharArray();
+        //之所以加，是因为大小写字母的ASCII码相差32，
+        // 而且大写字母的ASCII码要小于小写字母的ASCII码
+        //在Java中，对char做算学运算，实际上就是对ASCII码做算学运算
+        chars[0] += 32;
+        return String.valueOf(chars);
+    }
+
+    //自动依赖注入
     private void doAutowired() {
         if (ioc.isEmpty()) {
             return;
         }
-        for (Map.Entry<String, Class<?>> entry : ioc.entrySet()) {
+        for (Map.Entry<String, Object> entry : ioc.entrySet()) {
             //Declared 所有的，特定的 字段，包括private/protected/default
             //正常来说，普通的OOP编程只能拿到public的属性
             Field[] fields = entry.getValue().getClass().getDeclaredFields();
@@ -217,5 +246,41 @@ public class WuzzDispacherServlet extends HttpServlet {
         }
     }
 
+    //初始化url和Method的一对一对应关系
+    private void initHandlerMapping() {
+        if (ioc.isEmpty()) {
+            return;
+        }
 
+        for (Map.Entry<String, Object> entry : ioc.entrySet()) {
+            Class<?> clazz = entry.getValue().getClass();
+
+            if (!clazz.isAnnotationPresent(WuzzController.class)) {
+                continue;
+            }
+
+
+            //保存写在类上面的@GPRequestMapping("/demo")
+            String baseUrl = "";
+            if (clazz.isAnnotationPresent(WuzzRequestMapping.class)) {
+                WuzzRequestMapping requestMapping = clazz.getAnnotation(WuzzRequestMapping.class);
+                baseUrl = requestMapping.value();
+            }
+
+            //默认获取所有的public方法
+            for (Method method : clazz.getMethods()) {
+                if (!method.isAnnotationPresent(WuzzRequestMapping.class)) {
+                    continue;
+                }
+
+                WuzzRequestMapping requestMapping = method.getAnnotation(WuzzRequestMapping.class);
+                //优化
+                // //demo///query
+                String url = ("/" + baseUrl + "/" + requestMapping.value())
+                        .replaceAll("/+", "/");
+                handlerMapping.put(url, method);
+                System.out.println("Mapped :" + url + "," + method);
+            }
+        }
+    }
 }
