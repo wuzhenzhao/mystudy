@@ -1,6 +1,6 @@
 package com.wuzz.demo.core;
 
-import com.wuzz.demo.exception.ValidateException;
+import com.wuzz.demo.core.exception.ValidateException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

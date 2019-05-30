@@ -5,6 +5,7 @@ import com.wuzz.demo.mvc.annotation.WuzzRequestMapping;
 import com.wuzz.demo.mvc.controller.TestController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Method;
 
@@ -17,7 +18,8 @@ import java.lang.reflect.Method;
  */
 public class Test {
     private static final Logger LOGGER = LogManager.getLogger(Test.class);
-    public static void main(String[] args) {
+
+        public static void main(String[] args) {
         //  Class
         Class clazz = TestController.class;
         //判断这个类是否存在 @WuzzController
@@ -42,4 +44,9 @@ public class Test {
         }
 
     }
+//    public static void main(String[] args) {
+//
+//        ClassPathXmlApplicationContext classPathXmlApplicationContext =
+//                new ClassPathXmlApplicationContext("application.properties");
+//    }
 }

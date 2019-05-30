@@ -1,4 +1,4 @@
-package com.wuzz.demo.controller;
+package com.wuzz.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

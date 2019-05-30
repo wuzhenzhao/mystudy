@@ -1,7 +1,7 @@
 package com.wuzz.demo.core;
 
 
-import com.wuzz.demo.exception.ValidateException;
+import com.wuzz.demo.core.exception.ValidateException;
 
 public interface Validate {
 	

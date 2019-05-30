@@ -60,8 +60,9 @@ public class MyProxy {
     private static String generateSrc(Class<?>[] interfaces){
 
         StringBuffer sb = new StringBuffer();
-        sb.append("package com.wuzz.demo.proxy.myjdkproxy;" + ln);
+        sb.append("package com.wuzz.demo.proxy.customjdkproxy;" + ln);
         sb.append("import com.wuzz.demo.proxy.staticproxy.Person;" + ln);
+        sb.append("import com.wuzz.demo.proxy.customjdkproxy.MyInvocationHandler;" + ln);
         sb.append("import java.lang.reflect.Method;" + ln);
         sb.append("public class $Proxy0 implements " + interfaces[0].getName() + "{" + ln);
 

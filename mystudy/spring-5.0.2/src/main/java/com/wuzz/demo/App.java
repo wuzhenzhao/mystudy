@@ -15,16 +15,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Description:
  */
 @SpringBootApplication
-@ServletComponentScan
+//@ServletComponentScan  先注释掉，避免mvc的影响
 public class App {
     private final static Logger log = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
         log.info("服务启动成功");
-
-        ClassPathXmlApplicationContext classPathXmlApplicationContext =
-                new ClassPathXmlApplicationContext("application.properties");
 
     }
 
