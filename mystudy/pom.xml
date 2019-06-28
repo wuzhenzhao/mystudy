@@ -20,6 +20,7 @@
         <module>design-pattern-study</module>
         <module>springboot-study</module>
         <module>spring-5.0.2</module>
+        <module>mybatis-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

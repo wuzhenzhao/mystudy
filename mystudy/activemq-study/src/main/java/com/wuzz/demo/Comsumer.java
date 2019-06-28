@@ -14,14 +14,19 @@ import javax.jms.*;
 public class Comsumer {
 
     public static void main(String[] args) {
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.1.101:61616");
+        ConnectionFactory connectionFactory =
+                new ActiveMQConnectionFactory("tcp://192.168.1.101:61616");
         Connection connection = null;
         try {
 
             connection = connectionFactory.createConnection();
             connection.start();
             // 延迟确认
-            Session session = connection.createSession(Boolean.TRUE, Session.DUPS_OK_ACKNOWLEDGE);
+//            AUTO_ACKNOWLEDGE = 1 自动确认
+//            CLIENT_ACKNOWLEDGE = 2 客户端手动确认
+//            DUPS_OK_ACKNOWLEDGE = 3 自动批量确认
+//            SESSION_TRANSACTED = 0 事务提交并确认
+            Session session = connection.createSession(Boolean.TRUE, Session.CLIENT_ACKNOWLEDGE);
             // 创建目的地
             Destination destination = session.createQueue("myQueue");
             // 创建消费者

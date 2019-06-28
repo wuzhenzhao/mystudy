@@ -1,5 +1,7 @@
 package com.wuzz.demo;
 
+import java.util.Date;
+
 /**
  * Create with IntelliJ IDEA
  * User: Wuzhenzhao
@@ -10,10 +12,7 @@ package com.wuzz.demo;
 public class Test {
 
     public static void main(String[] args) {
-        Integer a=2564;
-        Integer b =3;
-        Integer c =a/b;
-        System.out.println(c);
-
+        String a ="2019-06-19 11:01:05";
+        System.out.println(new Date(new Date().getTime() + (86400 * 1000)));
     }
 }
