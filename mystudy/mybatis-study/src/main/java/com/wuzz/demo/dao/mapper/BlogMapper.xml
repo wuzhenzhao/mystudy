@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuzz.demo.dao.BlogMapper">
+    <!-- 声明这个namespace使用二级缓存 -->
+    <cache/>
+
+    <resultMap id="BaseResultMap" type="blog">
+        <id column="bid" property="bid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="author_id" property="authorId" jdbcType="INTEGER"/>
+    </resultMap>
+<!--****************************************************************************************-->
+    <!--简单查询-->
+    <select id="selectBlogById" resultMap="BaseResultMap" statementType="PREPARED" useCache="false">
+        select * from blog where bid = #{bid}
+    </select>
+<!--****************************************************************************************-->
+    <!--插入 useGeneratedKeys="true" keyProperty="bid"  返回自增主键且指定改主键是哪个字段-->
+    <insert id="insertBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="bid">
+      insert into blog (name, author_id)
+      values (#{name}, #{authorId})
+    </insert>
+<!--****************************************************************************************-->
+    <!--批量插入-->
+    <insert id="insertBlogs" useGeneratedKeys="true"
+            keyProperty="bid">
+        insert into blog (name, author_id) values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.name}, #{item.authorId})
+        </foreach>
+    </insert>
+
+<!--****************************************************************************************-->
+    <!-- 根据文章查询作者，一对一查询的结果，嵌套查询 -->
+    <resultMap id="BlogWithAuthorResultMap" type="com.wuzz.demo.associate.BlogAndAuthor">
+        <id column="bid" property="bid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <!-- 联合查询，将author的属性映射到ResultMap -->
+        <association property="author" javaType="com.wuzz.demo.entity.Author">
+            <id column="author_id" property="authorId"/>
+            <result column="author_name" property="authorName"/>
+        </association>
+    </resultMap>
+    <!-- 根据文章查询作者，一对一，嵌套结果，无N+1问题 -->
+    <select id="selectBlogWithAuthorResult" resultMap="BlogWithAuthorResultMap" >
+        select b.bid, b.name, b.author_id, a.author_id , a.author_name
+        from blog b,author a
+        where b.author_id=a.author_id and b.bid = #{bid, jdbcType=INTEGER}
+    </select>
+<!--****************************************************************************************-->
+    <!-- 另一种联合查询(一对一)的实现，但是这种方式有“N+1”的问题 -->
+    <resultMap id="BlogWithAuthorQueryMap" type="com.wuzz.demo.associate.BlogAndAuthor">
+        <id column="bid" property="bid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <association property="author" javaType="com.wuzz.demo.entity.Author"
+                     column="author_id" select="selectAuthor"/> <!-- selectAuthor 定义在下面-->
+    </resultMap>
+
+    <!-- 嵌套查询 -->
+    <select id="selectAuthor" parameterType="int" resultType="com.wuzz.demo.entity.Author">
+        select author_id authorId, author_name authorName
+        from author where author_id = #{authorId}
+    </select>
+
+    <!-- 根据文章查询作者，一对一，嵌套查询，存在N+1问题，可通过开启延迟加载解决 -->
+    <select id="selectBlogWithAuthorQuery" resultMap="BlogWithAuthorQueryMap" >
+        select b.bid, b.name, b.author_id, a.author_id , a.author_name
+        from blog b
+        left join author a
+        on b.author_id=a.author_id
+        where b.bid = #{bid, jdbcType=INTEGER}
+    </select>
+<!--****************************************************************************************-->
+    <!--  查询文章带评论的结果（一对多） -->
+    <resultMap id="BlogWithCommentMap" type="com.wuzz.demo.associate.BlogAndComment" extends="BaseResultMap" >
+        <collection property="comment" ofType="com.wuzz.demo.entity.Comment">
+            <id column="comment_id" property="commentId" />
+            <result column="content" property="content" />
+            <result column="bid" property="bid" />
+        </collection>
+    </resultMap>
+    <!-- 根据文章查询评论，一对多 -->
+    <select id="selectBlogWithCommentById" resultMap="BlogWithCommentMap" >
+        select b.bid, b.name, b.author_id , c.comment_id , c.content,c.bid
+        from blog b, comment c
+        where b.bid = c.bid
+        and b.bid = #{bid}
+    </select>
+<!--****************************************************************************************-->
+    <!--  按作者查询文章评论的结果（多对多） -->
+    <resultMap id="AuthorWithBlogMap" type="com.wuzz.demo.associate.AuthorAndBlog" >
+        <id column="author_id" property="authorId" jdbcType="INTEGER"/>
+        <result column="author_name" property="authorName" jdbcType="VARCHAR"/>
+        <collection property="blog" ofType="com.wuzz.demo.associate.BlogAndComment">
+            <id column="bid" property="bid" />
+            <result column="name" property="name" />
+            <result column="author_id" property="authorId" />
+            <collection property="comment" ofType="com.wuzz.demo.entity.Comment">
+                <id column="comment_id" property="commentId" />
+                <result column="content" property="content" />
+                <result column="bid" property="bid" />
+            </collection>
+        </collection>
+    </resultMap>
+
+    <!-- 根据作者文章评论，多对多 -->
+    <select id="selectAuthorWithBlog" resultMap="AuthorWithBlogMap" >
+        select b.bid, b.name, a.author_id , a.author_name , c.comment_id , c.content,c.bid
+        from blog b, author a, comment c
+        where b.author_id = a.author_id and b.bid = c.bid
+    </select>
+<!--****************************************************************************************-->
+    <!--动态sql-->
+    <select id="selectBlogById2" resultMap="BaseResultMap" statementType="PREPARED" useCache="false"
+        parameterType="blog">
+        select * from blog
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="bid != null and bid !='' ">
+                bid = #{bid}
+            </if>
+            <if test="name != null and name !='' ">
+                AND name = #{name}
+            </if>
+            <if test="authorId != null and authorId != ''">
+                AND author_id = #{author_id}
+            </if>
+        </trim>
+    </select>
+</mapper>
