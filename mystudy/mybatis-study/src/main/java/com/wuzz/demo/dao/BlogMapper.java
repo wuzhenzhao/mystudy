@@ -4,6 +4,7 @@ import com.wuzz.demo.associate.AuthorAndBlog;
 import com.wuzz.demo.associate.BlogAndAuthor;
 import com.wuzz.demo.associate.BlogAndComment;
 import com.wuzz.demo.entity.Blog;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +31,13 @@ public interface BlogMapper {
      * @return
      */
     public int insertBlog(Blog blog);
+
+    /**
+     * 修改博客
+     * @param blog
+     * @return
+     */
+    public int updateBlog(Blog blog);
 
     /**
      * 新增博客
@@ -71,7 +79,9 @@ public interface BlogMapper {
      * @param blog
      * @return
      */
-    public Blog selectBlogById2(Blog blog);
+    public List<Blog> selectBlogById2(Blog blog);
+
+    public List<Blog> selectBlogList(RowBounds rowBounds);
 
 
 

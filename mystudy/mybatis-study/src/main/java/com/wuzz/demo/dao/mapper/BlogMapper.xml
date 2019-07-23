@@ -4,14 +4,15 @@
     <!-- 声明这个namespace使用二级缓存 -->
     <cache/>
 
+
     <resultMap id="BaseResultMap" type="blog">
         <id column="bid" property="bid" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="author_id" property="authorId" jdbcType="INTEGER"/>
     </resultMap>
 <!--****************************************************************************************-->
-    <!--简单查询-->
-    <select id="selectBlogById" resultMap="BaseResultMap" statementType="PREPARED" useCache="false">
+    <!--简单查询  useCache="false"-->
+    <select id="selectBlogById" resultMap="BaseResultMap">
         select * from blog where bid = #{bid}
     </select>
 <!--****************************************************************************************-->
@@ -20,6 +21,13 @@
       insert into blog (name, author_id)
       values (#{name}, #{authorId})
     </insert>
+<!--****************************************************************************************-->
+    <!--修改-->
+    <update id="updateBlog" parameterType="blog">
+      update blog b
+          set b.name=#{name}
+          where b.bid=#{bid}
+    </update>
 <!--****************************************************************************************-->
     <!--批量插入-->
     <insert id="insertBlogs" useGeneratedKeys="true"
@@ -110,8 +118,8 @@
         where b.author_id = a.author_id and b.bid = c.bid
     </select>
 <!--****************************************************************************************-->
-    <!--动态sql-->
-    <select id="selectBlogById2" resultMap="BaseResultMap" statementType="PREPARED" useCache="false"
+    <!--动态sql  statementType="PREPARED" useCache="false"-->
+    <select id="selectBlogById2" resultMap="BaseResultMap"
         parameterType="blog">
         select * from blog
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
@@ -125,5 +133,10 @@
                 AND author_id = #{author_id}
             </if>
         </trim>
+    </select>
+
+
+    <select id="selectBlogList" resultMap="BaseResultMap" >
+        select bid, name, author_id authorId from blog
     </select>
 </mapper>

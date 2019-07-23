@@ -19,7 +19,7 @@ import io.netty.util.CharsetUtil;
 public class NettyServer {
     private static final String IP = "127.0.0.1";
     private static final int port = 6666;
-    private static final int BIZGROUPSIZE = Runtime.getRuntime().availableProcessors() *2;
+    private static final int BIZGROUPSIZE = Runtime.getRuntime().availableProcessors() * 2;
     private static final int BIZTHREADSIZE = 100;
     //创建两个EventLoopGroup对象，创建boss线程组 ⽤于服务端接受客户端的连接
     private static final EventLoopGroup bossGroup = new NioEventLoopGroup(BIZGROUPSIZE);
@@ -28,11 +28,11 @@ public class NettyServer {
 
     public static void start() throws Exception {
 
-//启动类初始化
+        //启动类初始化
         ServerBootstrap serverBootstrap = initServerBootstrap();
-// 绑定端⼝，并同步等待成功，即启动服务端
+        // 绑定端⼝，并同步等待成功，即启动服务端
         ChannelFuture channelFuture = serverBootstrap.bind(IP, port).sync();
-//成功绑定到端口之后,给channel增加一个 管道关闭的监听器并同步阻塞,直到channel关闭,线程才会往下执行,结束进程。
+        //成功绑定到端口之后,给channel增加一个 管道关闭的监听器并同步阻塞,直到channel关闭,线程才会往下执行,结束进程。
         channelFuture.channel().closeFuture().sync();
         System.out.println("server start");
 

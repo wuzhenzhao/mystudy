@@ -32,13 +32,13 @@ public class BufferDemo {
     }
 
     public static void encode(String str){
-        CharBuffer charBuffer = CharBuffer.allocate(128);
+        CharBuffer charBuffer =  CharBuffer.allocate(128);
         charBuffer.append(str);
         charBuffer.flip();
 
         /*对获取utf8的编解码器*/
         Charset utf8 = Charset.forName("UTF-8");
-        ByteBuffer byteBuffer = utf8.encode(charBuffer); /*对charbuffer中的内容解码*/
+        ByteBuffer byteBuffer = utf8.encode(charBuffer); /*对charbuffer中的内容编码*/
 
         /*array()返回的就是内部的数组引用，编码以后的有效长度是0~limit*/
         byte[] bytes = Arrays.copyOf(byteBuffer.array(), byteBuffer.limit());
