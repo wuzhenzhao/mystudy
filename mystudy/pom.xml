@@ -21,7 +21,6 @@
         <module>springboot-study</module>
         <module>spring-5.0.2</module>
         <module>mybatis-study</module>
-        <module>dubbo-2.7.2</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
