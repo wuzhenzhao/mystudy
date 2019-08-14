@@ -1,5 +1,8 @@
 package com.wuzz.demo.netty.nio;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.PooledByteBufAllocator;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -24,5 +27,10 @@ public class Buffers {
     }
     public ByteBuffer gerWriteBuffer(){
         return writeBuffer;
+    }
+
+    public static void main(String[] args) {
+        PooledByteBufAllocator allocator =new PooledByteBufAllocator();
+        ByteBuf buffer = allocator.buffer();
     }
 }

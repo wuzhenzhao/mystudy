@@ -1,7 +1,5 @@
 package com.wuzz.demo.run;
 
-import org.apache.dubbo.container.Main;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,19 +13,15 @@ import java.io.IOException;
  * Description:
  */
 @SpringBootApplication
-public class App {
+public class AppCluster2 {
 //    private final static Logger log = LoggerFactory.getLogger(NettyApp.class);
 
-    public static void main(String[] args)throws IOException {
-//        SpringApplication.run(App.class,args);
-//        log.info("服务启动成功");
-        //默认情况下会使用spring容器来启动服务
+    public static void main(String[] args) throws IOException {
         ClassPathXmlApplicationContext context=
                 new ClassPathXmlApplicationContext
-                        ("META-INF/spring/dubbo-server.xml");
+                        ("META-INF/spring/dubbo-cluster2.xml");
         context.start();
+
         System.in.read(); //阻塞当前进程
-
-
     }
 }
