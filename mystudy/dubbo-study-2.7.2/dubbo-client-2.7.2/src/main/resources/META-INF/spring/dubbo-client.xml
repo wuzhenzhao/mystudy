@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <!--提供方信息-->
+    <dubbo:application name="dubbo-client" owner="wuzz"/>
+
+    <!--注册中心-->
+    <dubbo:registry address="zookeeper://192.168.1.101:2181"/>
+
+    <!--配置需要发布的协议及端口-->
+    <dubbo:protocol port="20880" name="dubbo"/>
+
+    <dubbo:protocol name="webservice" port="8887" server="jetty"/>
+
+    <!--调用的服务名称，协议-->
+    <dubbo:reference id="helloService" loadbalance="roundrobin"
+                     interface="com.wuzz.demo.service.HelloService"
+                     protocol="webservice" version="1.0.0" />
+
+    <!--调用的服务名称，协议-->
+    <dubbo:reference id="userService"
+                     interface="com.wuzz.demo.service.UserService"
+                     protocol="dubbo" />
+
+</beans>

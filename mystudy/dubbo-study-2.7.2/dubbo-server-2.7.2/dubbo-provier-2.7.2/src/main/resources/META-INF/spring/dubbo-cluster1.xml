@@ -6,7 +6,6 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://code.alibabatech.com/schema/dubbo
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-
     <!--提供方信息-->
     <dubbo:application name="dubbo-server" owner="wuzz"/>
 
@@ -16,16 +15,10 @@
     <!--配置需要发布的协议及端口-->
     <dubbo:protocol port="20880" name="dubbo"/>
 
-    <dubbo:protocol port="8089" name="hessian"/>
-
-    <!--需要发布的服务 设置版本信息-->
+    <!--需要发布的服务-->
     <dubbo:service interface="com.wuzz.demo.service.HelloService"
-                   ref="helloService"  version="1.0.0"/>
-
-    <dubbo:service interface="com.wuzz.demo.service.HelloService"
-                   ref="helloService"  version="2.0.0"/>
+                   ref="helloService"  />
     <!--需要发布的服务实现类-->
     <bean id="helloService" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl"/>
 
-    <bean id="helloService3" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl3"/>
 </beans>
