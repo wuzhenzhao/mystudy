@@ -18,13 +18,13 @@
     <dubbo:protocol name="webservice" port="8887" server="jetty"/>
 
     <!--调用的服务名称，协议-->
-    <dubbo:reference id="helloService" loadbalance="roundrobin"
+    <dubbo:reference id="helloService" loadbalance="leastactive"
                      interface="com.wuzz.demo.service.HelloService"
-                     protocol="webservice" version="1.0.0" />
+                     protocol="dubbo" />
 
     <!--调用的服务名称，协议-->
-    <dubbo:reference id="userService"
-                     interface="com.wuzz.demo.service.UserService"
-                     protocol="dubbo" />
+    <!--<dubbo:reference id="userService"-->
+                     <!--interface="com.wuzz.demo.service.UserService"-->
+                     <!--protocol="dubbo" />-->
 
 </beans>
