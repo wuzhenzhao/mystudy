@@ -16,9 +16,9 @@
     <!--配置需要发布的协议及端口-->
     <dubbo:protocol port="20880" name="dubbo"/>
     <!--http://localhost:8889/com.wuzz.demo.service.HelloService?wsdl-->
-    <dubbo:protocol name="webservice" port="8887" server="jetty"/>
+    <!--<dubbo:protocol name="webservice" port="8887" server="jetty"/>-->
     <!--http://localhost:8889/user/register/5-->
-    <dubbo:protocol name ="rest" port ="8889" server ="jetty"/>
+    <!--<dubbo:protocol name ="rest" port ="8889" server ="jetty"/>-->
 
     <!--需要发布的服务 设置版本信息-->
     <dubbo:service interface="com.wuzz.demo.service.HelloService"
@@ -27,12 +27,12 @@
     <!--<dubbo:service interface="com.wuzz.demo.service.UserService"-->
                    <!--ref="userService"  protocol="rest,dubbo"/>-->
 
-    <dubbo:service interface="com.wuzz.demo.service.HelloService"
-                   ref="helloService3"  protocol="dubbo"/>
+    <!--<dubbo:service interface="com.wuzz.demo.service.HelloService"-->
+                   <!--ref="helloService3"  protocol="dubbo"/>-->
     <!--需要发布的服务实现类-->
     <bean id="helloService" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl"/>
 
     <!--<bean id="userService" class="com.wuzz.demo.ServiceImpl.UserServiceImpl"/>-->
 
-    <bean id="helloService3" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl3"/>
+    <!--<bean id="helloService3" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl3"/>-->
 </beans>

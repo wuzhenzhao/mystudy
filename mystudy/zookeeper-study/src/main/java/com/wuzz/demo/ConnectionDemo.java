@@ -44,6 +44,7 @@ public class ConnectionDemo {
             byte[] bytes=zooKeeper.getData("/zk-wuzz",null,stat);
             System.out.println(new String(bytes)); // 0
 
+            Stat stat1 = zooKeeper.exists("/zk-wuzz", true);
             //修改节点值
             zooKeeper.setData("/zk-wuzz","1".getBytes(),stat.getVersion());
 

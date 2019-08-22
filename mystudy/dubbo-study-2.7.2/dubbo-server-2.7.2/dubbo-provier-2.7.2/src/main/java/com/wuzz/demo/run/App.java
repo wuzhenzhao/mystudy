@@ -1,5 +1,7 @@
 package com.wuzz.demo.run;
 
+import org.apache.dubbo.common.extension.ExtensionLoader;
+import org.apache.dubbo.rpc.Protocol;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
@@ -18,6 +20,8 @@ public class App {
                 new ClassPathXmlApplicationContext
                         ("META-INF/spring/dubbo-server.xml");
         context.start();
+        Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("myProtocol");
+        System.out.println(protocol.getDefaultPort());
         System.out.println("dubbo服务启动。。。");
         System.in.read(); //阻塞当前进程
 
