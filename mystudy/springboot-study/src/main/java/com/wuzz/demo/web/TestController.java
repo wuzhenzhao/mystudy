@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
  * Time: 14:29
  * Description 描述:
  */
-@RestController(value = "/wuzz")
+@RestController
+@RequestMapping("wuzz")
 public class TestController {
 
     @RequestMapping(value = "/post.json", method = {RequestMethod.POST})
@@ -31,7 +32,7 @@ public class TestController {
     }
 
     @RequestMapping(value = "/get.json", method = {RequestMethod.GET})
-    public Result get(@RequestHeader(value = "name") String name) {
+    public Result get(String name) {
 
         if (name == null)
             throw new BusinessException(CommonErrorEnum.PARAMER_ERROR);
