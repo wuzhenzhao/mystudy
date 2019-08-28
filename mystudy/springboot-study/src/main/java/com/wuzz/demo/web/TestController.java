@@ -39,7 +39,7 @@ public class TestController {
         return new Result(true, "000", "成功: ");
     }
 
-    @RequestMapping(value = "push", method = {RequestMethod.GET})
+    @RequestMapping(value = "pus", method = {RequestMethod.GET})
     public Result get1() {
 
         return new Result(true, "000", "成功1111111: ");
