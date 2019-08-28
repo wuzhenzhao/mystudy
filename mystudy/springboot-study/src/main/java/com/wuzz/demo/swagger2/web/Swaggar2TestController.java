@@ -26,7 +26,7 @@ import java.util.Map;
  * Description 描述:
  */
 @RestController()
-public class TestController {
+public class Swaggar2TestController {
 
 
     @ApiOperation(value = "新建用户", notes = "新建用户详细信息")
