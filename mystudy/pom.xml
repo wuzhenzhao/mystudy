@@ -23,6 +23,7 @@
         <module>concurrent-study</module>
         <module>kafka-study</module>
         <module>rabbitmq-study</module>
+        <module>sentinel-dubbo-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
