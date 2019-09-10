@@ -15,6 +15,7 @@
         <module>sentinel-dubbo-server</module>
         <module>sentinel-dubbo-consumer</module>
         <module>sentinel-token-server</module>
+        <module>sentinel-degrade-demo</module>
     </modules>
 
 
