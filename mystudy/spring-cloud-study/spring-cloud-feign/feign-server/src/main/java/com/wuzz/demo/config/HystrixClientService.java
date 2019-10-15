@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * User: Wuzhenzhao
  * Date: 2019/4/10
  * Time: 16:42
- * Description ÃèÊö:
+ * Description ï¿½ï¿½ï¿½ï¿½:
  */
 @Component
 public class HystrixClientService implements FallbackFactory<ClientService> {
@@ -18,7 +18,7 @@ public class HystrixClientService implements FallbackFactory<ClientService> {
         return new ClientService() {
             @Override
             public String hello() {
-                return "·şÎñ½µ¼¶¡£¡£¡£¡£";
+                return "æœåŠ¡é™çº§";
             }
         };
     }
