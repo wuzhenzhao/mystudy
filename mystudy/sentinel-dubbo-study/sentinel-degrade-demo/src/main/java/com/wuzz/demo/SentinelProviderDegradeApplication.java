@@ -27,7 +27,7 @@ public class SentinelProviderDegradeApplication {
 
     //初始化规则
     private static void initFlowRules() {
-        List<FlowRule> rules = new ArrayList<>(); //限流规则的集合
+        List<FlowRule> rules = new ArrayList<FlowRule>(); //限流规则的集合
         FlowRule flowRule = new FlowRule();
         flowRule.setResource("com.wuzz.demo.SentinelService:sayHello(java.lang.String)");//资源(方法名称、接口）
         flowRule.setCount(100000);//限流阈值 qps=10

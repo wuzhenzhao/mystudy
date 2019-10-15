@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Description:
  */
 @SpringBootApplication
-//@ServletComponentScan  先注释掉，避免mvc的影响
+//@ServletComponentScan // 先注释掉，避免mvc的影响
 public class App {
     private final static Logger log = LoggerFactory.getLogger(App.class);
 

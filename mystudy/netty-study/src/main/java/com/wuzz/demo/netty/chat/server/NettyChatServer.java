@@ -40,10 +40,9 @@ public class NettyChatServer {
 
                     @Override
                     protected void initChannel(Channel arg0) throws Exception {
-//                        arg0.pipeline().addLast(new StringEncoder());
-//                        arg0.pipeline().addLast(new StringDecoder());
-                        ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
-                        arg0.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,delimiter));
+//                        ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+//                        arg0.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,delimiter));
+//                        arg0.pipeline().addLast(new LineBasedFrameDecoder(1024));
                         arg0.pipeline().addLast(new StringDecoder());
                         arg0.pipeline().addLast(new StringEncoder());
                         arg0.pipeline().addLast(new ServerHandler());

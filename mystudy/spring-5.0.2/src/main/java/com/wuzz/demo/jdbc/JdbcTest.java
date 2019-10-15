@@ -27,7 +27,7 @@ public class JdbcTest {
     }
 
     private static List<?> select(Object condition) {
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList<Object>();
         Class<?> entityClass = condition.getClass();
         Connection con = null;
         PreparedStatement pstm = null;

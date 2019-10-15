@@ -33,7 +33,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
         for (Channel ch : group) {
             if (ch == channel) {
-                arg0.writeAndFlush("[你说]:" + arg1 + "$_\n");
+                arg0.writeAndFlush("[你说]:" + arg1 + "\n");
             } else {
                 ch.writeAndFlush("[" + channel.remoteAddress() + "]" + arg1 + "\n");
             }

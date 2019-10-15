@@ -18,7 +18,7 @@ import java.util.List;
 public class DataSourceInitFunc implements InitFunc {
     @Override
     public void init() throws Exception {
-        List<DegradeRule> rules = new ArrayList<>();
+        List<DegradeRule> rules = new ArrayList<DegradeRule>();
         DegradeRule rule = new DegradeRule();
         //下面这个配置的意思是，当1s内持续进入5个请求，平均响应时间都超过count(10ms),
         // 那么在接下来的timewindow(10s)内，对

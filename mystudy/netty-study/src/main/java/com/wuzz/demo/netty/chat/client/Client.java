@@ -7,6 +7,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
@@ -42,9 +43,11 @@ public class Client {
 //                        pipeline.addLast("stringD", new StringDecoder());
 //                        pipeline.addLast("stringC", new StringEncoder());
 //                        pipeline.addLast("http", new HttpClientCodec());
-                        ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
-                        arg0.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,delimiter));
-                        arg0.pipeline().addLast(new StringDecoder());
+//                        ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+//                        arg0.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,delimiter));
+//                        arg0.pipeline().addLast(new StringDecoder());
+//                        pipeline.addLast(new LineBasedFrameDecoder(1024));
+                        pipeline.addLast("stringD", new StringDecoder());
                         pipeline.addLast("stringC", new StringEncoder());
                         pipeline.addLast("chat", new ClientHandler());
 
@@ -59,10 +62,10 @@ public class Client {
                 if ("quit".equals(input)) {
                     System.exit(1);
                 }
-                future.channel().writeAndFlush(Unpooled.copiedBuffer("hello nett$_y!!".getBytes())).addListener(new ChannelFutureListener() {
+                future.channel().writeAndFlush(Unpooled.copiedBuffer(input.getBytes())).addListener(new ChannelFutureListener() {
                     @Override
                     public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                        System.out.println("消息发送成功");
+//                        System.out.println("消息发送成功");
                     }
                 });
             }

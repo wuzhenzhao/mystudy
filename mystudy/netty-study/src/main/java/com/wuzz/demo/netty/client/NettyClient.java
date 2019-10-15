@@ -41,6 +41,13 @@ public class NettyClient implements Runnable {
                 f.channel().writeAndFlush("hello service !" + Thread.currentThread().getName() + ":---->" + i);
                 f.channel().closeFuture().sync();
             }
+//            bootstrap.connect("127.0.0.1", 6666).addListener(new ChannelFutureListener() {
+//                @Override
+//                public void operationComplete(ChannelFuture future) throws Exception {
+//                    System.out.println("connect success in port: 6666");
+//                }
+//            });
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

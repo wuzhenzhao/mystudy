@@ -59,7 +59,7 @@ public class Swagger2 {
     }
     private List<Parameter> setHeaderToken() {
         ParameterBuilder tokenPar = new ParameterBuilder();
-        List<Parameter> pars = new ArrayList<>();
+        List<Parameter> pars = new ArrayList<Parameter>();
         tokenPar.name("token").description("X-Auth-Token").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
         pars.add(tokenPar.build());
         return pars;
