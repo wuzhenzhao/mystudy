@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /**
  * Create with IntelliJ IDEA
@@ -13,14 +13,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Time: 18:13
  * Description:
  */
-@EnableSwagger2
 @SpringBootApplication
-public class App {
-    private final static Logger log = LoggerFactory.getLogger(App.class);
+@ServletComponentScan // 先注释掉，避免mvc的影响
+public class SpringStudyApp {
+    private final static Logger log = LoggerFactory.getLogger(SpringStudyApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class,args);
+        SpringApplication.run(SpringStudyApp.class, args);
         log.info("服务启动成功");
 
     }
+
 }

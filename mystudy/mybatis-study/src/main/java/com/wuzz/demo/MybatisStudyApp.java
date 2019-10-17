@@ -15,11 +15,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @MapperScan("com.wuzz.demo.dao")
 @SpringBootApplication
-public class App {
-    private final static Logger log = LoggerFactory.getLogger(App.class);
+public class MybatisStudyApp {
+    private final static Logger log = LoggerFactory.getLogger(MybatisStudyApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(MybatisStudyApp.class, args);
         log.info("服务启动成功");
 
     }

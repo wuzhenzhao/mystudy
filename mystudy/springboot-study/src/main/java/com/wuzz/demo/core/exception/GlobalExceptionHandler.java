@@ -13,8 +13,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Date: 2019/4/11
  * Time: 14:39
  * Description 描述:
+ *
+ * ## 异常处理
+ *
+ * ### 传统的Servlet web.xml 错误页面
+ * * 优点：统一处理，业界标准
+ * * 不足：灵活度不够，只能定义 web.xml文件里面
+ * <error-page> 处理逻辑：
+ *
+ *  * 处理状态码 <error-code>
+ *  * 处理异常类型 <exception-type>
+ *  * 处理服务：<location>
+
+ * ### Spring Web MVC 异常处理
+ *  * @ExceptionHandler
+ *     * 优点：易于理解，尤其是全局异常处理
+ *     * 不足：很难完全掌握所有的异常类型
+ *  * @RestControllerAdvice = @ControllerAdvice + @ResponseBody
+ *  * @ControllerAdvice 专门拦截（AOP） @Controller
+ *
+ * ### Spring Boot 错误处理页面
+ *  * 实现 ErrorPageRegistrar
+ *     * 状态码：比较通用，不需要理解Spring WebMVC 异常体系
+ *     * 不足：页面处理的路径必须固定
+ *  * 注册 ErrorPage 对象
+ *  * 实现 ErrorPage 对象中的Path 路径Web服务
  */
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.wuzz.demo")
 public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LogManager.getLogger(GlobalExceptionHandler.class);

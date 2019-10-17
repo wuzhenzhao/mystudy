@@ -27,7 +27,7 @@ import java.util.List;
  * Description 描述:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class)
+@SpringBootTest(classes = MybatisStudyApp.class)
 public class MybatisTest {
 
     @Autowired
