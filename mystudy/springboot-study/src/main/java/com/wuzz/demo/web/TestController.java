@@ -4,7 +4,6 @@ import com.wuzz.demo.core.Result;
 import com.wuzz.demo.core.exception.BusinessException;
 import com.wuzz.demo.core.exception.CommonErrorEnum;
 import com.wuzz.demo.entity.EntityDemo;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

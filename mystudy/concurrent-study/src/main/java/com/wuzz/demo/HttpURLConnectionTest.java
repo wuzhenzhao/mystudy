@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
  * Time: 19:01
  * Description 描述:
  */
-public class Test1 {
+public class HttpURLConnectionTest {
     public static String httpRequest(String requestUrl,String requestMethod,String outputStr){
         StringBuffer buffer=null;
         try{

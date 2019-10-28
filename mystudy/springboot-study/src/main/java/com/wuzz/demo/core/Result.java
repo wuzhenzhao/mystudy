@@ -40,6 +40,9 @@ public class Result<T> implements Serializable{
 		this.demo = demo;
 	}
 
+	public Result() {
+	}
+
 	public Result(boolean success, String code , String message ) {
 		this.success = success;
 		this.message = message;

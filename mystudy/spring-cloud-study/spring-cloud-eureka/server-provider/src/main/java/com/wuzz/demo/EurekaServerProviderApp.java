@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+
 /**
  * Create with IntelliJ IDEA
  * User: Wuzhenzhao
@@ -21,7 +22,7 @@ public class EurekaServerProviderApp {
     private final static Logger log = LoggerFactory.getLogger(EurekaServerProviderApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(EurekaServerProviderApp.class,args);
+        SpringApplication.run(EurekaServerProviderApp.class, args);
         log.info("服务启动成功");
 
     }
