@@ -20,7 +20,7 @@ public class SpringBootStudyApp {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootStudyApp.class, args);
-        log.info("服务启动成功");
+        log.info("服务启动成功 ");
 
     }
 }
