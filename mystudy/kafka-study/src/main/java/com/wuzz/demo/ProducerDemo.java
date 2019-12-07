@@ -1,8 +1,6 @@
 package com.wuzz.demo;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ProducerDemo extends Thread {
 
-    private final KafkaProducer<Integer, String> producer;
+    private final KafkaProducer<String, String> producer;
 
     private final String topic;
 
@@ -35,7 +33,7 @@ public class ProducerDemo extends Thread {
         //值序列化
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringSerializer");
-        producer = new KafkaProducer<Integer, String>(properties);
+        producer = new KafkaProducer<String, String>(properties);
         this.topic = topic;
     }
 
@@ -44,10 +42,26 @@ public class ProducerDemo extends Thread {
         int num=0;
         while(num<2000000) {
             try {
+
+                // 方法 1: 使用 callback
+//                producer.send(new ProducerRecord<String, String>("topic0", "message 2"), new Callback() {
+//
+//                    public void onCompletion(RecordMetadata metadata, Exception exception) {
+//                        if(exception != null) {
+//                            System.out.println("send message2 failed with " + exception.getMessage());
+//                        } else {
+//                            // offset 是消息在 partition 中的编号，可以根据 offset 检索消息
+//                            System.out.println("message2 sent to " + metadata.topic() + ", partition " + metadata.partition() + ", offset " + metadata.offset());
+//                        }
+//
+//                    }
+//
+//                });
                 String msg="gp kafka practice msg:"+num;
                 //get 会拿到发送的结果
                 //同步 get() -> Future()
                 //回调通知
+
                 producer.send(new ProducerRecord<>(topic, msg), (metadata, exception) -> {
 
                     System.out.println(metadata.offset()+"->"+metadata.partition()+"->"+metadata.topic());

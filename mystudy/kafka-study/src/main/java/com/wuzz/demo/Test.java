@@ -1,5 +1,9 @@
 package com.wuzz.demo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Create with IntelliJ IDEA
  * User: Wuzhenzhao
@@ -9,9 +13,14 @@ package com.wuzz.demo;
  */
 public class Test {
 
-    public static void main(String[] args) {
-        int i = Math.abs("KafkaConsumerGroup".hashCode()) % 50;
-
-        System.out.println(i);
+    public static void main(String[] args) throws ParseException {
+        Date date =new Date();
+        System.out.println(date.toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse = formatter.parse("2019-01-01 12:12:12");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHH");
+        String format = dateFormatter.format(parse);
+        Date parse1 = dateFormatter.parse(format);
+        System.out.printf(parse1.toString());
     }
 }
