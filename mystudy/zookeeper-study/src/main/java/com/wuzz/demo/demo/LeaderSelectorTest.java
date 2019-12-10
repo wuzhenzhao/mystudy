@@ -1,9 +1,11 @@
-package com.wuzz.demo;
+package com.wuzz.demo.demo;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.recipes.leader.LeaderLatch;
-import org.apache.curator.framework.recipes.leader.LeaderLatchListener;
+import org.apache.curator.framework.imps.CuratorFrameworkState;
+import org.apache.curator.framework.recipes.leader.LeaderSelector;
+import org.apache.curator.framework.recipes.leader.LeaderSelectorListener;
+import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.utils.CloseableUtils;
 
@@ -15,27 +17,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * User: Wuzhenzhao
  * Date: 2019/12/5
- * Time: 20:16
+ * Time: 20:20
  * Description:
- * ClassPath:com.wuzz.demo.LeaderLatchTest
+ * ClassPath:com.wuzz.demo.demo.LeaderSelectorTest
  */
-//Curator提供了两种选举方案：Leader Latch 和 Leader Election。下面分别介绍这两种选举方案。
-//
-//Leader Latch
-//使用 Leader Latch 方案进行Master选举，系统将随机从候选者中选出一台作为 leader，直到调用 close() 释放leadship，此时再重新随机选举 leader，否则其他的候选者无法成为 leader。
-//
-//下面的程序将启动 N 个线程用来模拟分布式系统中的节点，每个线程将创建一个Zookeeper客户端和一个 LeaderLatch 对象用于选举；每个线程有一个名称，名称中有一个编号用于区分；每个线程的存活时间为 number * 10秒 ，存活时间结束后将关闭 LeaderLatch 对象和客户端，表示该 ‘节点’ 宕机，如果该节点为 Master节点，这时系统将重新发起 Master选举。
-public class LeaderLatchTest {
+//Leader Election
+//通过 Leader Election 选举方案进行 Master选举，需添加 LeaderSelectorListener 监听器对领导权进行控制，当节点被选为leader之后，
+//        将调用 takeLeadership 方法进行业务逻辑处理，处理完成会立即释放 leadship，重新进行Master选举，这样每个节点都有可能成为
+//        leader。autoRequeue() 方法的调用确保此实例在释放领导权后还可能获得领导权
+public class LeaderSelectorTest {
     private static final String zkServerIps = "master:2181,hadoop2:2181";
-    private static final String masterPath = "/testZK/leader_latch";
+    private static final String masterPath = "/testZK/leader_selector";
 
     public static void main(String[] args) {
         final int clientNums = 5;  // 客户端数量，用于模拟
         final CountDownLatch countDownLatch = new CountDownLatch(clientNums);
-        List<LeaderLatch> latchList = new CopyOnWriteArrayList();
+        List<LeaderSelector> selectorList = new CopyOnWriteArrayList();
         List<CuratorFramework> clientList = new CopyOnWriteArrayList();
-        AtomicInteger atomicInteger = new
-                AtomicInteger(1);
+        AtomicInteger atomicInteger = new AtomicInteger(1);
         try {
             for (int i = 0; i < clientNums; i++) {
                 new Thread(new Runnable() {
@@ -44,31 +43,33 @@ public class LeaderLatchTest {
                         CuratorFramework client = getClient();  // 创建客户端
                         clientList.add(client);
                         int number = atomicInteger.getAndIncrement();
-                        final LeaderLatch latch = new LeaderLatch(client, masterPath, "client#" + number);
-                        System.out.println("创建客户端：" + latch.getId());
-                        // LeaderLatch 添加监听事件
-                        latch.addListener(new LeaderLatchListener() {
+                        final String name = "client#" + number;
+                        final LeaderSelector selector = new LeaderSelector(client, masterPath, new LeaderSelectorListener() {
                             @Override
-                            public void isLeader() {
-                                System.out.println(latch.getId() + ": 我现在被选举为Leader！我开始工作了....");
+                            public void takeLeadership(CuratorFramework client) throws Exception {
+                                System.out.println(name + ": 我现在被选举为Leader！我开始工作了....");
+                                Thread.sleep(3000);
                             }
                             @Override
-                            public void notLeader() {
-                                System.out.println(latch.getId() + ": 我遗憾地落选了，我到一旁休息去吧...");
+                            public void stateChanged(CuratorFramework curatorFramework, ConnectionState connectionState) {
                             }
                         });
-                        latchList.add(latch);
+                        System.out.println("创建客户端：" + name);
                         try {
-                            latch.start();
+                            selector.autoRequeue();
+                            selector.start();
+                            selectorList.add(selector);
                             // 随机等待 number * 10秒，之后关闭客户端
                             Thread.sleep(number * 10000);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         } finally {
-                            System.out.println("客户端 " + latch.getId() + " 关闭");
-                            CloseableUtils.closeQuietly(latch);
-                            CloseableUtils.closeQuietly(client);
                             countDownLatch.countDown();
+                            System.out.println("客户端 " + name + " 关闭");
+                            CloseableUtils.closeQuietly(selector);
+                            if (!client.getState().equals(CuratorFrameworkState.STOPPED)) {
+                                CloseableUtils.closeQuietly(client);
+                            }
                         }
                     }
                 }).start();
