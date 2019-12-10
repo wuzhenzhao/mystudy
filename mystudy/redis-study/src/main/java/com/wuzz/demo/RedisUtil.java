@@ -27,6 +27,7 @@ public class RedisUtil {
             jedis = jedisPool.getResource();
             return jedis.set(key, value);
         } catch (Exception e) {
+            e.printStackTrace();
             return "0";
         } finally {
             returnResource(jedisPool, jedis);
@@ -43,6 +44,7 @@ public class RedisUtil {
             jedis = jedisPool.getResource();
             value = jedis.get(key);
         } catch (Exception e) {
+            e.printStackTrace();
             return "0";
         } finally {
             returnResource(jedisPool, jedis);
@@ -59,6 +61,7 @@ public class RedisUtil {
             jedis = jedisPool.getResource();
             return jedis.exists(key);
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         } finally {
             returnResource(jedisPool, jedis);
@@ -74,6 +77,7 @@ public class RedisUtil {
             jedis = jedisPool.getResource();
             return jedis.del(key);
         } catch (Exception e) {
+            e.printStackTrace();
             return 0L;
         } finally {
             returnResource(jedisPool, jedis);
