@@ -21,12 +21,12 @@
         <module>mybatis-study</module>
         <module>dubbo-study-2.7.2</module>
         <module>concurrent-study</module>
-        <module>kafka-study</module>
         <module>rabbitmq-study</module>
         <module>sentinel-dubbo-study</module>
         <module>rocketmq-study</module>
         <module>quartz-scheduler-study</module>
         <module>redis-study</module>
+        <module>kafka-springboot-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
