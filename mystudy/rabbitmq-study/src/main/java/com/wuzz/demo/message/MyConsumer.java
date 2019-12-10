@@ -35,7 +35,7 @@ public class MyConsumer {
 
         // 声明交换机
         // String exchange, String type, boolean durable, boolean autoDelete, Map<String, Object> arguments
-        channel.exchangeDeclare(EXCHANGE_NAME,"direct",false, false, null);
+        channel.exchangeDeclare(EXCHANGE_NAME, "direct", false, false, null);
 
         // 声明队列
         // String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
@@ -43,7 +43,7 @@ public class MyConsumer {
         System.out.println(" Waiting for message....");
 
         // 绑定队列和交换机
-        channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,"wuzz.test");
+        channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "wuzz.test");
 
         // 创建消费者
         Consumer consumer = new DefaultConsumer(channel) {
@@ -52,8 +52,8 @@ public class MyConsumer {
                                        byte[] body) throws IOException {
                 String msg = new String(body, "UTF-8");
                 System.out.println("Received message : '" + msg + "'");
-                System.out.println("consumerTag : " + consumerTag );
-                System.out.println("deliveryTag : " + envelope.getDeliveryTag() );
+                System.out.println("consumerTag : " + consumerTag);
+                System.out.println("deliveryTag : " + envelope.getDeliveryTag());
             }
         };
 

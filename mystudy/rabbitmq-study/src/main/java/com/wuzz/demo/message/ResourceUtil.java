@@ -6,11 +6,11 @@ import java.util.ResourceBundle;
 public class ResourceUtil {
     private static final ResourceBundle resourceBundle;
 
-    static{
+    static {
         resourceBundle = ResourceBundle.getBundle("config");
     }
 
-    public static String getKey(String key){
+    public static String getKey(String key) {
         return resourceBundle.getString(key);
     }
 

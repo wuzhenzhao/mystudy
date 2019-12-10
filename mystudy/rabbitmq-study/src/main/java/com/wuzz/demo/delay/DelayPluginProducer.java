@@ -14,10 +14,9 @@ import java.util.Map;
 /**
  * @Author:
  * @Date: 2019/01/14 21:56
- * @Description:
- *  使用延时插件实现的消息投递-生产者
- *  必须要在服务端安装rabbitmq-delayed-message-exchange插件，安装步骤见README.MD
- *  先启动消费者
+ * @Description: 使用延时插件实现的消息投递-生产者
+ * 必须要在服务端安装rabbitmq-delayed-message-exchange插件，安装步骤见README.MD
+ * 先启动消费者
  */
 public class DelayPluginProducer {
 

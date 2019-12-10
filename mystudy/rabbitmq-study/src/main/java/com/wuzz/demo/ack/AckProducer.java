@@ -8,8 +8,7 @@ import com.wuzz.demo.message.ResourceUtil;
 /**
  * @Author:
  * @Date: 2018/9/21 10:52
- * @Description:
- * 消息生产者，用于测试消费者手工应答和重回队列
+ * @Description: 消息生产者，用于测试消费者手工应答和重回队列
  */
 public class AckProducer {
     private final static String QUEUE_NAME = "TEST_ACK_QUEUE";
@@ -30,8 +29,8 @@ public class AckProducer {
 
         // 发送消息
         // String exchange, String routingKey, BasicProperties props, byte[] body
-        for (int i =0; i<5; i++){
-            channel.basicPublish("", QUEUE_NAME, null, (msg+i).getBytes());
+        for (int i = 0; i < 5; i++) {
+            channel.basicPublish("", QUEUE_NAME, null, (msg + i).getBytes());
         }
 
         channel.close();

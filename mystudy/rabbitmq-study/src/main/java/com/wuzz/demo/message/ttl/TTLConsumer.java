@@ -37,8 +37,8 @@ public class TTLConsumer {
                                        byte[] body) throws IOException {
                 String msg = new String(body, "UTF-8");
                 System.out.println("Received message : '" + msg + "'");
-                System.out.println("consumerTag : " + consumerTag );
-                System.out.println("deliveryTag : " + envelope.getDeliveryTag() );
+                System.out.println("consumerTag : " + consumerTag);
+                System.out.println("deliveryTag : " + envelope.getDeliveryTag());
             }
         };
 

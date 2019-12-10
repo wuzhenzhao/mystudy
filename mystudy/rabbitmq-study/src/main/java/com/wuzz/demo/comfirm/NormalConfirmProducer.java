@@ -35,7 +35,7 @@ public class NormalConfirmProducer {
         channel.basicPublish("", QUEUE_NAME, null, msg.getBytes());
         // 普通Confirm，发送一条，确认一条
         if (channel.waitForConfirms()) {
-            System.out.println("消息发送成功" );
+            System.out.println("消息发送成功");
         }
 
         channel.close();

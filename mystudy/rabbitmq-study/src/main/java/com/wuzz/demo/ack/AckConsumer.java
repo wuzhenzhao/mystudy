@@ -36,12 +36,12 @@ public class AckConsumer {
                 String msg = new String(body, "UTF-8");
                 System.out.println("Received message : '" + msg + "'");
 
-                if (msg.contains("拒收")){
+                if (msg.contains("拒收")) {
                     // 拒绝消息
                     // requeue：是否重新入队列，true：是；false：直接丢弃，相当于告诉队列可以直接删除掉
                     // TODO 如果只有这一个消费者，requeue 为true 的时候会造成消息重复消费
                     channel.basicReject(envelope.getDeliveryTag(), false);
-                } else if (msg.contains("异常")){
+                } else if (msg.contains("异常")) {
                     // 批量拒绝
                     // requeue：是否重新入队列
                     // TODO 如果只有这一个消费者，requeue 为true 的时候会造成消息重复消费

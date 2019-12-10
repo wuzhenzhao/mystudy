@@ -32,18 +32,18 @@ public class TTLQueueCreate {
         Connection conn = factory.newConnection();
         // 创建消息通道
         Channel channel = conn.createChannel();
-        Map<String,Object> arguments = new HashMap<String,Object>();
-        arguments.put("x-dead-letter-exchange","DLX_EXCHANGE");
+        Map<String, Object> arguments = new HashMap<String, Object>();
+        arguments.put("x-dead-letter-exchange", "DLX_EXCHANGE");
         // 通过队列属性设置消息过期时间
         arguments.put("x-message-ttl", 20000);
         // 指定了这个队列的死信交换机(消息发送到这个队列)
         channel.queueDeclare("TEST_DLX_QUEUE", false, false, false, arguments);
         // 声明死信交换机
-        channel.exchangeDeclare("DLX_EXCHANGE","topic", false, false, false, null);
+        channel.exchangeDeclare("DLX_EXCHANGE", "topic", false, false, false, null);
         // 声明死信队列
         channel.queueDeclare("DLX_QUEUE", false, false, false, null);
         // 绑定
-        channel.queueBind("DLX_QUEUE","DLX_EXCHANGE","#");
+        channel.queueBind("DLX_QUEUE", "DLX_EXCHANGE", "#");
 
         channel.close();
         conn.close();

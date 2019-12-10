@@ -9,8 +9,7 @@ import com.wuzz.demo.message.ResourceUtil;
 /**
  * @Author:
  * @Date: 2018/9/21 10:52
- * @Description:
- * 消息生产者，通过TTL测试死信队列
+ * @Description: 消息生产者，通过TTL测试死信队列
  */
 public class DlxProducer {
 

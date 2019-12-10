@@ -14,9 +14,8 @@ import java.util.TreeSet;
 /**
  * @Author:
  * @Date: 2018/9/21 10:52
- * @Description:
- * 消息生产者，测试Confirm模式
- *  参考文章：https://www.cnblogs.com/vipstone/p/9350075.html
+ * @Description: 消息生产者，测试Confirm模式
+ * 参考文章：https://www.cnblogs.com/vipstone/p/9350075.html
  */
 public class AsyncConfirmProducer {
     private final static String QUEUE_NAME = "ORIGIN_QUEUE";
@@ -52,6 +51,7 @@ public class AsyncConfirmProducer {
                 }
                 // 这里添加重发的方法
             }
+
             public void handleAck(long deliveryTag, boolean multiple) throws IOException {
                 // 如果true表示批量执行了deliveryTag这个值以前（小于deliveryTag的）的所有消息，如果为false的话表示单条确认
                 System.out.println(String.format("Broker已确认消息，标识：%d，多个消息：%b", deliveryTag, multiple));
@@ -62,7 +62,7 @@ public class AsyncConfirmProducer {
                     // 只移除一个元素
                     confirmSet.remove(deliveryTag);
                 }
-                System.out.println("未确认的消息:"+confirmSet);
+                System.out.println("未确认的消息:" + confirmSet);
             }
         });
 
@@ -72,10 +72,10 @@ public class AsyncConfirmProducer {
             long nextSeqNo = channel.getNextPublishSeqNo();
             // 发送消息
             // String exchange, String routingKey, BasicProperties props, byte[] body
-            channel.basicPublish("", QUEUE_NAME, null, (msg +"-"+ i).getBytes());
+            channel.basicPublish("", QUEUE_NAME, null, (msg + "-" + i).getBytes());
             confirmSet.add(nextSeqNo);
         }
-        System.out.println("所有消息:"+confirmSet);
+        System.out.println("所有消息:" + confirmSet);
 
         // 这里注释掉的原因是如果先关闭了，可能收不到后面的ACK
         //channel.close();

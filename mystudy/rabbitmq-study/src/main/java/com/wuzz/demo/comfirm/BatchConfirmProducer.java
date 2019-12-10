@@ -8,8 +8,7 @@ import com.wuzz.demo.message.ResourceUtil;
 /**
  * @Author:
  * @Date: 2018/9/21 10:52
- * @Description:
- * 消息生产者，测试Confirm模式
+ * @Description: 消息生产者，测试Confirm模式
  */
 public class BatchConfirmProducer {
     private final static String QUEUE_NAME = "ORIGIN_QUEUE";
@@ -33,7 +32,7 @@ public class BatchConfirmProducer {
             for (int i = 0; i < 5; i++) {
                 // 发送消息
                 // String exchange, String routingKey, BasicProperties props, byte[] body
-                channel.basicPublish("", QUEUE_NAME, null, (msg +"-"+ i).getBytes());
+                channel.basicPublish("", QUEUE_NAME, null, (msg + "-" + i).getBytes());
             }
             // 批量确认结果，ACK如果是Multiple=True，代表ACK里面的Delivery-Tag之前的消息都被确认了
             // 比如5条消息可能只收到1个ACK，也可能收到2个（抓包才看得到）
