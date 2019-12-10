@@ -1,4 +1,4 @@
-package com.wuzz.demo;
+package com.wuzz.demo.demo;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -15,18 +15,18 @@ import java.util.Properties;
  * Time: 21:28
  * Description 描述:
  */
-public class ConsumerDemo2 extends Thread{
+public class ConsumerDemo3 extends Thread{
 
     private final KafkaConsumer kafkaConsumer;
 
-    public ConsumerDemo2(String topic) {
+    public ConsumerDemo3(String topic) {
         Properties properties=new Properties();
         // 连接的 kafka 集群地址
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "192.168.1.101:9092,192.168.1.102:9092,192.168.1.103:9092");
         // 消费者分组
-        properties.put(ConsumerConfig.GROUP_ID_CONFIG,"KafkaConsumerDemo");
-        properties.put(ConsumerConfig.CLIENT_ID_CONFIG,"KafkaConsumerDemo2");
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG,"KafkaConsumerGroup");
+        properties.put(ConsumerConfig.CLIENT_ID_CONFIG,"KafkaConsumerGroup1");
         //确认自动提交
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,"true");
         // 自动提交间隔
@@ -55,6 +55,6 @@ public class ConsumerDemo2 extends Thread{
     }
 
     public static void main(String[] args) {
-        new ConsumerDemo2("test").start();
+        new ConsumerDemo3("test").start();
     }
 }

@@ -1,6 +1,8 @@
-package com.wuzz.demo;
+package com.wuzz.demo.demo;
 
-import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
