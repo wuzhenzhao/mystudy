@@ -1,4 +1,4 @@
-package com.wuzz.demo;
+package com.wuzz.demo.demo;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
@@ -22,7 +22,7 @@ public class RocketMqConsumer {
         //消费者的组名，这个和kafka是一样,这里需要注意的是，
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("unique_consumer_group_name");
         //指定NameServer地址，多个地址以 ; 隔开
-        consumer.setNamesrvAddr("192.168.1.101:9876;192.168.1.102:9876");
+        consumer.setNamesrvAddr("192.168.1.101:9876");
         //设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
         //如果非第一次启动，那么按照上次消费的位置继续消费
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);

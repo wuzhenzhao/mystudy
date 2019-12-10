@@ -1,4 +1,4 @@
-package com.wuzz.demo;
+package com.wuzz.demo.demo;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -24,7 +24,7 @@ public class RocketMqProducer {
          */
         DefaultMQProducer producer = new DefaultMQProducer("unique_producer_group_name");
         //指定namesrv服务地址，获取broker相关信息
-        producer.setNamesrvAddr("192.168.1.101:9876;192.168.1.102:9876");
+        producer.setNamesrvAddr("192.168.1.101:9876");
         producer.start();
         for (int i = 0; i < 10; i++) {
             try {
