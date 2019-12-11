@@ -81,6 +81,14 @@ public interface BlogMapper {
      */
     public List<Blog> selectBlogById2(Blog blog);
 
+    /**
+     * 功能描述: <br>
+     * 测试插件
+     * @Param: [rowBounds]
+     * @Return: java.util.List<com.wuzz.demo.entity.Blog>
+     * @Author: wuzhenzhao
+     * @Date: 2019/12/11 11:55
+     */
     public List<Blog> selectBlogList(RowBounds rowBounds);
 
 

@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 /**
- * @Author: qingshan
+ * @Author:
  * @Date: 2019/4/2 22:13
- * @Description: 咕泡学院，只为更好的你
+ * @Description:
  */
 @Intercepts({//需要拦截的方法
    @Signature(type = Executor.class,method = "query",

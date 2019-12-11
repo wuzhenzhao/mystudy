@@ -10,9 +10,9 @@
 //import java.util.Properties;
 //
 ///**
-// * @Author: qingshan
+// * @Author:
 // * @Date: 2019/4/2 21:37
-// * @Description: 咕泡学院，只为更好的你
+// * @Description:
 // */
 //@Component
 //@Intercepts({ @Signature(type = StatementHandler.class, method = "query", args = { Statement.class, ResultHandler.class}) })
