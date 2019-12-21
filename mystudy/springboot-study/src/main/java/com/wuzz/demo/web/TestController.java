@@ -22,7 +22,7 @@ public class TestController {
     @RequestMapping(value = "/post.json", method = {RequestMethod.POST})
     public Result insert(EntityDemo entity) {
 
-//        entity.validate();
+        entity.validate();
         if (entity.getId() == null)
             throw new BusinessException(CommonErrorEnum.PARAMER_ERROR);
 //            throw new BusinessException(new ErrorObject("001", "error", "数据异常"));
@@ -39,8 +39,8 @@ public class TestController {
     }
 
     @RequestMapping(value = "pus", method = {RequestMethod.GET})
-    public Result get1() {
-
+    public Result get1(EntityDemo entity) {
+        entity.validate();
         return new Result(true, "000", "成功1111111: ");
     }
 

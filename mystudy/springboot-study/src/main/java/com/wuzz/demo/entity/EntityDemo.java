@@ -1,10 +1,16 @@
 package com.wuzz.demo.entity;
 
 import com.wuzz.demo.core.DefaultValidate;
+import com.wuzz.demo.core.util.EnumValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Create with IntelliJ IDEA
@@ -13,15 +19,14 @@ import javax.validation.constraints.NotNull;
  * Time: 15:16
  * Description 描述:
  */
-@ApiModel
-public class EntityDemo extends DefaultValidate {
-    @ApiModelProperty("主键")
-    @NotNull(message = "z主键不能为空")
+
+public class EntityDemo extends DefaultValidate implements Serializable {
+
     private String id;
-    @ApiModelProperty("名字")
-    private String name;
-    @ApiModelProperty("年纪")
-    private Integer age;
+
+    public String name;
+
+    private Double age;
 
     public String getId() {
         return id;
@@ -39,11 +44,11 @@ public class EntityDemo extends DefaultValidate {
         this.name = name;
     }
 
-    public Integer getAge() {
+    public Double getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Double age) {
         this.age = age;
     }
 }
