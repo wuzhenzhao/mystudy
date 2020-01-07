@@ -33,6 +33,8 @@ public class RocketMqProducer {
                 //创建一个消息实例，指定指定topic、tag、消息内容
                 Message msg = new Message("testTopic", "testTag",
                         ("Hello RocketMQ? " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */);
+                //设置延迟级别  此为一分钟
+                msg.setDelayTimeLevel(5);
                 //发送消息并且获取发送结果
                 SendResult sendResult = producer.send(msg);
                 System.out.printf("%s%n", sendResult);
