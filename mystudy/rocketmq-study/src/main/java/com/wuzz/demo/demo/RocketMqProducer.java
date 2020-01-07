@@ -26,6 +26,8 @@ public class RocketMqProducer {
         //指定namesrv服务地址，获取broker相关信息
         producer.setNamesrvAddr("192.168.1.101:9876");
         producer.start();
+        //设置重发次数
+//        producer.setRetryTimesWhenSendAsyncFailed(5);
         for (int i = 0; i < 10; i++) {
             try {
                 //创建一个消息实例，指定指定topic、tag、消息内容
