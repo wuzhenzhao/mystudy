@@ -3,8 +3,11 @@ package com.wuzz.demo.demo;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -59,18 +62,20 @@ public class ProducerDemo extends Thread {
 //                    }
 //
 //                });
-                String msg="gp kafka practice msg:"+num;
+                String msg="kafka practice msg:"+num;
                 //get 会拿到发送的结果
                 //同步 get() -> Future()
                 //回调通知
 
-                producer.send(new ProducerRecord<>(topic, msg), (metadata, exception) -> {
+                Future<RecordMetadata> futrue = producer.send(new ProducerRecord<>(topic, msg), (metadata, exception) -> {
 
-                    System.out.println(metadata.offset()+"->"+metadata.partition()+"->"+metadata.topic());
+                    System.out.println(metadata.offset() + "->" + metadata.partition() + "->" + metadata.topic());
                 });
+                futrue.get();
+
                 TimeUnit.SECONDS.sleep(1);
                 ++num;
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
