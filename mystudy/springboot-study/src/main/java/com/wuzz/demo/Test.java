@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Description 描述:
  */
 public class Test {
-
+    // 斐波那契数列
     //    public static long fibonacci(long number) {
 //        if ((number == 0) || (number == 1))
 //            return number;
@@ -23,6 +23,7 @@ public class Test {
 //                    counter, fibonacci(counter));
 //        }
 //    }
+    //杨辉三角
     public static void func(int n) {
         if (n < 0) return;
         int[][] a = new int[n][n];
@@ -46,10 +47,10 @@ public class Test {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Enter the number:");
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        func(n);
-    }
+//    public static void main(String[] args) {
+//        System.out.println("Enter the number:");
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        func(n);
+//    }
 }
