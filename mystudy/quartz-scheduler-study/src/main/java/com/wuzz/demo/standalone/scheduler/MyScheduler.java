@@ -13,6 +13,7 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class MyScheduler {
 
+    //执行本demo  需要修改quartz.properties文件名，不然会按照这个配置文件来
     public static void main(String[] args) throws SchedulerException {
 
         // JobDetail
@@ -27,7 +28,7 @@ public class MyScheduler {
                 .withIdentity("trigger1", "group1")
                 .startNow()
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                        .withIntervalInSeconds(2)
+                        .withIntervalInSeconds(1)
                         .repeatForever())
                 .build();
 
@@ -39,6 +40,7 @@ public class MyScheduler {
 
         // 绑定关系是1：N
         scheduler.scheduleJob(jobDetail, trigger);
+
         scheduler.start();
     }
 }
