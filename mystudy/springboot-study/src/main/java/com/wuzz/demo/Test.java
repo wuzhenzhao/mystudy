@@ -53,4 +53,8 @@ public class Test {
 //        int n = sc.nextInt();
 //        func(n);
 //    }
+
+//    public static void main(String[] args) {
+//        System.out.println(5/2);
+//    }
 }
