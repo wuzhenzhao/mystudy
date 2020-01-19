@@ -1,4 +1,4 @@
-package com.wuzz.demo.netty.server;
+package com.wuzz.demo.netty.demo.server;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

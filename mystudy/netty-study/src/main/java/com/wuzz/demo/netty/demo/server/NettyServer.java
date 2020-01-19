@@ -1,4 +1,4 @@
-package com.wuzz.demo.netty.server;
+package com.wuzz.demo.netty.demo.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
