@@ -79,21 +79,35 @@ public class TestController {
 
         }
         System.out.println("读取sheet表完成");
+        file.delete();
         return new Result(true, "000", "成功: ");
     }
 
     public void inputStreamToFile(InputStream ins, File file) {
+        OutputStream os = null;
         try {
-            OutputStream os = new FileOutputStream(file);
+            os = new FileOutputStream(file);
             int bytesRead = 0;
             byte[] buffer = new byte[8192];
             while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
                 os.write(buffer, 0, bytesRead);
             }
-            os.close();
-            ins.close();
+
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (null != os) {
+                    os.close();
+                }
+                if (null != ins) {
+                    ins.close();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
