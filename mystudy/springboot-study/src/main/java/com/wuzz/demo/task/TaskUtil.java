@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
  * Description:
  * ClassPath:com.wuzz.demo.task.TaskUtil
  */
-@Component
-public class TaskUtil {
-
-    @Scheduled(cron = "0/2 * * * * ?")
-    private void task1(){
-        System.out.println("任务执行");
-    }
-}
+//@Component
+//public class TaskUtil {
+//
+//    @Scheduled(cron = "0/2 * * * * ?")
+//    private void task1(){
+//        System.out.println("任务执行");
+//    }
+//}

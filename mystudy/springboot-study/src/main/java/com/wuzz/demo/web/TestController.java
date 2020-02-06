@@ -4,9 +4,16 @@ import com.wuzz.demo.core.Result;
 import com.wuzz.demo.core.exception.BusinessException;
 import com.wuzz.demo.core.exception.CommonErrorEnum;
 import com.wuzz.demo.entity.EntityDemo;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
 
 /**
  * Create with IntelliJ IDEA
@@ -44,4 +51,49 @@ public class TestController {
         return new Result(true, "000", "成功1111111: ");
     }
 
+    @RequestMapping(value = "/importFile.json", method = {RequestMethod.POST})
+    public Result importFile(MultipartFile multipartFile) throws IOException {
+        InputStream ins = multipartFile.getInputStream();
+        File file = new File(multipartFile.getOriginalFilename());
+        inputStreamToFile(ins, file);
+        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+        XSSFSheet sheet = null;
+
+        //获取每个sheet
+        sheet = workbook.getSheetAt(0);
+        //getPhysicalNumberOfRows获取有记录的行数
+        for (int j = 0; j < sheet.getPhysicalNumberOfRows(); j++) {
+            Row row = sheet.getRow(j);
+            if (null != row) {
+                //getLastCellNum获取最后一列
+                for (int k = 0; k < row.getLastCellNum(); k++) {
+                    if (null != row.getCell(k)) {
+                        Cell cell = row.getCell(k);
+                        cell.setCellType(Cell.CELL_TYPE_STRING);
+                        String d = cell.getStringCellValue();
+                        System.out.print(d + "  ");
+                    }
+                }
+                System.out.println("\t");
+            }
+
+        }
+        System.out.println("读取sheet表完成");
+        return new Result(true, "000", "成功: ");
+    }
+
+    public void inputStreamToFile(InputStream ins, File file) {
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
