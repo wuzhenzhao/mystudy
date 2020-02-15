@@ -1,6 +1,8 @@
 package com.wuzz.demo.core.util;
 
-import java.text.*;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -10,7 +12,43 @@ import java.util.*;
  * Description:
  * ClassPath:com.wuzz.demo.util.DateUtil
  */
-public class DateUtil {
+public class DateUtils {
+
+	/**
+	 * 功能描述: <br>
+	 * 获取今天的开始时间  00：00：00
+	 * @Param: []
+	 * @Return: java.util.Date
+	 * @Author: wuzhenzhao
+	 * @Date: 2020/2/9 15:00
+	 */
+	public static Date getTodayBegin(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		Date zero = calendar.getTime();
+		return zero;
+	}
+
+	/**
+	 * 功能描述: <br>
+	 * 获取今天的结束时间
+	 * @Param: []
+	 * @Return: java.util.Date
+	 * @Author: wuzhenzhao
+	 * @Date: 2020/2/9 19:35
+	 */
+	public static Date getTodayEnd(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		Date zero = calendar.getTime();
+		return zero;
+	}
 
 	/**
 	 * 获取现在时间
@@ -95,7 +133,7 @@ public class DateUtil {
 	 * @param dateDate
 	 * @return
 	 */
-	public static String dateToStrLong(java.util.Date dateDate) {
+	public static String dateToStrLong(Date dateDate) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateString = formatter.format(dateDate);
 		return dateString;
@@ -108,7 +146,7 @@ public class DateUtil {
 	 * @param
 	 * @return
 	 */
-	public static String dateToStr(java.util.Date dateDate) {
+	public static String dateToStr(Date dateDate) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String dateString = formatter.format(dateDate);
 		return dateString;
@@ -228,8 +266,8 @@ public class DateUtil {
 		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		long day = 0;
 		try {
-			java.util.Date date = myFormatter.parse(sj1);
-			java.util.Date mydate = myFormatter.parse(sj2);
+			Date date = myFormatter.parse(sj1);
+			Date mydate = myFormatter.parse(sj2);
 			day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
 		} catch (Exception e) {
 			return "";
@@ -386,7 +424,7 @@ public class DateUtil {
 	 */
 	public static String getWeek(String sdate, String num) {
 		// 再转换为时间
-		Date dd = DateUtil.strToDate(sdate);
+		Date dd = DateUtils.strToDate(sdate);
 		Calendar c = Calendar.getInstance();
 		c.setTime(dd);
 		if (num.equals("1")) // 返回星期一所在的日期
@@ -414,7 +452,7 @@ public class DateUtil {
 	 */
 	public static String getWeek(String sdate) {
 		// 再转换为时间
-		Date date = DateUtil.strToDate(sdate);
+		Date date = DateUtils.strToDate(sdate);
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		// int hour=c.get(Calendar.DAY_OF_WEEK);
@@ -425,7 +463,7 @@ public class DateUtil {
 
 	public static String getWeekStr(String sdate) {
 		String str = "";
-		str = DateUtil.getWeek(sdate);
+		str = DateUtils.getWeek(sdate);
 		if ("1".equals(str)) {
 			str = "星期日";
 		} else if ("2".equals(str)) {
@@ -458,8 +496,8 @@ public class DateUtil {
 			return 0;
 		// 转换为标准时间
 		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date date = null;
-		java.util.Date mydate = null;
+		Date date = null;
+		Date mydate = null;
 		try {
 			date = myFormatter.parse(date1);
 			mydate = myFormatter.parse(date2);
@@ -481,11 +519,11 @@ public class DateUtil {
 		sdate = sdate.substring(0, 8) + "01";
 
 		// 得到这个月的1号是星期几
-		Date date = DateUtil.strToDate(sdate);
+		Date date = DateUtils.strToDate(sdate);
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int u = c.get(Calendar.DAY_OF_WEEK);
-		String newday = DateUtil.getNextDay(sdate, (1 - u) + "");
+		String newday = DateUtils.getNextDay(sdate, (1 - u) + "");
 		return newday;
 	}
 
@@ -540,12 +578,12 @@ public class DateUtil {
 		return true;
 	}
 
-	public static void main(String[] args) throws Exception {
-		try {
-			//System.out.print(Integer.valueOf(getTwoDay("2006-11-03 12:22:10", "2006-11-02 11:22:09")));
-		} catch (Exception e) {
-			throw new Exception();
-		}
-		//System.out.println("sss");
-	}
+//	public static void main(String[] args) throws Exception {
+//		try {
+//			//System.out.print(Integer.valueOf(getTwoDay("2006-11-03 12:22:10", "2006-11-02 11:22:09")));
+//		} catch (Exception e) {
+//			throw new Exception();
+//		}
+//		//System.out.println("sss");
+//	}
 }
