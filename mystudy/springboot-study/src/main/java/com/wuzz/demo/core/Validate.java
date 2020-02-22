@@ -1,7 +1,7 @@
 package com.wuzz.demo.core;
 
 
-import com.hikvision.cgb.core.exception.ValidateException;
+import com.wuzz.demo.core.exception.ValidateException;
 
 public interface Validate {
 

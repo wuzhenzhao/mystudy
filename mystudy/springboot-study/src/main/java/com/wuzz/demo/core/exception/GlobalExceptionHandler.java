@@ -1,6 +1,6 @@
 package com.wuzz.demo.core.exception;
 
-import com.hikvision.cgb.core.Result;
+import com.wuzz.demo.core.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
