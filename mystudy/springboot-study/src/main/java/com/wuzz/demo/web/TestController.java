@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * Create with IntelliJ IDEA
@@ -108,6 +112,29 @@ public class TestController {
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    @RequestMapping(value = "/sendUploadVoice",method = RequestMethod.GET)
+    public void sendUploadVoice(HttpServletResponse res, HttpServletRequest req) {
+        try {
+            File file=new File("D://吴振照求职简历.doc"); //设置content-disposition响应头控制浏览器以下载的形式打开文件
+            res.setCharacterEncoding("utf-8");
+            res.setContentType("application/octet-stream");
+            res.setHeader("Content-Disposition", "attachment;fileName="+ URLEncoder.encode("吴振照求职简历.doc", "UTF-8"));
+            InputStream inputStream=new FileInputStream(file);//根据路径获取要下载的文件输入流
+            OutputStream out = res.getOutputStream();
+            byte[] b=new byte[1024];  //创建数据缓冲区
+            int length;
+            while((length=inputStream.read(b))>0){  //把文件流写到缓冲区里
+                out.write(b,0,length);
+            }
+            out.flush();
+            out.close();
+            inputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
