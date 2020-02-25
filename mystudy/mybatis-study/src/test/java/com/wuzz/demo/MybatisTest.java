@@ -136,18 +136,23 @@ public class MybatisTest {
         SqlSession session2 = sqlSessionFactory.openSession();
         BlogMapper mapper1 = session1.getMapper(BlogMapper.class);
         BlogMapper mapper2 = session2.getMapper(BlogMapper.class);
-//        System.out.println(mapper1.selectBlogById(1002));
         System.out.println(mapper1.selectBlogById(1002));
+        System.out.println("*********************");
+//        System.out.println(mapper1.selectBlogById(1002));
+//        System.out.println("*********************");
+//        System.out.println(mapper2.selectBlogById(1002));
+//        System.out.println("*********************");
         //主键自增返回测试
-//        Blog blog3 = new Blog();
-//        blog3.setBid(1002);
-//        blog3.setName("mybatis缓存机制");
-//        mapper1.updateBlog(blog3);
+        Blog blog3 = new Blog();
+        blog3.setBid(1002);
+        blog3.setName("mybatis缓存机制111");
+        mapper1.updateBlog(blog3);
         session1.commit();
 
-
+        System.out.println("*********************");
         System.out.println(mapper2.selectBlogById(1002));
-
+//        System.out.println("*********************");
+//        System.out.println(mapper1.selectBlogById(1002));
     }
 
     @Test

@@ -3,8 +3,6 @@
 <mapper namespace="com.wuzz.demo.dao.BlogMapper">
     <!-- 声明这个namespace使用二级缓存 -->
     <cache/>
-
-
     <resultMap id="BaseResultMap" type="blog">
         <id column="bid" property="bid" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
