@@ -32,12 +32,12 @@ public class TCPTransport {
         Socket socket = null;
         try {
             socket = newSocket();
-//获取输出流，将客户端需要调用的远程方法参数request发送给
+            //获取输出流，将客户端需要调用的远程方法参数request发送给
             ObjectOutputStream outputStream = new ObjectOutputStream
                     (socket.getOutputStream());
             outputStream.writeObject(request);
             outputStream.flush();
-//获取输入流，得到服务端的返回结果
+            //获取输入流，得到服务端的返回结果
             ObjectInputStream inputStream = new ObjectInputStream
                     (socket.getInputStream());
             Object result = inputStream.readObject();
