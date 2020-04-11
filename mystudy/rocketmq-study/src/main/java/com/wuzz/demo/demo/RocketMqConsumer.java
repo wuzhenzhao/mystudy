@@ -27,7 +27,7 @@ public class RocketMqConsumer {
         //如果非第一次启动，那么按照上次消费的位置继续消费
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         //订阅PushTopic下Tag为push的消息
-        consumer.subscribe("testTopic", "*"); //*表示不过滤，可以通过tag来过滤，比如:”tagA”
+        consumer.subscribe("testTopicQueueNums", "*"); //*表示不过滤，可以通过tag来过滤，比如:”tagA”
         /*
          * 注册消息监听回调这里有两种监听，MessageListenerConcurrently以及MessageListenerOrderly
          * 前者是普通监听，后者是顺序监听。这块在后续单独说明
