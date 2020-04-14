@@ -7,6 +7,7 @@ import com.wuzz.demo.associate.BlogAndAuthor;
 import com.wuzz.demo.associate.BlogAndComment;
 import com.wuzz.demo.dao.BlogMapper;
 import com.wuzz.demo.entity.Blog;
+import com.wuzz.demo.webapp.ApplicationContextUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,7 +15,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,18 +136,23 @@ public class MybatisTest {
         SqlSession session2 = sqlSessionFactory.openSession();
         BlogMapper mapper1 = session1.getMapper(BlogMapper.class);
         BlogMapper mapper2 = session2.getMapper(BlogMapper.class);
-//        System.out.println(mapper1.selectBlogById(1002));
         System.out.println(mapper1.selectBlogById(1002));
+        System.out.println("*********************");
+//        System.out.println(mapper1.selectBlogById(1002));
+//        System.out.println("*********************");
+//        System.out.println(mapper2.selectBlogById(1002));
+//        System.out.println("*********************");
         //主键自增返回测试
-//        Blog blog3 = new Blog();
-//        blog3.setBid(1002);
-//        blog3.setName("mybatis缓存机制");
-//        mapper1.updateBlog(blog3);
+        Blog blog3 = new Blog();
+        blog3.setBid(1002);
+        blog3.setName("mybatis缓存机制111");
+        mapper1.updateBlog(blog3);
         session1.commit();
 
-
+        System.out.println("*********************");
         System.out.println(mapper2.selectBlogById(1002));
-
+//        System.out.println("*********************");
+//        System.out.println(mapper1.selectBlogById(1002));
     }
 
     @Test
@@ -153,6 +163,27 @@ public class MybatisTest {
         int limit = 1; // limit
         RowBounds rb = new RowBounds(offset, limit);
         List<Blog> list = mapper1.selectBlogList(rb);
+
+    }
+
+    @Autowired
+    private ApplicationContextUtils applicationContextUtils;
+    @Test
+    public void testTransation() {
+        // 获取IOC容器事物管理器
+        DataSourceTransactionManager transactionManager = applicationContextUtils.getBean(DataSourceTransactionManager.class);
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        // 事物隔离级别，开启新事务，这样会比较安全些
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+
+        // 获得事务状态
+        TransactionStatus status = transactionManager.getTransaction(def);
+
+        // 正常，事务提交
+        transactionManager.commit(status);
+
+        // 异常，事务回滚
+        transactionManager.rollback(status);
 
     }
 

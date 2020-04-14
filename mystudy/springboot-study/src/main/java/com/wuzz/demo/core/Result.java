@@ -1,98 +1,85 @@
 package com.wuzz.demo.core;
 
-import com.wuzz.demo.entity.EntityDemo;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.wuzz.demo.core.exception.CommonErrorEnum;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
-@ApiModel(value = "返回Model")
-public class Result<T> implements Serializable{
 
-	//
-	@ApiModelProperty("是否成功")
-	private boolean success;
+public class Result<T> implements Serializable {
 
-	//
-	@ApiModelProperty("响应编码")
-	private String code ;
+    //
+    private boolean success;
 
-	//
-	@ApiModelProperty("详细消息")
-	private String message;
+    //
+    private String code;
 
-	//
-	@ApiModelProperty("返回数据")
-	private T  data ;
+    //
+    private String message;
 
-	@ApiModelProperty("错误详情")
-	private Map<String,String> errs ;
+    //
+    private T data;
 
-	@ApiModelProperty("错误详情")
-	private List<EntityDemo> demo;
+    private Map<String, String> errs;
 
-	public List<EntityDemo> getDemo() {
-		return demo;
-	}
+    public Result() {
+    }
 
-	public void setDemo(List<EntityDemo> demo) {
-		this.demo = demo;
-	}
+    public Result(boolean success, String code, String message) {
+        this.success = success;
+        this.message = message;
+        this.code = code;
+    }
 
-	public Result() {
-	}
+    public Result(boolean success, CommonErrorEnum commonErrorEnum) {
+        this.success = success;
+        this.message = commonErrorEnum.getMessage();
+        this.code = commonErrorEnum.getCode();
+    }
 
-	public Result(boolean success, String code , String message ) {
-		this.success = success;
-		this.message = message;
-		this.code = code ; 
-	}
+    public Result(boolean success, T data) {
+        this.success = success;
+        this.code = "001";
+        this.message = "success";
+        this.data = data;
+    }
 
-	public Result(boolean success, String code, String message, T data) {
-		this.success = success;
-		this.code = code;
-		this.message = message;
-		this.data = data;
-	}
+    public boolean isSuccess() {
+        return success;
+    }
 
-	public boolean isSuccess() {
-		return success;
-	}
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public T getData() {
+        return data;
+    }
 
-	public T getData() {
-		return data;
-	}
+    public void setData(T data) {
+        this.data = data;
+    }
 
-	public void setData(T data) {
-		this.data = data;
-	}
+    public Map<String, String> getErrs() {
+        return errs;
+    }
 
-	public Map<String, String> getErrs() {
-		return errs;
-	}
-
-	public void setErrs(Map<String, String> errs) {
-		this.errs = errs;
-	}
+    public void setErrs(Map<String, String> errs) {
+        this.errs = errs;
+    }
 }

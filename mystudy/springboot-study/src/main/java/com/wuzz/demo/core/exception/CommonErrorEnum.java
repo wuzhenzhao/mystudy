@@ -8,7 +8,7 @@ package com.wuzz.demo.core.exception;
  * Description 描述:
  */
 public enum CommonErrorEnum {
-    PARAMER_ERROR("001","参数错误")
+    PARAMER_ERROR("0001","参数错误")
     ;
     private String code ;
 
