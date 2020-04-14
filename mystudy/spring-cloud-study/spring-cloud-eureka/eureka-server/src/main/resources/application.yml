@@ -6,6 +6,8 @@ server:
 eureka:
   instance: #Eureka实例名，集群中根据这里相互识别
     hostname: eureka7001.com
+    lease-renewal-interval-in-seconds: 30 #服务续约任务的调用间隔时间，默认为30秒EurekaServer会维护 一 份只读的服务清单来返回给客户端，同时该缓存清单会每隔30秒更新一 次。
+    lease-expiration-duration-in-seconds: 90 #服务失效的时间，默认为90秒
   client:
     registerWithEureka: false #表示是否注册Eureka服务器,因为自身作为服务注册中心，所以为false
     fetchRegistry: false #是否从eureka上获取注册信息,因为自身作为服务注册中心，所以为false

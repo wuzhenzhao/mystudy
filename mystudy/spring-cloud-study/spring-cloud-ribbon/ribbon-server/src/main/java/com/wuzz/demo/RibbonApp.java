@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 
@@ -15,12 +16,12 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
  * Time: 18:13
  * Description:
  */
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 //自定义负载均衡算法 自定义配置类不能跟主启动类一个包或在子包下面
 //name: 表示对哪个服务采用自定义算法
 //configuration:负载算法类
-@RibbonClient(name="cloud-provider" ,configuration= MyRule_ZY.class)
+@RibbonClient(name="cloud-provider")
 public class RibbonApp {
     private final static Logger log = LoggerFactory.getLogger(RibbonApp.class);
 

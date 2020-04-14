@@ -7,8 +7,8 @@ spring:
 
 eureka:
   client:
-    service-url:  # 集群情况下如下，如果是单机版，只需要配置单机版Eureka地址
-      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+    service-url:  # 集群情况下http://localhost:7001/eureka/,http://localhost:7002/eureka/，如果是单机版，只需要配置单机版Eureka地址
+      defaultZone: http://localhost:7001/eureka/
   instance:
     instance-id: cloud-provider-8001
     prefer-ip-address: true #访问路径显示IP地址

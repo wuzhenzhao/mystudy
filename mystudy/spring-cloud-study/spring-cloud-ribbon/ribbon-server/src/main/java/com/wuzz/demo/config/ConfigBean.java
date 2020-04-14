@@ -1,7 +1,7 @@
 package com.wuzz.demo.config;
 
 import com.netflix.loadbalancer.IRule;
-import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.RoundRobinRule;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +25,9 @@ public class ConfigBean {
         return new RestTemplate();
     }
 
-//    @Bean
-//    public IRule ribbonRule(){
-//        //随机负载
-//        return new RandomRule();
-//    }
+    @Bean
+    public IRule ribbonRule() {
+        //随机负载
+        return new RoundRobinRule();
+    }
 }
