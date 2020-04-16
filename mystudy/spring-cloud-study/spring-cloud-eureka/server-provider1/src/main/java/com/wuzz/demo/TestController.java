@@ -3,11 +3,14 @@ package com.wuzz.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,6 +31,16 @@ public class TestController {
          return  "Hello Eureka Provider1";
     }
 
+    @GetMapping("/hi")
+    public List<String> hi(String ids) {
+        //ids是 , 隔开的字符串
+        String[] split = ids.split(",");
+        ArrayList<String> objects = new ArrayList<String>();
+        for(String s:split){
+            objects.add("hi! wuzz:ID: " + s);
+        }
+        return objects;
+    }
     /**
      * 服务发现
      * @return

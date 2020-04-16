@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: cloud-provider #服务注册到Eureka上使用的名称
+    name: hytrix-provider #服务注册到Eureka上使用的名称
 
 eureka:
   client:

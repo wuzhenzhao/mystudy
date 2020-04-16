@@ -15,7 +15,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * Time: 18:13
  * Description:
  */
-@EnableEurekaClient //eureka客户端
 @SpringBootApplication // boot启动类
 @EnableDiscoveryClient // 提供服务发现
 @EnableCircuitBreaker // 对Hystrix熔断机制的支持
