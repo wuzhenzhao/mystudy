@@ -12,8 +12,9 @@
     <artifactId>spring-cloud-hystrix</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>hystrix-server-provider</module>
         <module>hystrix-dasboard</module>
+        <module>turbine</module>
+        <module>turbine-amqp</module>
     </modules>
 
 

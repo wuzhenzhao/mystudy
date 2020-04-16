@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>ribbon-server</module>
+        <module>ribbon-server1</module>
     </modules>
 
 

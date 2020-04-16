@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hystrix-dasboard</artifactId>
+    <artifactId>turbine-amqp</artifactId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,18 +18,9 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
-            <version>1.4.6.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+            <artifactId>spring-cloud-starter-turbine-amqp</artifactId>
             <version>1.4.6.RELEASE</version>
         </dependency>
         <dependency>
@@ -37,4 +28,5 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
+
 </project>
