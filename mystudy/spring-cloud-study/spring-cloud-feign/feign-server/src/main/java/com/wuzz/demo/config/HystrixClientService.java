@@ -17,7 +17,7 @@ public class HystrixClientService implements FallbackFactory<ClientService> {
     public ClientService create(Throwable throwable) {
         return new ClientService() {
             @Override
-            public String hello() {
+            public String hello(String id) {
                 return "服务降级";
             }
         };

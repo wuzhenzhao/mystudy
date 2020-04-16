@@ -1,17 +1,32 @@
 server:
-  port: 9002
+  port: 9012
 
 spring:
   application:
     name: feign-server #服务注册到Eureka上使用的名称
 
+cloud-provider:
+  ribbon:
+    ConnectTimeout: 500 #请求连接的超时时间。
+    ReadTimeout: 2000  #请求处理的超时时间。
+    OkToRetryOnAllOperations: true #对所有操作请求都进行重试。
+    MaxAutoRetriesNextServer: 2 #切换实例的重试次数。
+    MaxAutoRetries: 1 #对当前实例的重试次数。
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
   instance:
-    instance-id: feign-server-9002
+    instance-id: feign-server-9012
     prefer-ip-address: true #访问路径显示IP地址
 feign:
   hystrix:
-    enabled: true
+    enabled: false
+
+logging:
+  level:
+    com:
+      wuzz:
+        demo:
+          service:
+            ClientService: DEBUG
