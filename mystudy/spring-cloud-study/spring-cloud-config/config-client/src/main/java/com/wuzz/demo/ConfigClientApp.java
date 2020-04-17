@@ -13,11 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Description:
  */
 @SpringBootApplication
-public class App {
-    private final static Logger log = LoggerFactory.getLogger(App.class);
+public class ConfigClientApp {
+    private final static Logger log = LoggerFactory.getLogger(ConfigClientApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class,args);
+        SpringApplication.run(ConfigClientApp.class,args);
         log.info("服务启动成功");
 
     }

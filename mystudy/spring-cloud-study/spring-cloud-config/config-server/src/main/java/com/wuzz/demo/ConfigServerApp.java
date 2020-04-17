@@ -15,11 +15,11 @@ import org.springframework.cloud.config.server.EnableConfigServer;
  */
 @SpringBootApplication
 @EnableConfigServer
-public class App {
-    private final static Logger log = LoggerFactory.getLogger(App.class);
+public class ConfigServerApp {
+    private final static Logger log = LoggerFactory.getLogger(ConfigServerApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(ConfigServerApp.class, args);
         log.info("服务启动成功");
 
     }
