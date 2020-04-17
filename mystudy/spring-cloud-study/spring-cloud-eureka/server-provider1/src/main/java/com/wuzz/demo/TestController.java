@@ -27,13 +27,13 @@ public class TestController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(String id) throws InterruptedException {
         // 测试fegin 超时重试代码开始
-        List<ServiceInstance> instances = client.getInstances("feign-server");
-        //测试超时
-        int sleepTime = new Random().nextInt(3000);
-        System.out.println("sleepTime:" + sleepTime);
-        Thread.sleep(sleepTime);
-        System.out.println("/hello, host:" + instances.get(0).getHost() +
-                instances.get(0).getServiceId());
+//        List<ServiceInstance> instances = client.getInstances("feign-server");
+//        //测试超时
+//        int sleepTime = new Random().nextInt(3000);
+//        System.out.println("sleepTime:" + sleepTime);
+//        Thread.sleep(sleepTime);
+//        System.out.println("/hello, host:" + instances.get(0).getHost() +
+//                instances.get(0).getServiceId());
         // 测试fegin 超时重试代码结束
          return  "Hello Eureka Provider1 "+ id;
     }

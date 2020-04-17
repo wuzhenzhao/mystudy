@@ -1,16 +1,21 @@
 server:
-  port: 9527
+  port: 9110
 
 spring:
   application:
     name: cloud-zuul-getway #服务注册到Eureka上使用的名称
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes
 eureka:
   client:
     service-url:  # 集群情况下如下，如果是单机版，只需要配置单机版Eureka地址
       defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
   instance:
-    instance-id: cloud-zuul-getway-9527
+    instance-id: cloud-zuul-getway-9110
     prefer-ip-address: true #访问路径显示IP地址
 
 info:   # 在Eureka上点击服务时会跳转到个404页面，可配置这里让他跳转到服务简介的一个页面，信息如下配置
@@ -18,10 +23,21 @@ info:   # 在Eureka上点击服务时会跳转到个404页面，可配置这里�
   company.name: www.wuzz.com
   build.artifactId: cloud-zuul-getway
   build.version: 1.0
-
-zuul:  # zuul 的配置规则 http://localhost:9527/wuzz/mydept/hello
-  prefix: /wuzz # 统一的公共前缀
-  ignored-services: cloud-provider  #  "*" 所有 忽略原有服务名
+#zuul:
+##  prefix: /wuzz #统一的公共前缀
+##  ignored-services: feign-server  # "*"所有忽略原有服务名
+#  routes:
+#    feign:
+#      url: http://localhost:9012/
+#      path: /fegin/**
+zuul:
+#  prefix: /wuzz #统一的公共前缀
+  ignored-services: feign-server  # "*"所有忽略原有服务名
   routes:
-    mydept.serviceId: cloud-provider #域名映射
-    mydept.path: /mydept/**
+    feign:
+      serviceId: feign-server
+      path: /fegin/**
+  add-host-header: true
+  filter:
+    root: filter # 指定动态加载的过滤器存储路径
+    interval: 5 # 配置动态加载的间隔时间， 以秒为单位。

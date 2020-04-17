@@ -13,9 +13,20 @@ public class FeignController {
 	@Autowired
 	private ClientService service;
 
-	@RequestMapping(value = "/feign/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/testHello", method = RequestMethod.GET)
 	public String hello() throws InterruptedException{
 
 		return service.hello("1");
+	}
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public String hello2() throws InterruptedException{
+
+		return service.hello("2");
+	}
+
+	@RequestMapping(value = "/fegin/hello", method = RequestMethod.GET)
+	public String hello3() throws InterruptedException{
+
+		return "service.hello(2)";
 	}
 }
