@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>zuul-server</module>
+        <module>dynamic-zuul-server</module>
     </modules>
 
 

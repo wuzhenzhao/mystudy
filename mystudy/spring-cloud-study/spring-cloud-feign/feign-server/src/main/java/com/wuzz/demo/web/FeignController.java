@@ -24,7 +24,7 @@ public class FeignController {
 		return service.hello("2");
 	}
 
-	@RequestMapping(value = "/fegin/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/feign/hello", method = RequestMethod.GET)
 	public String hello3() throws InterruptedException{
 
 		return "service.hello(2)";
