@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * * 注册 ErrorPage 对象
  * * 实现 ErrorPage 对象中的Path 路径Web服务
  */
-@ControllerAdvice(basePackages = "com.hikvision.cgb")
+@ControllerAdvice(basePackages = "com.hikvision.demo")
 public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LogManager.getLogger(GlobalExceptionHandler.class);

@@ -1,4 +1,4 @@
-package com.wuzz.demo.core.util;
+package com.wuzz.demo.core.validate;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

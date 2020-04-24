@@ -1,4 +1,4 @@
-package com.wuzz.demo.core;
+package com.wuzz.demo.core.validate;
 
 import com.wuzz.demo.core.exception.ValidateException;
 

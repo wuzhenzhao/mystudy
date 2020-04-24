@@ -1,15 +1,15 @@
-package com.wuzz.demo.core.util;
+package com.wuzz.demo.core;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class PageBean<T> implements Serializable{
-	
+
 	public PageBean(List<T> list ,Long totalCount){
 		this.list = list ;
 		this.totalCount = totalCount ;
 	}
-	
+
 	public PageBean(Integer pageNo, Integer pageSize, List<T> list, Long totalCount) {
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
@@ -18,16 +18,16 @@ public class PageBean<T> implements Serializable{
 	}
 
 	public PageBean(){
-		
+
 	}
 	private Integer pageNo;
-	
+
 	private Integer pageSize;
-	
+
 	private List<T> list ;
-	
+
 	private Long totalCount ;
-	
+
 	//private Integer pageNo ;
 
 	public List<T> getList() {
@@ -63,6 +63,6 @@ public class PageBean<T> implements Serializable{
 	}
 
 
-	
+
 
 }

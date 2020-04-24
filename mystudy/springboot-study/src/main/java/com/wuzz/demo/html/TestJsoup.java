@@ -18,7 +18,7 @@ import java.util.Random;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/21 14:35
  * @since 1.0
  **/

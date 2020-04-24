@@ -1,4 +1,4 @@
-package com.wuzz.demo.core.util;
+package com.wuzz.demo.core.validate;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -8,9 +8,9 @@ import javax.validation.ConstraintValidatorContext;
  * Date: 2019/12/16
  * Time: 20:54
  * Description:
- * ClassPath:com.wuzz.demo.core.util.EnumValueValidator
+ * ClassPath:com.wuzz.demo.core.validate.EnumValueValidator
  */
-public class EnumValueValidator implements ConstraintValidator< EnumValue, Object> {
+public class EnumValueValidator implements ConstraintValidator<EnumValue, Object> {
 
     private String[] strValues;
     private int[] intValues;

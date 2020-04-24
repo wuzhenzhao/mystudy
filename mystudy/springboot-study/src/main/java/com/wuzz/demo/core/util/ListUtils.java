@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @description: 集合工具类
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: wuzhenzhao
  * @time 2020/2/9 15:06
  * @since 1.0
  **/

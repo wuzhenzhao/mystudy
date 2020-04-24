@@ -1,21 +1,21 @@
-package com.wuzz.demo.core.util;
+package com.wuzz.demo.core;
 
 
 
 public class PageParam {
-	
-	
+
+
 	/**
 	 * 每页显示几条
 	 */
 	private Integer pageSize=10;
-	
+
 
 	/**
-	 * 第几页 
+	 * 第几页
 	 */
 	private Integer pageNum=1;
-	
+
 
 	public PageParam(Integer pageSize, Integer pageNum) {
 		this.pageSize = pageSize;
