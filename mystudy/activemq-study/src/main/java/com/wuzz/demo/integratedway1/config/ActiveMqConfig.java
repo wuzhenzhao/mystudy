@@ -1,5 +1,7 @@
 package com.wuzz.demo.integratedway1.config;
 
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -22,6 +24,10 @@ public class ActiveMqConfig {
     @Bean
     public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory activeMQConnectionFactory) {
         DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
+        //使用异步发送
+//        ((ActiveMQConnectionFactory) activeMQConnectionFactory).setUseAsyncSend(true);
+        //使用异步发送
+//        ((ActiveMQConnection)activeMQConnectionFactory).setUseAsyncSend(true);
         bean.setConnectionFactory(activeMQConnectionFactory);
         return bean;
     }

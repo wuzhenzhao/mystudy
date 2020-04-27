@@ -1,17 +1,15 @@
-package com.wuzz.demo;
+package com.wuzz.demo.concurrent;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Create with IntelliJ IDEA
- * User: Wuzhenzhao
- * Date: 2019/8/16
- * Time: 18:24
- * Description 描述:
- */
-public class ReentrantLockTest {
-
+ * @description: 类功能描述
+ * @author: wuzhenzhao
+ * @time 2020/4/26 16:56
+ * @since 1.0
+ **/
+public class ReentrantLockDemo {
     private static int count = 0;
     static Lock lock = new ReentrantLock();
 
@@ -29,7 +27,7 @@ public class ReentrantLockTest {
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 1000; i++) {
             new Thread(() -> {
-                ReentrantLockTest.inc();
+                ReentrantLockDemo.inc();
             }).start();
             ;
         }

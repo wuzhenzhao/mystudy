@@ -16,7 +16,7 @@ import javax.jms.*;
 public class Provider {
 
     public static void main(String[] args) {
-
+        //new ActiveMQConnectionFactory("tcp://192.168.11.153:61616?jms.useAsyncSend=true");
         ConnectionFactory connectionFactory =
                 new ActiveMQConnectionFactory("tcp://192.168.1.101:61616");
         Connection connection = null;
@@ -27,7 +27,7 @@ public class Provider {
             // 延迟确认
             Session session = connection.createSession(Boolean.TRUE, Session.DUPS_OK_ACKNOWLEDGE);
             // 创建目的地
-            Destination destination = session.createQueue("myQueue");
+            Destination destination = session.createQueue("stringQueue");
             // 创建消费者
             MessageProducer producer = session.createProducer(destination);
             TextMessage message = session.createTextMessage("Hello World");

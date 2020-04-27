@@ -1,4 +1,4 @@
-package com.wuzz.demo.publish;
+package com.wuzz.demo.demo.publish;
 
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -29,7 +29,7 @@ public class Provider {
             MessageProducer producer = session.createProducer(destination);
             producer.setDeliveryMode(DeliveryMode.PERSISTENT);
             //创建需要发送的消息
-            TextMessage message = session.createTextMessage("topic -message");
+            TextMessage message = session.createTextMessage("topic-message");
             //Text   Map  Bytes  Stream  Object
             producer.send(message);
             session.commit();

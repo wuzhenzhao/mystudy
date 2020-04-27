@@ -1,4 +1,4 @@
-package com.wuzz.demo.publish;
+package com.wuzz.demo.demo.publish;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
