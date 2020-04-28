@@ -28,7 +28,9 @@ public class Comsumer {
 //            SESSION_TRANSACTED = 0 事务提交并确认
             Session session = connection.createSession(Boolean.TRUE, Session.CLIENT_ACKNOWLEDGE);
             // 创建目的地
-            Destination destination = session.createQueue("myQueue");
+            //session.createQueue("myQueue?consumer.prefetchSize=10");
+//            Destination destination = session.createQueue("VirtualTopicConsumers.B.VirtualTopic.helloTopic");
+            Destination destination = session.createQueue("myQueue?consumer.prefetchSize=10");
             // 创建消费者
             MessageConsumer consumer = session.createConsumer(destination);
             TextMessage textMessage = (TextMessage) consumer.receive();

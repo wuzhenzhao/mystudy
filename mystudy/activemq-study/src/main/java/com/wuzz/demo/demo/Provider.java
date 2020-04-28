@@ -27,15 +27,15 @@ public class Provider {
             // 延迟确认
             Session session = connection.createSession(Boolean.TRUE, Session.DUPS_OK_ACKNOWLEDGE);
             // 创建目的地
-            Destination destination = session.createQueue("stringQueue");
+            Destination destination = session.createQueue("myQueue");
             // 创建消费者
             MessageProducer producer = session.createProducer(destination);
             TextMessage message = session.createTextMessage("Hello World");
             //延迟60秒发送消息
 //            long time = 60 * 1000;
 //            message.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, time);
-            //开始延迟30秒发送，重复发送10次，每次之间间隔10秒
-//            long delay = 30 * 1000;
+            //开始延迟3秒发送，重复发送10次，每次之间间隔10秒
+//            long delay = 3 * 1000;
 //            long period = 10 * 1000;
 //            int repeat = 9;
 //            message.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, delay);

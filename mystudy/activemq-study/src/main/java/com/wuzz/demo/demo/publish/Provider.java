@@ -24,6 +24,7 @@ public class Provider {
             connection.start();
             Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
             //创建目的地
+//            Destination destination = session.createTopic("VirtualTopic.helloTopic");
             Destination destination = session.createTopic("myTopic");
             //创建发送者
             MessageProducer producer = session.createProducer(destination);

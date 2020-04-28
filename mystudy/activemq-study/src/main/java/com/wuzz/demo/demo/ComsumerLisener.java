@@ -26,7 +26,10 @@ public class ComsumerLisener {
 
             Session session = connection.createSession
                     (Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
+//            Session session = connection.createSession
+//                    (Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
             //创建目的地
+//            Destination destination = session.createQueue("VirtualTopicConsumers.A.VirtualTopic.helloTopic");
             Destination destination = session.createQueue("myQueue");
             //创建接收者
             MessageConsumer consumer = session.createConsumer(destination);
@@ -38,6 +41,8 @@ public class ComsumerLisener {
                     try {
                         System.out.println(((TextMessage) message).getText());
                         session.commit();
+//                        session.rollback();
+//                        session.recover();
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }
