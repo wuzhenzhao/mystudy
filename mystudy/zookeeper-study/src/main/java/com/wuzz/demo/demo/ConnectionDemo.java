@@ -20,8 +20,8 @@ public class ConnectionDemo {
         try {
             final CountDownLatch countDownLatch=new CountDownLatch(1);
             ZooKeeper zooKeeper=
-                    new ZooKeeper("192.168.1.101:2181," +
-                            "192.168.1.102:2181,192.168.1.103:2181",
+                    new ZooKeeper("192.168.1.101:2181",
+//                    new ZooKeeper("192.168.1.101:2181,192.168.1.102:2181,192.168.1.103:2181",
                             4000, new Watcher() {
                         @Override
                         public void process(WatchedEvent event) {
@@ -39,22 +39,22 @@ public class ConnectionDemo {
             zooKeeper.create("/zk-wuzz","0".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             Thread.sleep(1000);
             Stat stat=new Stat();
-
             //得到当前节点的值
             byte[] bytes=zooKeeper.getData("/zk-wuzz",null,stat);
             System.out.println(new String(bytes)); // 0
-
-            Stat stat1 = zooKeeper.exists("/zk-wuzz", true);
+            zooKeeper.create("/zk-wuzz/", "0".getBytes(),
+                    ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+//            Stat stat1 = zooKeeper.exists("/zk-wuzz", true);
             //修改节点值
-            zooKeeper.setData("/zk-wuzz","1".getBytes(),stat.getVersion());
+//            zooKeeper.setData("/zk-wuzz","1".getBytes(),stat.getVersion());
 
             //得到当前节点的值
-            byte[] bytes1=zooKeeper.getData("/zk-wuzz",null,stat);
-            System.out.println(new String(bytes1)); // 1
+//            byte[] bytes1=zooKeeper.getData("/zk-wuzz",null,stat);
+//            System.out.println(new String(bytes1)); // 1
 
 //            zooKeeper.delete("/zk-wuzz",stat.getVersion());
 
-            zooKeeper.close();
+//            zooKeeper.close();
 
             System.in.read();
         } catch (IOException e) {

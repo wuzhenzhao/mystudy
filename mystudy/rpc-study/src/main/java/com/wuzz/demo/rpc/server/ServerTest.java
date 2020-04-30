@@ -3,8 +3,8 @@ package com.wuzz.demo.rpc.server;
 public class ServerTest {
 
     public static void main(String[] args) {
-        HelloService iGpHello = new HelloServiceImpl();
+        HelloService helloService  =new HelloServiceImpl();
         RpcServer rpcServer = new RpcServer();
-        rpcServer.publisher(iGpHello, 6666);
+        rpcServer.publisher(helloService, 6666);
     }
 }

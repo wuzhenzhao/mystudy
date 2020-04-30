@@ -24,8 +24,7 @@ public class CuratorDemo {
                 .build(); // 构造
 
         curatorFramework.start();// 启动 连接
-
-        // 结果: /curator/mic/node1
+        curatorFramework.blockUntilConnected();
         // 原生api中，必须是逐层创建，也就是父节点必须存在，子节点才能创建
         String path = curatorFramework.create() // 创建节点
                 .creatingParentsIfNeeded() // 如果需要创建父节点
