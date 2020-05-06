@@ -21,6 +21,7 @@
         <module>spring-cloud-zuul</module>
         <module>spring-cloud-stream</module>
         <module>spring-cloud-sleuth</module>
+        <module>spring-cloud-consul</module>
     </modules>
 
     <properties>
