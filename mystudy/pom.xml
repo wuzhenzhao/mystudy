@@ -27,6 +27,7 @@
         <module>quartz-scheduler-study</module>
         <module>redis-study</module>
         <module>kafka-springboot-study</module>
+        <module>nacos-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
