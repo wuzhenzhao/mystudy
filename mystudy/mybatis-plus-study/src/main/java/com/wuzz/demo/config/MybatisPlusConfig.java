@@ -1,7 +1,6 @@
 package com.wuzz.demo.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @time 2020/5/7 10:26
  * @since 1.0
  **/
-@EnableTransactionManagement (proxyTargetClass = true)
+@EnableTransactionManagement(proxyTargetClass = true)
 @Configuration
 public class MybatisPlusConfig {
 
@@ -23,8 +22,6 @@ public class MybatisPlusConfig {
         // paginationInterceptor.setOverflow(false);
         // 设置最大单页限制数量，默认 500 条，-1 不受限制
         // paginationInterceptor.setLimit(500);
-        // 开启 count 的 join 优化,只针对部分 left join
-        paginationInterceptor.setSqlParser(new JsqlParserCountOptimize());
         return paginationInterceptor;
     }
 }
