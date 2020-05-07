@@ -39,6 +39,9 @@ public class UserService /*implements IService<User>*/ {
 //    }
 
     public boolean test() {
+
+        IPage<User> page = userMapper.selectPageVo(new Page<>(0, 2));
+        System.out.println(JSON.toJSONString(page));
         //查询
         User user = userMapper.selectById(1);
         System.out.println(user.toString());
@@ -47,16 +50,16 @@ public class UserService /*implements IService<User>*/ {
         List<User> users = userMapper.selectList(wrapper);
         System.out.println(users.toString());
 
-        Page page = new Page<>(1, 2);
-        IPage<User> userPage = userMapper.selectPage(page,wrapper);
+        Page page2 = new Page<>(1, 2);
+        IPage<User> userPage = userMapper.selectPage(page2,wrapper);
         System.out.println(JSON.toJSONString(userPage));
 
         List<Map<String, Object>> maps = userMapper.selectMaps(wrapper);
         System.out.println(JSON.toJSONString(maps));
-
-        User wuzz = new User("wuzz", 18, "774283325@qq.com");
-        int i = userMapper.insert(wuzz);
-        System.out.println(wuzz.getId());
+//
+//        User wuzz = new User("wuzz", 18, "774283325@qq.com");
+//        int i = userMapper.insert(wuzz);
+//        System.out.println(wuzz.getId());
         return false;
     }
 

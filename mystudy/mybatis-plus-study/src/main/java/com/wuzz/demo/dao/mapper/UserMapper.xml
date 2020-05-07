@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wuzz.demo.dao.UserMapper">
     <!-- 声明这个namespace使用二级缓存 -->
-    <cache/>
-<!--    <select id="selectPageVo" resultType="com.wuzz.demo.entity.User" >-->
-<!--        SELECT id,name FROM user WHERE state=#{state}-->
-<!--    </select>-->
+    <cache-ref namespace="com.wuzz.demo.dao.UserMapper"/>
+    <select id="selectPageVo" resultType="com.wuzz.demo.entity.User" useCache="true">
+        SELECT id,name FROM user
+    </select>
 </mapper>
