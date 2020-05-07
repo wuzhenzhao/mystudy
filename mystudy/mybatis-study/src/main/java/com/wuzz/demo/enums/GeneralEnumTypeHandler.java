@@ -17,7 +17,8 @@ import java.sql.SQLException;
 
 public class GeneralEnumTypeHandler<E extends BaseEnum> extends BaseTypeHandler<E> {
 
-
+    //<result column="es_type" property="esType"
+    // typeHandler="com.hikvision.cms.screen.enums.process.GeneralEnumTypeHandler"/>
     private Class<E> type;
 
     private E[] enums;
