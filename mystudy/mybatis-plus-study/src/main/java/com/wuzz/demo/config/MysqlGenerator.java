@@ -65,7 +65,7 @@ public class MysqlGenerator {
         // 代码生成器
         AutoGenerator autoGenerator = new AutoGenerator();
         String projectPath = System.getProperty("user.dir");
-        GlobalConfig globalConfig = new GlobalConfig().setOutputDir(projectPath + "/src/main/java")// 输出目录
+        GlobalConfig globalConfig = new GlobalConfig().setOutputDir(projectPath + "/mybatis-plus-study/src/main/java")// 输出目录
                 .setFileOverride(true)// 是否覆盖文件
                 .setActiveRecord(true)// 开启 activeRecord 模式
                 .setEnableCache(false)// XML 二级缓存
