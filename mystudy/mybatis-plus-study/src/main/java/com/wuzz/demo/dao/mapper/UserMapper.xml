@@ -3,7 +3,7 @@
 <mapper namespace="com.wuzz.demo.dao.UserMapper">
     <!-- 声明这个namespace使用二级缓存 -->
     <cache/>
-    <select id="selectPageVo" resultType="com.wuzz.demo.entity.User">
-        SELECT id,name FROM user WHERE state=#{state}
-    </select>
+<!--    <select id="selectPageVo" resultType="com.wuzz.demo.entity.User" >-->
+<!--        SELECT id,name FROM user WHERE state=#{state}-->
+<!--    </select>-->
 </mapper>

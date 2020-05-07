@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @time 2020/5/7 10:26
  * @since 1.0
  **/
-@EnableTransactionManagement
+@EnableTransactionManagement (proxyTargetClass = true)
 @Configuration
 public class MybatisPlusConfig {
 

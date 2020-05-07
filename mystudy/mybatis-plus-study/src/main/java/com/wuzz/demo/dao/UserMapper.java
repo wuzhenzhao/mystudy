@@ -23,5 +23,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param state 状态
      * @return 分页对象
      */
-    IPage<User> selectPageVo(Page<?> page, Integer state);
+//    IPage<User> selectPageVo(Page<?> page, Integer state);
 }
