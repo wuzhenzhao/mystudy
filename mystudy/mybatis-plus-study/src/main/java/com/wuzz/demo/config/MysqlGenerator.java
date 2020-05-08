@@ -82,7 +82,6 @@ public class MysqlGenerator {
         // 数据源配置
         DataSourceConfig dataSourceConfig = new DataSourceConfig().setDbType(DbType.MYSQL)// 数据库类型
                 .setDriverName(DRIVER).setUsername(USER_NAME).setPassword(PASSWORD).setUrl(URL);
-
         autoGenerator.setDataSource(dataSourceConfig);
         // 策略配置
         StrategyConfig strategyConfig = new StrategyConfig()
@@ -94,7 +93,7 @@ public class MysqlGenerator {
                 // .setExclude(new String[]{"test"}) // 排除生成的表
                 // 自定义实体，公共字段
                 // .setSuperEntityColumns(new String[]{"test_id"})
-                .setTableFillList(tableFillList)
+                // .setTableFillList(tableFillList)
                 // 自定义实体父类
                 // .setSuperEntityClass("com.baomidou.demo.base.BsBaseEntity")
                 // // 自定义 mapper 父类

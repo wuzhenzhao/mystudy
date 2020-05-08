@@ -43,19 +43,27 @@ public class UserService /*implements IService<User>*/ {
         IPage<User> page = userMapper.selectPageVo(new Page<>(0, 2));
         System.out.println(JSON.toJSONString(page));
         //查询
-        User user = userMapper.selectById(1);
+        User user = userMapper.selectById(20);
         System.out.println(user.toString());
 
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>().like(User::getName, "J");
-        List<User> users = userMapper.selectList(wrapper);
-        System.out.println(users.toString());
 
-        Page page2 = new Page<>(1, 2);
-        IPage<User> userPage = userMapper.selectPage(page2,wrapper);
-        System.out.println(JSON.toJSONString(userPage));
+        userMapper.selectById(20);
 
-        List<Map<String, Object>> maps = userMapper.selectMaps(wrapper);
-        System.out.println(JSON.toJSONString(maps));
+        user.setName("Hello Wuzz");
+        userMapper.updateById(user);
+
+        userMapper.selectById(20);
+
+//        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>().like(User::getName, "J");
+//        List<User> users = userMapper.selectList(wrapper);
+//        System.out.println(users.toString());
+//
+//        Page page2 = new Page<>(1, 2);
+//        IPage<User> userPage = userMapper.selectPage(page2,wrapper);
+//        System.out.println(JSON.toJSONString(userPage));
+//
+//        List<Map<String, Object>> maps = userMapper.selectMaps(wrapper);
+//        System.out.println(JSON.toJSONString(maps));
 //
 //        User wuzz = new User("wuzz", 18, "774283325@qq.com");
 //        int i = userMapper.insert(wuzz);
