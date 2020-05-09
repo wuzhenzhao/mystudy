@@ -18,9 +18,9 @@
     <dubbo:protocol name="webservice" port="8887" server="jetty"/>
 
     <!--调用的服务名称，协议-->
-    <dubbo:reference id="helloService" loadbalance="leastactive"
+    <dubbo:reference id="helloService" loadbalance="leastactive" check="false"
                      interface="com.wuzz.demo.service.HelloService"
-                     protocol="dubbo" />
+                     protocol="dubbo" version="2.0.0" />
 
     <!--调用的服务名称，协议-->
     <!--<dubbo:reference id="userService"-->

@@ -21,9 +21,9 @@ public class App {
                         ("META-INF/spring/dubbo-server.xml");
         context.start();
         Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("myProtocol");
-        System.out.println(protocol.getDefaultPort());
-        System.out.println("dubbo服务启动。。。");
-        System.in.read(); //阻塞当前进程
+//        System.out.println(protocol.getDefaultPort());
+//        System.out.println("dubbo服务启动。。。");
+//        System.in.read(); //阻塞当前进程
 
 
     }

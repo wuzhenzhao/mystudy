@@ -22,17 +22,17 @@
 
     <!--需要发布的服务 设置版本信息-->
     <dubbo:service interface="com.wuzz.demo.service.HelloService"
-                   ref="helloService" protocol="dubbo"/>
+                   ref="helloService" protocol="dubbo" version="1.0.0"/>
 
     <!--<dubbo:service interface="com.wuzz.demo.service.UserService"-->
                    <!--ref="userService"  protocol="rest,dubbo"/>-->
 
-    <!--<dubbo:service interface="com.wuzz.demo.service.HelloService"-->
-                   <!--ref="helloService3"  protocol="dubbo"/>-->
+    <dubbo:service interface="com.wuzz.demo.service.HelloService"
+                   ref="helloService3"  protocol="dubbo" version="2.0.0"/>
     <!--需要发布的服务实现类-->
     <bean id="helloService" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl"/>
 
-    <!--<bean id="userService" class="com.wuzz.demo.ServiceImpl.UserServiceImpl"/>-->
+<!--    <bean id="userService" class="com.wuzz.demo.ServiceImpl.UserServiceImpl"/>-->
 
-    <!--<bean id="helloService3" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl3"/>-->
+    <bean id="helloService3" class="com.wuzz.demo.ServiceImpl.HelloServiceImpl3"/>
 </beans>
