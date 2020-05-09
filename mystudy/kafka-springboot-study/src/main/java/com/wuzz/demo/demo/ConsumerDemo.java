@@ -3,8 +3,10 @@ package com.wuzz.demo.demo;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -23,7 +25,7 @@ public class ConsumerDemo extends Thread{
         Properties properties=new Properties();
         // 连接的 kafka 集群地址
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "192.168.1.101:9092,192.168.1.102:9092,192.168.1.103:9092");
+                "192.168.1.101:9092");//,192.168.1.102:9092,192.168.1.103:9092
         // 消费者分组
         properties.put(ConsumerConfig.GROUP_ID_CONFIG,"KafkaConsumerDemo");
         properties.put(ConsumerConfig.CLIENT_ID_CONFIG,"KafkaConsumerDemo1");
@@ -39,6 +41,9 @@ public class ConsumerDemo extends Thread{
         //对于不同的groupid保证能消费到之前的消息，重置offset
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
         kafkaConsumer=new KafkaConsumer(properties);
+        //消费指定的分区
+        //TopicPartition topicPartition=new TopicPartition(topic,0);
+//        kafkaConsumer.assign(Arrays.asList(topicPartition));
         //订阅
         kafkaConsumer.subscribe(Collections.singletonList(topic));
     }

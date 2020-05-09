@@ -23,7 +23,7 @@ public class ConsumerDemo2 extends Thread{
         Properties properties=new Properties();
         // 连接的 kafka 集群地址
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "192.168.1.101:9092,192.168.1.102:9092,192.168.1.103:9092");
+                "192.168.1.101:9092");//,192.168.1.102:9092,192.168.1.103:9092
         // 消费者分组
         properties.put(ConsumerConfig.GROUP_ID_CONFIG,"KafkaConsumerDemo");
         properties.put(ConsumerConfig.CLIENT_ID_CONFIG,"KafkaConsumerDemo2");
@@ -55,6 +55,6 @@ public class ConsumerDemo2 extends Thread{
     }
 
     public static void main(String[] args) {
-        new ConsumerDemo2("test").start();
+        new ConsumerDemo2("testCopyTopic").start();
     }
 }

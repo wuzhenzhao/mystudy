@@ -27,7 +27,7 @@ public class ProducerDemo extends Thread {
         Properties properties = new Properties();
         // 连接的 kafka 集群地址
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "192.168.1.101:9092,192.168.1.102:9092,192.168.1.103:9092");
+                "192.168.1.101:9092");//,192.168.1.102:9092,192.168.1.103:9092
         // 客户端ID标识
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaProducerDemo");
         //确认记录，保证记录不丢失 总是设置成-1
@@ -38,6 +38,8 @@ public class ProducerDemo extends Thread {
         //值序列化
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringSerializer");
+        //指定自己的分区规则
+//        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,"com.wuzz.demo.demo.MyPartition");
         producer = new KafkaProducer<String, String>(properties);
         this.topic = topic;
     }
@@ -45,7 +47,7 @@ public class ProducerDemo extends Thread {
     @Override
     public void run() {
         int num=0;
-        while(num<2000000) {
+        while(num<10) {
             try {
 
                 // 方法 1: 使用 callback
