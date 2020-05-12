@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Create with IntelliJ IDEA
@@ -14,6 +15,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  * Description:
  */
 @SpringBootApplication
+@EnableTransactionManagement
 @ServletComponentScan // 先注释掉，避免mvc的影响
 public class SpringStudyApp {
     private final static Logger log = LoggerFactory.getLogger(SpringStudyApp.class);
