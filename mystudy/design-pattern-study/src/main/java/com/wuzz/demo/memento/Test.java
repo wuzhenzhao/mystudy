@@ -1,7 +1,7 @@
 package com.wuzz.demo.memento;
 
 /**
- * @description:
+ * @description:备忘录模式
  * @author: Wuzhenzhao@hikvision.com.cn
  * @time 2020/3/25 14:28
  * @since 1.0

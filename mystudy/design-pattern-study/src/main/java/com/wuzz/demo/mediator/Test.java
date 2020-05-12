@@ -1,7 +1,7 @@
 package com.wuzz.demo.mediator;
 
 /**
- * @description:
+ * @description:中介者模式
  * @author: Wuzhenzhao@hikvision.com.cn
  * @time 2020/3/25 10:06
  * @since 1.0

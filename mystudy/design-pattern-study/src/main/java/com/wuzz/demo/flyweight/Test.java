@@ -1,7 +1,7 @@
 package com.wuzz.demo.flyweight;
 
 /**
- * @description:
+ * @description: 享元模式
  * @author: Wuzhenzhao@hikvision.com.cn
  * @time 2020/3/24 19:06
  * @since 1.0
