@@ -1,4 +1,4 @@
-package com.wuzz.demo;
+package com.wuzz.demo.config;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +13,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * Date: 2019/12/7
  * Time: 9:47
  * Description:
- * ClassPath:com.wuzz.demo.RedisConfig
+ * ClassPath:com.wuzz.demo.config.RedisConfig
  */
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -53,8 +53,8 @@ public class RedisConfig {
         jedisPoolConfig.setBlockWhenExhausted(blockWhenExhausted);
         // 是否启用pool的jmx管理功能, 默认tru
         jedisPoolConfig.setJmxEnabled(JmxEnabled);
+//        JedisPool jedisPool1 = new JedisPool(jedisPoolConfig, host, port, timeout, password, 0);
         JedisPool jedisPool = new JedisPool(jedisPoolConfig,  host,  port,  timeout, password);
-
         System.out.println("JedisPool注入成功...");
         return jedisPool;
     }
