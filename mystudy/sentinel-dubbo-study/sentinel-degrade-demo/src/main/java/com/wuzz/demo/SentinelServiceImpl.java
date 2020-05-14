@@ -1,5 +1,6 @@
 package com.wuzz.demo;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.apache.dubbo.config.annotation.Service;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  */
 @Service//把当前服务发布成dubbo服务
 public class SentinelServiceImpl implements SentinelService {
+
 
     @Override
     public String sayHello(String name) {

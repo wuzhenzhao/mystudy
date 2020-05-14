@@ -1,4 +1,4 @@
-package com.wuzz.demo.simple;
+package com.wuzz.demo.demo;
 
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.SphU;
