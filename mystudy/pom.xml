@@ -29,6 +29,7 @@
         <module>kafka-springboot-study</module>
         <module>nacos-study</module>
         <module>mybatis-plus-study</module>
+        <module>elasticsearch-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
