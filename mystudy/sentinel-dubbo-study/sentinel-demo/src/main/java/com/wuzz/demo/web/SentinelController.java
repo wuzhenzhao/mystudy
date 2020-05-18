@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class SentinelController {
-
+    //-Dcsp.sentinel.dashboard.server=localhost:8080 -Dproject.name=sentinel-demo
     //针对方法级别的限流
     @SentinelResource(value = "sayHello", blockHandler = "exceptionHandler", fallback = "fallbackHandler")
     @GetMapping("/say")
     public String sayHello(String name) {
         System.out.println("hello world");
-        if (1 == 1) throw new RuntimeException("Hello");
+//        if (1 == 1) throw new RuntimeException("Hello");
         return "hello world";
     }
 
