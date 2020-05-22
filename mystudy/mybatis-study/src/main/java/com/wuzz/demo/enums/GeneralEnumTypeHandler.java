@@ -19,6 +19,9 @@ public class GeneralEnumTypeHandler<E extends BaseEnum> extends BaseTypeHandler<
 
     //<result column="es_type" property="esType"
     // typeHandler="com.hikvision.cms.screen.enums.process.GeneralEnumTypeHandler"/>
+
+    // 在mybatis-plus里面还需要再配置文件中配置
+    //mybatis-plus.configuration.default-enum-type-handler= com.....GeneralEnumTypeHandler
     private Class<E> type;
 
     private E[] enums;

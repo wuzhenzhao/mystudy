@@ -5,9 +5,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 /**
- * @Author: qingshan
  * @Date: 2018/9/21 10:52
- * @Description: 咕泡学院，只为更好的你
  * 消息生产者，测试事务模式。发送消息的效率比较低，建议使用Confirm模式
  * 参考文章：https://www.cnblogs.com/vipstone/p/9350075.html
  */
