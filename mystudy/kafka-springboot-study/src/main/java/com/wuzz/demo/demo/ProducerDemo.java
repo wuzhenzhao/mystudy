@@ -38,10 +38,15 @@ public class ProducerDemo extends Thread {
         //值序列化
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringSerializer");
+        //Producer自动升级成幂等性Producer。Kafka会自动去重。
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tx-id");
         //指定自己的分区规则
 //        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,"com.wuzz.demo.demo.MyPartition");
         producer = new KafkaProducer<String, String>(properties);
         this.topic = topic;
+
+
     }
 
     @Override
@@ -80,6 +85,16 @@ public class ProducerDemo extends Thread {
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
+            // kafka  事务型消息
+//            producer.initTransactions();
+//            try {
+//                producer.beginTransaction();
+//                producer.send(record1);
+//                producer.send(record2);
+//                producer.commitTransaction();
+//            } catch (KafkaException e) {
+//                producer.abortTransaction();
+//            }
         }
     }
 
