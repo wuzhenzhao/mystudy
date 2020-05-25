@@ -38,10 +38,10 @@ public class MysqlGenerator {
     /**
      * JDBC相关配置
      */
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://192.168.1.101:3306/study?useUnicode=true&characterEncoding=UTF-8";
-    private static final String USER_NAME = "root";
-    private static final String PASSWORD = "123456";
+    private static final String DRIVER = "org.postgresql.Driver";
+    private static final String URL = "jdbc:postgresql://127.0.0.1:5432/eemva";
+    private static final String USER_NAME = "postgres";
+    private static final String PASSWORD = "zhenzhao123456";
 
     /**
      * <p>
@@ -57,10 +57,10 @@ public class MysqlGenerator {
         //虽然像Mysql数据库有自动更新几只，但像ORACLE的数据库就没有了，
         //使用公共字段填充功能，就可以实现，自动按场景更新了。
         //如下是配置
-        TableFill createField = new TableFill("gmt_create", FieldFill.INSERT);
-        TableFill modifiedField = new TableFill("gmt_modified", FieldFill.INSERT_UPDATE);
-        tableFillList.add(createField);
-        tableFillList.add(modifiedField);
+//        TableFill createField = new TableFill("gmt_create", FieldFill.INSERT);
+//        TableFill modifiedField = new TableFill("gmt_modified", FieldFill.INSERT_UPDATE);
+//        tableFillList.add(createField);
+//        tableFillList.add(modifiedField);
 
         // 代码生成器
         AutoGenerator autoGenerator = new AutoGenerator();
@@ -80,7 +80,7 @@ public class MysqlGenerator {
         autoGenerator.setGlobalConfig(globalConfig);
 
         // 数据源配置
-        DataSourceConfig dataSourceConfig = new DataSourceConfig().setDbType(DbType.MYSQL)// 数据库类型
+        DataSourceConfig dataSourceConfig = new DataSourceConfig().setDbType(DbType.POSTGRE_SQL)// 数据库类型
                 .setDriverName(DRIVER).setUsername(USER_NAME).setPassword(PASSWORD).setUrl(URL);
         autoGenerator.setDataSource(dataSourceConfig);
         // 策略配置
