@@ -52,16 +52,18 @@ public class KafkaProducerConfig {
 
     private ProducerFactory<String, String> producerFactory() {
         DefaultKafkaProducerFactory<String, String> producerFactory = new DefaultKafkaProducerFactory<>(producerConfigs());
-        /*producerFactory.transactionCapable();
-        producerFactory.setTransactionIdPrefix("hous-");*/
+//        // 开启事务
+//        producerFactory.transactionCapable();
+//        // 用来生成Transactional.id的前缀
+//        producerFactory.setTransactionIdPrefix("hous-");
         return producerFactory;
     }
 
-    /*@Bean
-    public KafkaTransactionManager transactionManager() {
-        KafkaTransactionManager manager = new KafkaTransactionManager(producerFactory());
-        return manager;
-    }*/
+//    @Bean
+//    public KafkaTransactionManager transactionManager() {
+//        KafkaTransactionManager manager = new KafkaTransactionManager(producerFactory());
+//        return manager;
+//    }
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {

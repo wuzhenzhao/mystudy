@@ -94,8 +94,9 @@ public class KafkaConsumerConfig {
     private ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        //批量消费
-        factory.setBatchListener(batchListener);
+        //从版本1.1开始，@KafkaListener可以被配置为批量接收从Kafka话题队列中的Message。
+        // 要配置监听器容器工厂以创建批处理侦听器，需要设置batchListener属性为true
+        factory.setBatchListener(false);
         //如果消息队列中没有消息，等待timeout毫秒后，调用poll()方法。
         // 如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。
         //手动提交无需配置
