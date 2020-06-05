@@ -1,14 +1,17 @@
 package com.wuzz.demo.integratedway1;
 
+import org.apache.catalina.User;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
+import static org.apache.kafka.common.requests.DeleteAclsResponse.log;
 
 /**
  * User: Wuzhenzhao
@@ -33,13 +36,20 @@ public class KafkaReceiver {
 //
 //    }
 
-    @KafkaListener(topics = "testCopyTopic", id = "consumer", containerFactory = "batchFactory")
-    public void listen(List<ConsumerRecord<?, ?>> list) {
-        List<String> messages = new ArrayList<>();
-        for (ConsumerRecord<?, ?> record : list) {
-            Optional<?> kafkaMessage = Optional.ofNullable(record.value());
-            // 获取消息
-            kafkaMessage.ifPresent(o -> messages.add(o.toString()));
+    @KafkaListener(containerFactory = "kafkaBatchListener6", topics = {"testCopyTopic"},groupId = "testGroup")
+    public void batchListener(List<ConsumerRecord<?, ?>> records, Acknowledgment ack) {
+
+        List<User> userList = new ArrayList<>();
+        try {
+            records.forEach(record -> {
+                System.out.println("----------------- record =" + record);
+                System.out.println("------------------ message =" + record);
+            });
+        } catch (Exception e) {
+            log.error("Kafka监听异常" + e.getMessage(), e);
+        } finally {
+            ack.acknowledge();//手动提交偏移量
         }
+
     }
 }

@@ -81,7 +81,7 @@ public class ProducerDemo extends Thread {
                 futrue.get();
 
                 TimeUnit.SECONDS.sleep(1);
-                ++num;
+                num++;
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }

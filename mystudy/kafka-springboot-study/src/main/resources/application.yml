@@ -1,0 +1,21 @@
+#kafka\u914D\u7F6E\u4FE1\u606F
+kafka:
+  producer:
+    bootstrap-servers: 192.168.1.101:9092
+    batch-size: 16785                                   #\u4E00\u6B21\u6700\u591A\u53D1\u9001\u6570\u636E\u91CF
+    retries: 1                                          #\u53D1\u9001\u5931\u8D25\u540E\u7684\u91CD\u590D\u53D1\u9001\u6B21\u6570
+    buffer-memory: 33554432                             #32M\u6279\u5904\u7406\u7F13\u51B2\u533A
+    linger: 1
+  consumer:
+    bootstrap-servers: 192.168.1.101:9092
+    auto-offset-reset: latest                           #\u6700\u65E9\u672A\u88AB\u6D88\u8D39\u7684offset earliest
+    max-poll-records: 3100                              #\u6279\u91CF\u6D88\u8D39\u4E00\u6B21\u6700\u5927\u62C9\u53D6\u7684\u6570\u636E\u91CF
+    enable-auto-commit: false                           #\u662F\u5426\u5F00\u542F\u81EA\u52A8\u63D0\u4EA4
+    auto-commit-interval: 1000                          #\u81EA\u52A8\u63D0\u4EA4\u7684\u95F4\u9694\u65F6\u95F4
+    session-timeout: 20000                              #\u8FDE\u63A5\u8D85\u65F6\u65F6\u95F4
+    max-poll-interval: 15000                            #\u624B\u52A8\u63D0\u4EA4\u8BBE\u7F6E\u4E0Epoll\u7684\u5FC3\u8DF3\u6570,\u5982\u679C\u6D88\u606F\u961F\u5217\u4E2D\u6CA1\u6709\u6D88\u606F\uFF0C\u7B49\u5F85\u6BEB\u79D2\u540E\uFF0C\u8C03\u7528poll()\u65B9\u6CD5\u3002\u5982\u679C\u961F\u5217\u4E2D\u6709\u6D88\u606F\uFF0C\u7ACB\u5373\u6D88\u8D39\u6D88\u606F\uFF0C\u6BCF\u6B21\u6D88\u8D39\u7684\u6D88\u606F\u7684\u591A\u5C11\u53EF\u4EE5\u901A\u8FC7max.poll.records\u914D\u7F6E\u3002
+    max-partition-fetch-bytes: 15728640                 #\u8BBE\u7F6E\u62C9\u53D6\u6570\u636E\u7684\u5927\u5C0F,15M
+  listener:
+    batch-listener: true                                #\u662F\u5426\u5F00\u542F\u6279\u91CF\u6D88\u8D39\uFF0Ctrue\u8868\u793A\u6279\u91CF\u6D88\u8D39
+    concurrencys: 3,6                                   #\u8BBE\u7F6E\u6D88\u8D39\u7684\u7EBF\u7A0B\u6570
+    poll-timeout: 1500                                  #\u53EA\u9650\u81EA\u52A8\u63D0\u4EA4\uFF0C
