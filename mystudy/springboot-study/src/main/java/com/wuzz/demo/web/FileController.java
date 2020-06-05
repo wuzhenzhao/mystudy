@@ -3,6 +3,7 @@ package com.wuzz.demo.web;
 import com.wuzz.demo.core.Result;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,70 @@ public class FileController {
         System.out.println("读取sheet表完成");
         file.delete();
         return new Result(true, "000", "成功: ");
+    }
+
+    @RequestMapping(value = "/downLoad", method = RequestMethod.GET)
+    public void downLoad(HttpServletResponse httpServletResponse) {
+        //输出Excel文件
+        OutputStream output = null;
+        try {
+            XSSFWorkbook wb = new XSSFWorkbook();//创建HSSFWorkbook对象
+            XSSFSheet sheet = wb.createSheet("市场监管局数据");//建立sheet对象
+            //在sheet里创建第1行
+            XSSFRow row = sheet.createRow(0);
+            //合并单元格CellRangeAddress构造参数依次表示起始行，截至行，起始列， 截至列
+//            sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
+            //创建单元格并设置单元格内容
+            row.createCell(0).setCellValue("查询日期");
+            row.createCell(1).setCellValue("企业名称");
+            row.createCell(2).setCellValue("注册号");
+            row.createCell(3).setCellValue("统一社会信用代码");
+            row.createCell(4).setCellValue("法定代表人");
+            row.createCell(5).setCellValue("成立日期");
+            row.createCell(6).setCellValue("登记机关");
+            row.createCell(7).setCellValue("管辖单位");
+            row.createCell(8).setCellValue("企业类型");
+            row.createCell(9).setCellValue("注册资本");
+            row.createCell(10).setCellValue("注册资本折美元");
+            row.createCell(11).setCellValue("核准日期");
+            row.createCell(12).setCellValue("行业");
+            row.createCell(13).setCellValue("经营范围");
+            row.createCell(14).setCellValue("经营截止日期");
+            row.createCell(15).setCellValue("经营地址");
+            row.createCell(16).setCellValue("吊销日期");
+            row.createCell(17).setCellValue("注销日期");
+            row.createCell(18).setCellValue("国别地区");
+            row.createCell(19).setCellValue("投资总额");
+            row.createCell(20).setCellValue("投资总额折美元");
+            row.createCell(21).setCellValue("住所");
+            row.createCell(22).setCellValue("实际出资额");
+            row.createCell(23).setCellValue("实际出资额折美元");
+            row.createCell(24).setCellValue("外方认缴出资额折美元");
+            row.createCell(25).setCellValue("外方认缴出资额");
+            row.createCell(26).setCellValue("电话");
+            row.createCell(27).setCellValue("证件号码");
+            row.createCell(28).setCellValue("档案号");
+            row.createCell(29).setCellValue("企业额外属性");
+            row.createCell(30).setCellValue("企业风险");
+            output = httpServletResponse.getOutputStream();
+            httpServletResponse.reset();
+            //设置响应头，
+            httpServletResponse.setCharacterEncoding("utf-8");
+            httpServletResponse.setContentType("application/octet-stream");
+            httpServletResponse.setHeader("Content-Disposition", "attachment;fileName="
+                    + URLEncoder.encode("市场监管局数据导入模板.xlsx", "UTF-8"));
+            wb.write(output);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @RequestMapping(value = "/sendUploadVoice", method = RequestMethod.GET)
