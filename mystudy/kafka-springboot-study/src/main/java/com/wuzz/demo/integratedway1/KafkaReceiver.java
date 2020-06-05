@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,15 +21,25 @@ import java.util.Optional;
 public class KafkaReceiver {
     private static Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
 
-    @KafkaListener(topics = {"wuzzTopic"})
-    public void listen(ConsumerRecord<?, ?> record) {
-        Optional<?> kafkaMessage = Optional.ofNullable(record.value());
-        if (kafkaMessage.isPresent()) {
+//    @KafkaListener(topics = {"wuzzTopic"})
+//    public void listen(ConsumerRecord<?, ?> record) {
+//        Optional<?> kafkaMessage = Optional.ofNullable(record.value());
+//        if (kafkaMessage.isPresent()) {
+//
+//            Object message = kafkaMessage.get();
+//            System.out.println("----------------- record =" + record);
+//            System.out.println("------------------ message =" + message);
+//        }
+//
+//    }
 
-            Object message = kafkaMessage.get();
-            System.out.println("----------------- record =" + record);
-            System.out.println("------------------ message =" + message);
+    @KafkaListener(topics = "testCopyTopic", id = "consumer", containerFactory = "batchFactory")
+    public void listen(List<ConsumerRecord<?, ?>> list) {
+        List<String> messages = new ArrayList<>();
+        for (ConsumerRecord<?, ?> record : list) {
+            Optional<?> kafkaMessage = Optional.ofNullable(record.value());
+            // 获取消息
+            kafkaMessage.ifPresent(o -> messages.add(o.toString()));
         }
-
     }
 }

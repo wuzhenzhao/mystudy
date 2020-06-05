@@ -39,8 +39,8 @@ public class ProducerDemo extends Thread {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringSerializer");
         //Producer自动升级成幂等性Producer。Kafka会自动去重。
-        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tx-id");
+//        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+//        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tx-id");
         //指定自己的分区规则
 //        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,"com.wuzz.demo.demo.MyPartition");
         producer = new KafkaProducer<String, String>(properties);
@@ -52,7 +52,7 @@ public class ProducerDemo extends Thread {
     @Override
     public void run() {
         int num=0;
-        while(num<10) {
+        while(num<30) {
             try {
 
                 // 方法 1: 使用 callback
