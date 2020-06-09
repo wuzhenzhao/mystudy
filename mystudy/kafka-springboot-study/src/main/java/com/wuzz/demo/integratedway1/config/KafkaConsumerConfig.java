@@ -101,7 +101,8 @@ public class KafkaConsumerConfig {
         // 如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。
         //手动提交无需配置
         factory.getContainerProperties().setPollTimeout(pollTimeout);
-        //设置提交偏移量的方式， MANUAL_IMMEDIATE 表示消费一条提交一次；MANUAL表示批量提交一次
+        //设置提交偏移量的方式， MANUAL_IMMEDIATE 表示消费一条提交一次；MANUAL表示批量提交一次,
+        // 自动提交的时候注释掉
         factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
