@@ -52,7 +52,7 @@ public class ProducerDemo extends Thread {
     @Override
     public void run() {
         int num=0;
-        while(num<30) {
+        while(num<1) {
             try {
 
                 // 方法 1: 使用 callback
@@ -81,7 +81,7 @@ public class ProducerDemo extends Thread {
                 futrue.get();
 
                 TimeUnit.SECONDS.sleep(1);
-                num++;
+                ++num;
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
