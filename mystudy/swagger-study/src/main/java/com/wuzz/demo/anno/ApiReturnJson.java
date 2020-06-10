@@ -1,4 +1,4 @@
-package com.wuzz.demo.swagger2.annotation;
+package com.wuzz.demo.anno;
 
 
 import java.lang.annotation.ElementType;

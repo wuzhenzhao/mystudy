@@ -30,6 +30,7 @@
         <module>nacos-study</module>
         <module>mybatis-plus-study</module>
         <module>elasticsearch-study</module>
+        <module>swagger-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

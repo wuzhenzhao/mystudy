@@ -1,4 +1,4 @@
-package com.wuzz.demo.swagger2.config;
+package com.wuzz.demo.config;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class MyOperationBuilderPlugin implements OperationBuilderPlugin  {
 		// TODO Auto-generated method stub
 		if(operationContext.getReturnType().isInstanceOf(Map.class)) {
 			//根据参数上的ApiJsonObject注解中的参数动态生成Class
-			//Optional<ApiReturnJson> optional = operationContext.findAnnotation(ApiReturnJson.class); 
+			//Optional<ApiReturnJson> optional = operationContext.findAnnotation(ApiReturnJson.class);
 			try {
 				//Method method = Swagger2.class.getMethod("restApi");//系统默认取该处的全局变量
 				//ApiReturnJson apiReturnJson = method.getAnnotation(ApiReturnJson.class);

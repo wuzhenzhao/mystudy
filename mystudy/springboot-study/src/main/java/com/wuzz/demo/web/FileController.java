@@ -2,6 +2,7 @@ package com.wuzz.demo.web;
 
 import com.wuzz.demo.core.Result;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -44,7 +45,7 @@ public class FileController {
                 for (int k = 0; k < row.getLastCellNum(); k++) {
                     if (null != row.getCell(k)) {
                         Cell cell = row.getCell(k);
-                        cell.setCellType(Cell.CELL_TYPE_STRING);
+                        cell.setCellType(CellType.STRING);
                         String d = cell.getStringCellValue();
                         System.out.print(d + "  ");
                     }
