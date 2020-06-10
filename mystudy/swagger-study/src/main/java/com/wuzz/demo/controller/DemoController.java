@@ -43,8 +43,8 @@ public class DemoController {
     })
     @GetMapping("/test2")
     @ApiOperation(value = "test_ApiImplicitParams")
-    public void test2(String mobile, String password, Integer age) {
-        System.out.println(mobile);
+    public RestMessage test2(String mobile, String password, Integer age) {
+        return new RestMessage();
     }
 
     //@ApiResponses：用于请求的方法上，表示一组响应
@@ -58,8 +58,8 @@ public class DemoController {
     })
     @GetMapping("/test3")
     @ApiOperation(value = "test_ApiResponses")
-    public void test3(String name) {
-        System.out.println(name);
+    public RestMessage test3(String name) {
+        return new RestMessage();
     }
 
     //Swagger要传送对象作为参数，只需添加@ModelAttribute或@RequestBody
