@@ -1,9 +1,6 @@
 package com.wuzz.demo.entity;
 
 import com.wuzz.demo.core.validate.DefaultValidate;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 
 import java.io.Serializable;
 
@@ -14,10 +11,8 @@ import java.io.Serializable;
  * Time: 15:16
  * Description 描述:
  */
-@ApiModel(value = "入参类",description = "实体入参")
 public class EntityDemo extends DefaultValidate implements Serializable {
 
-    @ApiModelProperty(value = "主键",example = "123456")
     private String id;
 
     public String name;
