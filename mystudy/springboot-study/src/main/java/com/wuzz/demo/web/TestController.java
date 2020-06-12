@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Description 描述:
  */
 @RestController
-@RequestMapping("wuzz")
+@RequestMapping("/wuzz")
 public class TestController {
     private final static Logger log = LoggerFactory.getLogger(TestController.class);
     @RequestMapping(value = "/post.json", method = {RequestMethod.POST})
@@ -45,10 +45,10 @@ public class TestController {
         return new Result(true, "000", "成功: ");
     }
 
-    @RequestMapping(value = "pus", method = {RequestMethod.GET})
+    @RequestMapping(value = "/pus", method = {RequestMethod.GET})
     public Result get1(EntityDemo entity) {
         log.info("进入pus方法。。。。。");
-        entity.validate();
+//        entity.validate();
         return new Result(true, "000", "成功1111111: ");
     }
 }
