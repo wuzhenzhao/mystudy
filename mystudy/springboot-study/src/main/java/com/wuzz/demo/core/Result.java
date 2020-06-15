@@ -1,5 +1,6 @@
 package com.wuzz.demo.core;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.wuzz.demo.core.exception.CommonErrorEnum;
 
 import java.io.Serializable;
@@ -7,16 +8,24 @@ import java.util.Map;
 
 public class Result<T> implements Serializable {
 
+    public interface BaseJsonView{}
+
+    public interface SimpleJsonView extends  BaseJsonView{}
+
     //
+    @JsonView(BaseJsonView.class)
     private boolean success;
 
     //
+    @JsonView(BaseJsonView.class)
     private String code;
 
     //
+    @JsonView(BaseJsonView.class)
     private String message;
 
     //
+    @JsonView(BaseJsonView.class)
     private T data;
 
     private Map<String, String> errs;
