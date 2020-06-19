@@ -1,5 +1,6 @@
 package com.wuzz.demo.http;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -8,6 +9,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -90,7 +92,8 @@ public class HttpClient4 {
         // 为httpPost实例设置配置
         httpPost.setConfig(requestConfig);
         // 设置请求头
-        httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
+        httpPost.addHeader("token", "SElLIE1LeXRrMkVXN0hyeW93YUk6SllyNFFyY1pDR0RQdmg1Nmwxa1BkQ3dvcmlwQVdoa2FIYkhoZkZFdVkrcz0=");
         // 封装post请求参数
         if (null != paramMap && paramMap.size() > 0) {
             List<NameValuePair> nvps = new ArrayList<NameValuePair>();
@@ -105,7 +108,15 @@ public class HttpClient4 {
 
             // 为httpPost设置封装好的请求参数
             try {
-                httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+//                httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+                //组织数据
+                StringEntity se = new StringEntity(JSONObject.toJSONString(paramMap));
+                //设置编码格式
+                se.setContentEncoding("UTF-8");
+                //设置数据类型
+                se.setContentType("application/json");
+                //对于POST请求,把请求体填充进HttpPost实体.
+                httpPost.setEntity(se);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -141,9 +152,15 @@ public class HttpClient4 {
     }
 
     public static void main(String[] args) {
-        String s = doGet("http://www.baidu.com");
+//        String s = doGet("http://www.baidu.com");
 
-//        Map<String, Object> map=new HashMap<>();
-//        String s = doPost("https://app.46584.cn/user/install/get_udid?app_id=1", map);
+        Map<String, Object> map=new HashMap<>();
+        map.put("pageSize", 10);
+        map.put("pageNo", 1);
+        map.put("type", 1);
+        String s = doPost("http://10.19.165.249:8099/devcenter/enterpriseTax/v1/api/taxRankingList", map);
+
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        System.out.println(jsonObject);
     }
 }
