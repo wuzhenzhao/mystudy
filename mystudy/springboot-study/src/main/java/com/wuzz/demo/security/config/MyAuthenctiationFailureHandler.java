@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 @Configuration("myAuthenctiationFailureHandler")
 public class MyAuthenctiationFailureHandler implements AuthenticationFailureHandler {

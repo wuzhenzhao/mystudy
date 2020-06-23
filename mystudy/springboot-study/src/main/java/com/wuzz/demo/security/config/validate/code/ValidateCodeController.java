@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 @RestController
 public class ValidateCodeController {

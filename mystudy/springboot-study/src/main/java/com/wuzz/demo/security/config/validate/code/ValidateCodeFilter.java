@@ -22,8 +22,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {

@@ -13,8 +13,11 @@ import org.springframework.stereotype.Component;
 import javax.servlet.Filter;
 
 /**
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 @Component("validateCodeSecurityConfig")
 public class ValidateCodeSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

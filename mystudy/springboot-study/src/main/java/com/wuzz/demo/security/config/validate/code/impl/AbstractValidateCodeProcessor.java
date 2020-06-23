@@ -15,8 +15,11 @@ import org.springframework.web.context.request.ServletWebRequest;
 import java.util.Map;
 
 /**
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 

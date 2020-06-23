@@ -10,10 +10,11 @@ import org.springframework.web.context.request.ServletWebRequest;
 import javax.imageio.ImageIO;
 
 /**
- * 图片验证码处理器
- *
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:图片验证码处理器
  */
 @Component("imageValidateCodeProcessor")
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {

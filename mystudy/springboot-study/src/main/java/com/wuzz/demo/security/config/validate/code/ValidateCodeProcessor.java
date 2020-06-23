@@ -6,10 +6,11 @@ package com.wuzz.demo.security.config.validate.code;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
- * 校验码处理器，封装不同校验码的处理逻辑
- *
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:校验码处理器，封装不同校验码的处理逻辑
  */
 public interface ValidateCodeProcessor {
 

@@ -7,8 +7,11 @@ import java.time.LocalDateTime;
 
 
 /**
- * @author zhailiang
- *
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public class ValidateCode {
 
