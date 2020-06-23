@@ -36,7 +36,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
         UserDetails userDetails = myUserDetailService.loadUserByUsername(userName);
         String encodePassword = passwordEncoder.encode(password);
-        if (!passwordEncoder.matches(password,encodePassword)) {
+        if (!passwordEncoder.matches(userDetails.getPassword(),encodePassword)) {
             throw new UsernameNotFoundException("用户名或者密码不正确");
         }
 

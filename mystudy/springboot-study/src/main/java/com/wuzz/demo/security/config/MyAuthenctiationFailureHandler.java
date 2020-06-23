@@ -36,7 +36,7 @@ public class MyAuthenctiationFailureHandler implements AuthenticationFailureHand
                                         AuthenticationException exception) throws IOException, ServletException {
 
         logger.info("登录失败");
-
+        // 错误码设置，这里先注释掉。登陆失败由前端处理
 //        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(JSONObject.toJSONString(exception.getLocalizedMessage()));
