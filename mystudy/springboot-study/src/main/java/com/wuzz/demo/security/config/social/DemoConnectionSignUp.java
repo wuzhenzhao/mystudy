@@ -15,7 +15,7 @@ import org.springframework.social.connect.ConnectionSignUp;
  */
 //@Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
-
+//SocialAuthenticationProvider
 	/* (non-Javadoc)
 	 * @see org.springframework.social.connect.ConnectionSignUp#execute(org.springframework.social.connect.Connection)
 	 */
