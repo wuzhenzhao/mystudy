@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -56,6 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private SpringSocialConfigurer wuzzSpringSocialConfigurer;
+
     //密码加密
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -76,7 +80,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().permitAll()
 //                .and().logout().permitAll();
 
-        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+        http.apply(wuzzSpringSocialConfigurer)
+                .and()
+                .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
                     .antMatchers("/wuzz/test4","/code/*").permitAll() //不需要保护的资源，可以多个
                     .antMatchers("/wuzz/**").authenticated()// 需要认证得资源，可以多个
@@ -87,11 +93,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(myAuthenctiationFailureHandler) // 登陆失败处理器
                     .permitAll()
                     .and()
-                    .userDetailsService(myUserDetailService)//设置userDetailsService，处理用户信息
+
                 .rememberMe()//实现记住我功能 RememberMeAuthenticationFilter
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(3600)
-
+                .userDetailsService(myUserDetailService)//设置userDetailsService，处理用户信息
         ;
         http.headers().cacheControl(); //禁用缓存
         http.csrf().disable(); //禁用csrf校验

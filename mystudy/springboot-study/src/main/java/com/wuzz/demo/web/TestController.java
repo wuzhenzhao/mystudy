@@ -5,13 +5,17 @@ import com.wuzz.demo.core.Result;
 import com.wuzz.demo.core.exception.BusinessException;
 import com.wuzz.demo.core.exception.CommonErrorEnum;
 import com.wuzz.demo.entity.EntityDemo;
+import com.wuzz.demo.security.config.social.SocialUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -25,6 +29,28 @@ import javax.validation.Valid;
 @RequestMapping("/wuzz")
 public class TestController {
     private final static Logger log = LoggerFactory.getLogger(TestController.class);
+
+    @Autowired
+    private ProviderSignInUtils providerSignInUtils;
+
+    @GetMapping("/social/user")
+    public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
+        SocialUserInfo userInfo = new SocialUserInfo();
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+        userInfo.setProviderId(connection.getKey().getProviderId());
+        userInfo.setProviderUserId(connection.getKey().getProviderUserId());
+        userInfo.setNickname(connection.getDisplayName());
+        userInfo.setHeadimg(connection.getImageUrl());
+        return userInfo;
+    }
+
+    @PostMapping("/regist")
+    public void regist(HttpServletRequest request) {
+
+        //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
+        String userId = "user.getUsername()";
+        providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+    }
 
     @RequestMapping(value = "/post.json", method = {RequestMethod.POST})
     public Result insert(EntityDemo entity) {
