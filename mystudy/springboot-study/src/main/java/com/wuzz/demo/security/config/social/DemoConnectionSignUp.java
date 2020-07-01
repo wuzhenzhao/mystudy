@@ -5,6 +5,7 @@ package com.wuzz.demo.security.config.social;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
+import org.springframework.stereotype.Component;
 
 /**
  * Create with IntelliJ IDEA
@@ -13,7 +14,7 @@ import org.springframework.social.connect.ConnectionSignUp;
  * Time: 18:13
  * Description:实现自动注册
  */
-//@Component
+@Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
 //SocialAuthenticationProvider
 	/* (non-Javadoc)
