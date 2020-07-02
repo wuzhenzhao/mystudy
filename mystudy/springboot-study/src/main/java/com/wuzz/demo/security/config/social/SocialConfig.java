@@ -47,7 +47,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     }
 
     @Bean
-    public SpringSocialConfigurer imoocSocialSecurityConfig() {
+    public SpringSocialConfigurer wuzzSocialSecurityConfig() {
         String filterProcessesUrl = "/qqLogin";
         WuzzSpringSocialConfigurer configurer = new WuzzSpringSocialConfigurer(filterProcessesUrl);
         configurer.signupUrl("/signUp.html");

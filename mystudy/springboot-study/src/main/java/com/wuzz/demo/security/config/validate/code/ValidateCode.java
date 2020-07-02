@@ -3,6 +3,7 @@
  */
 package com.wuzz.demo.security.config.validate.code;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  * Time: 18:13
  * Description:
  */
-public class ValidateCode {
+public class ValidateCode implements Serializable {
 
 	private String code;
 

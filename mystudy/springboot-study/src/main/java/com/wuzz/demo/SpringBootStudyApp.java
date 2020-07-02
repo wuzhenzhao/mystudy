@@ -17,6 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @ServletComponentScan
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 3600)
 public class SpringBootStudyApp {
     private final static Logger log = LoggerFactory.getLogger(SpringBootStudyApp.class);
 

@@ -4,6 +4,7 @@
 package com.wuzz.demo.security.config;
 
 
+import com.wuzz.demo.security.config.logout.WuzzLogoutSuccessHandler;
 import com.wuzz.demo.security.config.session.WuzzExpiredSessionStrategy;
 import com.wuzz.demo.security.config.session.WuzzInvalidSessionStrategy;
 import com.wuzz.demo.security.config.validate.code.ValidateCodeFilter;
@@ -20,6 +21,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
@@ -72,6 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
+    @Autowired
+    private LogoutSuccessHandler wuzzLogoutSuccessHandler;
+
     //密码加密
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -88,6 +93,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
     public SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
         return new WuzzExpiredSessionStrategy();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(WuzzLogoutSuccessHandler.class)
+    public WuzzLogoutSuccessHandler wuzzLogoutSuccessHandler(){
+        return new WuzzLogoutSuccessHandler();
     }
 
     // 自定义认证配置
@@ -118,9 +129,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .invalidSessionUrl("http://localhost:8080/#/login")
                     .invalidSessionStrategy(invalidSessionStrategy)//session无效处理策略
                     .maximumSessions(1) //允许最大的session
-//                    .maxSessionsPreventsLogin(true) //只允许一个地点登录，再次登陆报错
+                    .maxSessionsPreventsLogin(true) //只允许一个地点登录，再次登陆报错
                     .expiredSessionStrategy(sessionInformationExpiredStrategy) //session过期处理策略，被顶号了
                     .and()
+                    .and()
+                .logout()
+                    .logoutUrl("/signOut")
+//                    .logoutSuccessUrl("http://localhost:8080/#/login")//Url跟handler时互斥的 ，只能一个
+                    .logoutSuccessHandler(wuzzLogoutSuccessHandler)
+                    .deleteCookies("JSESSIONID")
                     .and()
                 .rememberMe()//实现记住我功能 RememberMeAuthenticationFilter
                     .tokenRepository(persistentTokenRepository())
