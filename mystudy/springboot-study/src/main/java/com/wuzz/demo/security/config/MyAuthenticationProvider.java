@@ -35,14 +35,14 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String userName = authentication.getName();// 这个获取表单输入中的用户名
         String password = (String) authentication.getCredentials();
         UserDetails userDetails = myUserDetailService.loadUserByUsername(userName);
-        String encodePassword = passwordEncoder.encode(password);
-        if (!passwordEncoder.matches(userDetails.getPassword(),encodePassword)) {
+//        String encodePassword = passwordEncoder.encode(password);
+        if (!passwordEncoder.matches(password,userDetails.getPassword())) {
             throw new UsernameNotFoundException("用户名或者密码不正确");
         }
 
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
 
-        return new UsernamePasswordAuthenticationToken(userDetails, encodePassword, authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, password, authorities);
 
     }
 
