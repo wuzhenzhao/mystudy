@@ -114,11 +114,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authorizeRequests()
 //                .anyRequest().permitAll()
 //                .and().logout().permitAll();
-
+        http.httpBasic();
         http.apply(wuzzSpringSocialConfigurer)
                 .and()
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
-
                 .formLogin().loginPage("http://localhost:8080/#/login")//自定义登陆地址
                     .loginProcessingUrl("/authentication/form") //登录处理地址
                     .successHandler(myAuthenticationSuccessHandler) // 登陆成功处理器
@@ -145,8 +144,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .userDetailsService(myUserDetailService)//设置userDetailsService，处理用户信息
                     .and()
                 .authorizeRequests()
-                .antMatchers("/wuzz/test4","/code/*").permitAll() //不需要保护的资源，可以多个
-                .antMatchers("/wuzz/**").authenticated()// 需要认证得资源，可以多个
+                .antMatchers("/wuzz/test4","/code/**").permitAll() //不需要保护的资源，可以多个
+                .anyRequest().authenticated()// 需要认证得资源，可以多个
                 .and()
         ;
         http.headers().cacheControl(); //禁用缓存
