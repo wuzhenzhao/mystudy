@@ -41,6 +41,8 @@ public class TestController {
         userInfo.setProviderUserId(connection.getKey().getProviderUserId());
         userInfo.setNickname(connection.getDisplayName());
         userInfo.setHeadimg(connection.getImageUrl());
+
+        //APP 需要存到redis 里
         return userInfo;
     }
 
