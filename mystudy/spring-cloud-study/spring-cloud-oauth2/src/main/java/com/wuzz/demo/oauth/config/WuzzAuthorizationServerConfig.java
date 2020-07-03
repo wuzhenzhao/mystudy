@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +40,20 @@ public class WuzzAuthorizationServerConfig extends AuthorizationServerConfigurer
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // 自定义token存储类型
     @Autowired
     private TokenStore tokenStore;
 
+    // jwt token
     @Autowired(required = false)
     private JwtAccessTokenConverter jwtAccessTokenConverter;
 
+    //jwt token 附加信息
     @Autowired(required = false)
     private TokenEnhancer jwtTokenEnhancer;
+
+    @Autowired(required = false)
+    private DataSource dataSource;
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

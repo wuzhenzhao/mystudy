@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class WuzzResourceServerConfig extends ResourceServerConfigurerAdapter {
     //http://localhost:8889/oauth/authorize?client_id=wuzzClientId&response_type=code&redirect_uri=http://www.wuzz.demo&scope=all
 
+
+    // 自定义  token 分发类型
     @Autowired
     private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
