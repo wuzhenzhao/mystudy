@@ -4,6 +4,8 @@
 package com.wuzz.demo.security.config;
 
 
+import com.wuzz.demo.security.config.login.mobile.SmsCodeAuthenticationFilter;
+import com.wuzz.demo.security.config.login.mobile.SmsCodeAuthenticationProvider;
 import com.wuzz.demo.security.config.logout.WuzzLogoutSuccessHandler;
 import com.wuzz.demo.security.config.session.WuzzExpiredSessionStrategy;
 import com.wuzz.demo.security.config.session.WuzzInvalidSessionStrategy;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -77,6 +80,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LogoutSuccessHandler wuzzLogoutSuccessHandler;
 
+//    @Autowired
+//    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
     //密码加密
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -85,19 +91,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @ConditionalOnMissingBean(InvalidSessionStrategy.class)
-    public InvalidSessionStrategy invalidSessionStrategy(){
+    public InvalidSessionStrategy invalidSessionStrategy() {
         return new WuzzInvalidSessionStrategy();
     }
 
     @Bean
     @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
-    public SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
+    public SessionInformationExpiredStrategy sessionInformationExpiredStrategy() {
         return new WuzzExpiredSessionStrategy();
     }
 
     @Bean
     @ConditionalOnMissingBean(WuzzLogoutSuccessHandler.class)
-    public WuzzLogoutSuccessHandler wuzzLogoutSuccessHandler(){
+    public WuzzLogoutSuccessHandler wuzzLogoutSuccessHandler() {
         return new WuzzLogoutSuccessHandler();
     }
 
@@ -105,6 +111,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(myAuthenticationProvider);
+        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
+        smsCodeAuthenticationProvider.setUserDetailsService(myUserDetailService);
+        auth.authenticationProvider(smsCodeAuthenticationProvider);
     }
 
     @Override
@@ -117,49 +126,57 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic();
         http.apply(wuzzSpringSocialConfigurer)
                 .and()
+                //.apply(smsCodeAuthenticationSecurityConfig)
+                //.and()
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin().loginPage("http://localhost:8080/#/login")//自定义登陆地址
-                    .loginProcessingUrl("/authentication/form") //登录处理地址
-                    .successHandler(myAuthenticationSuccessHandler) // 登陆成功处理器
-                    .failureHandler(myAuthenctiationFailureHandler) // 登陆失败处理器
-                    .permitAll()
-                    .and()
+                .loginProcessingUrl("/authentication/form") //登录处理地址
+                .successHandler(myAuthenticationSuccessHandler) // 登陆成功处理器
+                .failureHandler(myAuthenctiationFailureHandler) // 登陆失败处理器
+                .permitAll()
+                .and()
                 .sessionManagement()
 //                    .invalidSessionUrl("http://localhost:8080/#/login")
-                    .invalidSessionStrategy(invalidSessionStrategy)//session无效处理策略
-                    .maximumSessions(1) //允许最大的session
-                    .maxSessionsPreventsLogin(true) //只允许一个地点登录，再次登陆报错
-                    .expiredSessionStrategy(sessionInformationExpiredStrategy) //session过期处理策略，被顶号了
-                    .and()
-                    .and()
+                .invalidSessionStrategy(invalidSessionStrategy)//session无效处理策略
+                .maximumSessions(1) //允许最大的session
+                .maxSessionsPreventsLogin(true) //只允许一个地点登录，再次登陆报错
+                .expiredSessionStrategy(sessionInformationExpiredStrategy) //session过期处理策略，被顶号了
+                .and()
+                .and()
                 .logout()
-                    .logoutUrl("/signOut")
+                .logoutUrl("/signOut")
 //                    .logoutSuccessUrl("http://localhost:8080/#/login")//Url跟handler时互斥的 ，只能一个
-                    .logoutSuccessHandler(wuzzLogoutSuccessHandler)
-                    .deleteCookies("JSESSIONID")
-                    .and()
+                .logoutSuccessHandler(wuzzLogoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
+                .and()
                 .rememberMe()//实现记住我功能 RememberMeAuthenticationFilter
-                    .tokenRepository(persistentTokenRepository())
-                    .tokenValiditySeconds(3600)
-                    .userDetailsService(myUserDetailService)//设置userDetailsService，处理用户信息
-                    .and()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(3600)
+                .userDetailsService(myUserDetailService)//设置userDetailsService，处理用户信息
+                .and()
                 .authorizeRequests()
-                .antMatchers("/wuzz/test4","/code/**").permitAll() //不需要保护的资源，可以多个
+                .antMatchers("/wuzz/test4", "/code/**").permitAll() //不需要保护的资源，可以多个
                 .anyRequest().authenticated()// 需要认证得资源，可以多个
                 .and()
         ;
         http.headers().cacheControl(); //禁用缓存
         http.csrf().disable(); //禁用csrf校验
+        SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
+        smsCodeAuthenticationFilter.setAuthenticationManager(this.authenticationManager());
+        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler);
+        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(myAuthenctiationFailureHandler);
+
+        http.addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     //忽略的uri
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-				.antMatchers( "/code/**","/api/**", "/resources/**", "/static/**", "/public/**", "/webui/**", "/h2-console/**"
-						, "/configuration/**",  "/swagger-resources/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**"
-						,  "/**/*.css", "/**/*.js","/**/*.ftl", "/**/*.png ", "/**/*.jpg", "/**/*.gif ", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff");
-	}
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/code/**", "/api/**", "/resources/**", "/static/**", "/public/**", "/webui/**", "/h2-console/**"
+                        , "/configuration/**", "/swagger-resources/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**"
+                        , "/**/*.css", "/**/*.js", "/**/*.ftl", "/**/*.png ", "/**/*.jpg", "/**/*.gif ", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff");
+    }
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {

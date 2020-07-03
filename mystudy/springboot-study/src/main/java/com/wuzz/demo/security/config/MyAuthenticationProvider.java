@@ -1,5 +1,6 @@
 package com.wuzz.demo.security.config;
 
+import com.wuzz.demo.security.config.login.mobile.SmsCodeAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -48,6 +49,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return true;
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(aClass);
     }
 }
