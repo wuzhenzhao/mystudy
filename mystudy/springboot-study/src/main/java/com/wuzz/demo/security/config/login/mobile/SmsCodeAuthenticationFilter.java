@@ -35,6 +35,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     public SmsCodeAuthenticationFilter() {
         /**
          * 默认的手机验证码登录请求处理url
+         * http://localhost:8889/code/sms?mobile=13888888888
          */
         super(new AntPathRequestMatcher("/authentication/mobile", "POST"));
     }
