@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -39,6 +40,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
     @Autowired
     private ClientDetailsService clientDetailsService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;
@@ -70,7 +73,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
         if (clientDetails == null) {
             throw new UnapprovedClientAuthenticationException("clientId 不存在" + clientId);
-        } else if (!StringUtils.equals(clientSecret, clientDetails.getClientSecret())) {
+        } else if (!passwordEncoder.matches(clientSecret,clientDetails.getClientSecret())) {
             throw new UnapprovedClientAuthenticationException("clientSecret 不匹配" + clientId);
         }
 

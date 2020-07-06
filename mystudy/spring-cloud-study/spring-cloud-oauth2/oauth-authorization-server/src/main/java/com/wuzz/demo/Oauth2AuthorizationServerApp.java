@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Description:
  */
 @SpringBootApplication
-public class Oauth2StudyApp {
+public class Oauth2AuthorizationServerApp {
 
     /**
      * 在springboot-study模块中。对于springsecurity提供的登录用户名密码登录、短信登陆、第三方社交登录。
@@ -21,13 +21,13 @@ public class Oauth2StudyApp {
      * 1.用户名密码登录：已经在本模块实现，登陆的时候带上  clientId + client-secret
      * 2.短信登陆原来验证码是放到session里，这里可以采用放到一个共享存储里，如redis。
      * 3.社交登录的时候，用户是在APP去访问第三方应用  比如 QQ  微信。获取到openId后 来访问后台显然是行不通的
-     *    所以后台需要提供一个根据openId登录的方式，具体方式参照springboot-study模块 短信验证码登录的方式。
-     *    3.1 对于第三方的注册逻辑也需要修改 ，主要是修改ProviderSignInUtils
+     * 所以后台需要提供一个根据openId登录的方式，具体方式参照springboot-study模块 短信验证码登录的方式。
+     * 3.1 对于第三方的注册逻辑也需要修改 ，主要是修改ProviderSignInUtils
      */
-    private final static Logger log = LoggerFactory.getLogger(Oauth2StudyApp.class);
+    private final static Logger log = LoggerFactory.getLogger(Oauth2AuthorizationServerApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(Oauth2StudyApp.class, args);
+        SpringApplication.run(Oauth2AuthorizationServerApp.class, args);
         log.info("服务启动成功 ");
 
     }

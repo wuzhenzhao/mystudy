@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -129,7 +130,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.apply(smsCodeAuthenticationSecurityConfig)
                 //.and()
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin().loginPage("http://localhost:8080/#/login")//自定义登陆地址
+                .formLogin().loginPage("http://localhost:8081/#/login")//自定义登陆地址
                 .loginProcessingUrl("/authentication/form") //登录处理地址
                 .successHandler(myAuthenticationSuccessHandler) // 登陆成功处理器
                 .failureHandler(myAuthenctiationFailureHandler) // 登陆失败处理器
@@ -154,8 +155,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(3600)
                 .userDetailsService(myUserDetailService)//设置userDetailsService，处理用户信息
                 .and()
+                //ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry
+                // 通过上述这个类实现自定义的多文件配置 +order
                 .authorizeRequests()
                 .antMatchers("/wuzz/test4", "/code/**").permitAll() //不需要保护的资源，可以多个
+                .antMatchers("/user").hasRole("ADMIN")//拥有ADMIN角色  ROLE_ADMIN
+                //FilterSecurityIntercepter
+                .antMatchers(HttpMethod.GET,"/user/get").hasRole("ADMIN")//指定某个路径的请求方式
                 .anyRequest().authenticated()// 需要认证得资源，可以多个
                 .and()
         ;

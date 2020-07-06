@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 
 /**
  * Create with IntelliJ IDEA
@@ -29,11 +30,16 @@ public class TestController {
 
     @RequestMapping(value = "/me", method = {RequestMethod.GET})
     public Object me(Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {
-        String header = request.getHeader("Authorization");
-        String token = StringUtils.substringAfter(header, "Bearer ");
-        Claims claims = Jwts.parser().setSigningKey("wuzz".getBytes("UTF-8")).parseClaimsJws(token).getBody();
-        String company = (String)claims.get("company");
-        System.out.println(company);
+//        String header = request.getHeader("Authorization");
+//        String token = StringUtils.substringAfter(header, "Bearer ");
+//        Claims claims = Jwts.parser().setSigningKey("wuzz".getBytes("UTF-8")).parseClaimsJws(token).getBody();
+//        String company = (String)claims.get("company");
+//        System.out.println(company);
         return user;
+    }
+
+    @RequestMapping(value = "/current", method = RequestMethod.GET)
+    public Principal getUser(Principal principal) {
+        return principal;
     }
 }

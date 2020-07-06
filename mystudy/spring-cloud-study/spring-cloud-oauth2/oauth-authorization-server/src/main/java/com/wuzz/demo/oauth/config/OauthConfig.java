@@ -2,6 +2,7 @@ package com.wuzz.demo.oauth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @since 1.0
  **/
 @Configuration
+@Order(1)
 public class OauthConfig {
 
         //密码加密
