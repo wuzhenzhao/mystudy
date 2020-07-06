@@ -1,4 +1,4 @@
-//package com.wuzz.demo.oauth.config;
+package com.wuzz.demo.config;//package com.wuzz.demo.oauth.config;
 //
 //import com.wuzz.demo.oauth.jwt.WuzzJwtTokenEnhancer;
 //import org.springframework.beans.factory.annotation.Autowired;

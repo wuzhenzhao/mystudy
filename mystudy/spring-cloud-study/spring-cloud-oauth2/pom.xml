@@ -13,5 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>oauth-authorization-server</module>
+        <module>oauth-resource-server</module>
     </modules>
 </project>

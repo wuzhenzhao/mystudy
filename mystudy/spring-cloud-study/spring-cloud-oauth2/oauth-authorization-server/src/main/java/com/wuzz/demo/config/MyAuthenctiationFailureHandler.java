@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.wuzz.demo.oauth;
+package com.wuzz.demo.config;
 
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.wuzz.demo.oauth.jwt;//package com.wuzz.demo.oauth.jwt;
+package com.wuzz.demo.jwt;//package com.wuzz.demo.oauth.jwt;
 //
 //import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 //import org.springframework.security.oauth2.common.OAuth2AccessToken;
