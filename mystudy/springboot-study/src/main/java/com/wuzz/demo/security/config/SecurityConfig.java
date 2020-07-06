@@ -159,9 +159,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 通过上述这个类实现自定义的多文件配置 +order
                 .authorizeRequests()
                 .antMatchers("/wuzz/test4", "/code/**").permitAll() //不需要保护的资源，可以多个
-                .antMatchers("/user").hasRole("ADMIN")//拥有ADMIN角色  ROLE_ADMIN
+                .antMatchers("/wuzz/pus").hasRole("USER")//拥有USER角色  ROLE_USER
                 //FilterSecurityIntercepter
-                .antMatchers(HttpMethod.GET,"/user/get").hasRole("ADMIN")//指定某个路径的请求方式
+                .antMatchers(HttpMethod.GET,"/user/get").hasRole("USER")//指定某个路径的请求方式
                 .anyRequest().authenticated()// 需要认证得资源，可以多个
                 .and()
         ;
