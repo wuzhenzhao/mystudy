@@ -17,7 +17,7 @@ public class WuzzResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        //配置受保护的资源
         http.authorizeRequests().antMatchers("/api/order/**").authenticated();
-
     }
 }
