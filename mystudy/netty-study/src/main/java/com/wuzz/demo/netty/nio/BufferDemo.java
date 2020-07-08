@@ -18,10 +18,13 @@ public class BufferDemo {
     public static void decode(String str) throws UnsupportedEncodingException {
         // 开辟一个长度为128的字节空间
         ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+        System.out.println("position ---->" + byteBuffer.position() + "。limit ---->" + byteBuffer.limit() + "。capacity ---->" + byteBuffer.capacity());
         //写入数据
         byteBuffer.put(str.getBytes("UTF-8"));
+        System.out.println("position ---->" + byteBuffer.position() + "。limit ---->" + byteBuffer.limit() + "。capacity ---->" + byteBuffer.capacity());
         //写完数据以后要进行读取，需要设置 limit 为 position 的值，然后 position 置为0。
         byteBuffer.flip();
+        System.out.println("position ---->" + byteBuffer.position() + "。limit ---->" + byteBuffer.limit() + "。capacity ---->" + byteBuffer.capacity());
         /*获取utf8的编解码器*/
         Charset utf8 = Charset.forName("UTF-8");
         CharBuffer charBuffer = utf8.decode(byteBuffer);/*对bytebuffer中的内容解码*/
@@ -31,11 +34,13 @@ public class BufferDemo {
         System.out.println(charArr);
     }
 
-    public static void encode(String str){
-        CharBuffer charBuffer =  CharBuffer.allocate(128);
+    public static void encode(String str) {
+        CharBuffer charBuffer = CharBuffer.allocate(128);
         charBuffer.append(str);
-        charBuffer.flip();
+        System.out.println("position ---->" + charBuffer.position() + "。limit ---->" + charBuffer.limit() + "。capacity ---->" + charBuffer.capacity());
 
+        charBuffer.flip();
+        System.out.println("position ---->" + charBuffer.position() + "。limit ---->" + charBuffer.limit() + "。capacity ---->" + charBuffer.capacity());
         /*对获取utf8的编解码器*/
         Charset utf8 = Charset.forName("UTF-8");
         ByteBuffer byteBuffer = utf8.encode(charBuffer); /*对charbuffer中的内容编码*/
@@ -47,7 +52,7 @@ public class BufferDemo {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
 
-        BufferDemo.decode("解码测试");
+        BufferDemo.decode("解码测试。");
         BufferDemo.encode("编码测试");
     }
 }
