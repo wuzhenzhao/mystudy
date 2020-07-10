@@ -36,7 +36,7 @@
         sp.permission_desc
     </sql>
 
-
+    <!--根据用户名查询用户角色权限-->
     <resultMap id="UserWithRoleWithPermissionMap" type="com.wuzz.demo.moudle.entity.User" extends="BaseResultMap">
         <collection property="roles" ofType="com.wuzz.demo.moudle.entity.Role" >
             <id column="role_id" property="roleId" />
