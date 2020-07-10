@@ -1,5 +1,6 @@
 package com.wuzz.demo.jwt;
 
+import com.wuzz.demo.moudle.entity.User;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -20,7 +21,8 @@ public class WuzzJwtTokenEnhancer implements TokenEnhancer {
     public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
 
         Map<String, Object> info = new HashMap<String, Object>();
-        info.put("company", "alibaba");
+        User user =(User)oAuth2Authentication.getUserAuthentication().getPrincipal();
+        info.put("mobile", user.getMobile());
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(info);
         return oAuth2AccessToken;
     }

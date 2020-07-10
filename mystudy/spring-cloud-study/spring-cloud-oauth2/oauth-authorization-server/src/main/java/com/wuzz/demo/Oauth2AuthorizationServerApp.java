@@ -1,5 +1,6 @@
 package com.wuzz.demo;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Description:
  */
 @SpringBootApplication
+@MapperScan("com.wuzz.demo.moudle.dao")
 public class Oauth2AuthorizationServerApp {
 
     /**

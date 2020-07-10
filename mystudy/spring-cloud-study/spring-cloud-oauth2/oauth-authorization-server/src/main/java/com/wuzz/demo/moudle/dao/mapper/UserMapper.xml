@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuzz.demo.moudle.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.wuzz.demo.moudle.entity.User">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="account_non_expired" property="accountNonExpired" jdbcType="TINYINT"/>
+        <result column="account_non_locked" property="accountNonLocked" jdbcType="TINYINT"/>
+        <result column="credentials_non_expired" property="credentialsNonExpired" jdbcType="TINYINT"/>
+        <result column="enabled" property="enabled" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="userColumns">
+        su.user_id,
+        su.username,
+        su.password,
+        su.mobile,
+        su.account_non_expired,
+        su.account_non_locked,
+        su.credentials_non_expired,
+        su.enabled
+    </sql>
+
+    <sql id="roleColumns">
+        sr.role_id,
+        sr.role_desc,
+        sr.role_code
+    </sql>
+
+    <sql id="permissionColumns">
+        sp.permission_id,
+        sp.permission_code,
+        sp.permission_desc
+    </sql>
+
+
+    <resultMap id="UserWithRoleWithPermissionMap" type="com.wuzz.demo.moudle.entity.User" extends="BaseResultMap">
+        <collection property="roles" ofType="com.wuzz.demo.moudle.entity.Role" >
+            <id column="role_id" property="roleId" />
+            <result column="role_desc" property="roleDesc"/>
+            <result column="role_code" property="roleCode"/>
+            <collection property="permissions" ofType="com.wuzz.demo.moudle.entity.Permission">
+                <id column="permission_id" property="permissionId"/>
+                <result column="permission_code" property="permissionCode"/>
+                <result column="permission_desc" property="permissionDesc"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="selectUserByUsername" resultMap="UserWithRoleWithPermissionMap">
+        select <include refid="userColumns"></include>,
+        <include refid="roleColumns"></include>,
+        <include refid="permissionColumns"></include>
+        from sys_user su
+        left join sys_user_role sur on su.user_id=sur.user_id
+        left join sys_role sr on sur.role_id=sr.role_id
+        left join sys_role_permission srp on sr.role_id =srp.role_id
+        left join sys_permission sp on srp.permission_id=sp.permission_id
+        where su.username =#{username}
+
+    </select>
+
+</mapper>

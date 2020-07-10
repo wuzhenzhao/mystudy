@@ -25,8 +25,8 @@ public class OrderController {
         String header = request.getHeader("Authorization");
         String token = StringUtils.substringAfter(header, "Bearer ");
         Claims claims = Jwts.parser().setSigningKey("wuzz".getBytes("UTF-8")).parseClaimsJws(token).getBody();
-        String company = (String) claims.get("company");
-        System.out.println(company);
+        String mobile = (String) claims.get("mobile");
+        System.out.println(mobile);
         return user;
     }
 }
