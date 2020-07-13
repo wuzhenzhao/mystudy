@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /**
  * @description: 类功能描述
@@ -25,6 +27,8 @@ public class QRCodeController {
     @GetMapping("/qrcode")
     public void qrcode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String content = "你是猪";
+        long l = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        content += String.valueOf(l);
         if (StringUtils.isBlank(content)) {
             System.out.println("404");
             return;
