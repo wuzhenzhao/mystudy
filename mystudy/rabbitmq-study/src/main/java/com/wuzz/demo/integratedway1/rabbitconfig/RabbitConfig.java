@@ -23,7 +23,6 @@ public class RabbitConfig {
 
     @Bean
     public TopicExchange topicExchange() {
-
         return new TopicExchange("TOPIC_EXCHANGE");
     }
 
