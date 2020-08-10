@@ -33,6 +33,7 @@
         <module>swagger-study</module>
         <module>shiro-study</module>
         <module>elastic-job-study</module>
+        <module>dynamic-datasource</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
