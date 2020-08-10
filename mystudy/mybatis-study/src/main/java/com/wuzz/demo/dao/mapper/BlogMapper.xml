@@ -120,6 +120,7 @@
     <select id="selectBlogById2" resultMap="BaseResultMap"
         parameterType="blog">
         select * from blog
+--         prefix：前缀　prefixOverrides：去掉第一个and或者是or
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="bid != null and bid !='' ">
                 bid = #{bid}
