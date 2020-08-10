@@ -6,4 +6,30 @@
     <select id="selectPageVo" resultType="com.wuzz.demo.entity.User" useCache="true">
         SELECT id,name FROM user
     </select>
+<!--    复杂查询-->
+<!--    <if test="request!=null">&lt;!&ndash;信息缺失企业&ndash;&gt;-->
+<!--        <if test="request.informationLack == true">-->
+<!--            and (e.legal_person is null or e.legal_person='' or e.enterprise_tel is null or e.enterprise_tel='')-->
+<!--        </if>&lt;!&ndash;疑似迁出企业&ndash;&gt;-->
+<!--        <if test="request.suspectedOut == true">-->
+<!--            and e.enterprise_label like concat('%',#{request.ysqc,jdbcType=VARCHAR},'%')-->
+<!--        </if>-->
+<!--        &lt;!&ndash;            <if test="request.suspectedOut ==false and request.informationLack ==false">&ndash;&gt;-->
+<!--        <if test="request.enterpriseName !=null and request.enterpriseName !=''">-->
+<!--            and e.enterprise_name like concat('%',#{request.enterpriseName,jdbcType=VARCHAR},'%')-->
+<!--        </if>-->
+<!--        <if test="request.legalPerson !=null and request.legalPerson!=''">-->
+<!--            and e.legal_person like concat('%',#{request.legalPerson,jdbcType=VARCHAR},'%')-->
+<!--        </if>-->
+<!--        <if test="request.enterpriseLabel !=null and request.enterpriseLabel!=''">-->
+<!--            <foreach collection="request.enterpriseLabel.split(',')" item="label"-->
+<!--                     index="index">-->
+<!--                and e.enterprise_label like concat('%',#{label,jdbcType=VARCHAR},'%')-->
+<!--            </foreach>-->
+<!--        </if>-->
+<!--        <if test="request.creditCode !=null and request.creditCode !=''">-->
+<!--            and e.credit_code like concat('%',#{request.creditCode,jdbcType=VARCHAR},'%')-->
+<!--        </if>-->
+<!--        &lt;!&ndash;            </if>&ndash;&gt;-->
+<!--    </if>-->
 </mapper>
