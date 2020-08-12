@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: sharding
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wuzz.demo.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
