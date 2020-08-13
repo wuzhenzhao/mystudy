@@ -14,7 +14,6 @@
 <!--        <if test="request.suspectedOut == true">-->
 <!--            and e.enterprise_label like concat('%',#{request.ysqc,jdbcType=VARCHAR},'%')-->
 <!--        </if>-->
-<!--        &lt;!&ndash;            <if test="request.suspectedOut ==false and request.informationLack ==false">&ndash;&gt;-->
 <!--        <if test="request.enterpriseName !=null and request.enterpriseName !=''">-->
 <!--            and e.enterprise_name like concat('%',#{request.enterpriseName,jdbcType=VARCHAR},'%')-->
 <!--        </if>-->
@@ -30,6 +29,12 @@
 <!--        <if test="request.creditCode !=null and request.creditCode !=''">-->
 <!--            and e.credit_code like concat('%',#{request.creditCode,jdbcType=VARCHAR},'%')-->
 <!--        </if>-->
-<!--        &lt;!&ndash;            </if>&ndash;&gt;-->
+<!--        <if test="request.cameraIndexCode !=null and request.cameraIndexCode.size() >0 ">-->
+<!--            and esource.camera_index_code in-->
+<!--            <foreach collection="request.cameraIndexCode" item="item" index="index"-->
+<!--                     open="(" separator="," close=")">-->
+<!--                #{item}-->
+<!--            </foreach>-->
+<!--        </if>-->
 <!--    </if>-->
 </mapper>
