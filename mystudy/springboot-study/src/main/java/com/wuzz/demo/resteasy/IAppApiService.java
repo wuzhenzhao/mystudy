@@ -1,4 +1,4 @@
-package com.wuzz.demo.javaxapi;
+package com.wuzz.demo.resteasy;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

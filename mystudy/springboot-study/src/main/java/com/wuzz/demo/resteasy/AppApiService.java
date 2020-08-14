@@ -1,4 +1,4 @@
-package com.wuzz.demo.javaxapi;
+package com.wuzz.demo.resteasy;
 
 /**
  * @description: 类功能描述

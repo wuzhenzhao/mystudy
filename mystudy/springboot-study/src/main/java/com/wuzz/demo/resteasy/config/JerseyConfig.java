@@ -1,7 +1,6 @@
-package com.wuzz.demo.javaxapi.config;
+package com.wuzz.demo.resteasy.config;
 
-import com.wuzz.demo.javaxapi.AppApiService;
-import com.wuzz.demo.javaxapi.IAppApiService;
+import com.wuzz.demo.resteasy.AppApiService;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
