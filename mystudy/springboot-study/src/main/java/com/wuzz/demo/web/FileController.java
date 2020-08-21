@@ -1,6 +1,7 @@
 package com.wuzz.demo.web;
 
 import com.wuzz.demo.core.Result;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -109,6 +110,8 @@ public class FileController {
             httpServletResponse.setContentType("application/octet-stream");
             httpServletResponse.setHeader("Content-Disposition", "attachment;fileName="
                     + URLEncoder.encode("市场监管局数据导入模板.xlsx", "UTF-8"));
+//            IOUtils.copy(inputStream, outputStream);
+//            response.flushBuffer();
             wb.write(output);
         } catch (Exception e) {
             e.printStackTrace();
