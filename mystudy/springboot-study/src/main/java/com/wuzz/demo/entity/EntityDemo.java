@@ -1,11 +1,13 @@
 package com.wuzz.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.wuzz.demo.core.Result;
 import com.wuzz.demo.core.validate.DefaultValidate;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Create with IntelliJ IDEA
@@ -24,6 +26,9 @@ public class EntityDemo extends DefaultValidate implements Serializable {
 
 
     private Double age;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime localDateTime;
 
     @JsonView(Result.BaseJsonView.class)
     public String getId() {
@@ -49,6 +54,14 @@ public class EntityDemo extends DefaultValidate implements Serializable {
 
     public void setAge(Double age) {
         this.age = age;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 }
 

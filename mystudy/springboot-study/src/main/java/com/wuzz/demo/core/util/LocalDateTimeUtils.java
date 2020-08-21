@@ -1,5 +1,6 @@
 package com.wuzz.demo.core.util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -16,6 +17,11 @@ import java.util.Date;
  * @since 1.0
  **/
 public class LocalDateTimeUtils {
+
+    public static final String ISO_DATETIME_TIME_ZONE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+
+    //2020-08-21T10:16:31.917+0800
+//    SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ");
 
     //获取当前时间的LocalDateTime对象
     //LocalDateTime.now();
@@ -97,5 +103,23 @@ public class LocalDateTimeUtils {
                 .withMinute(59)
                 .withSecond(59)
                 .withNano(999999999);
+    }
+
+    /**
+     * 功能描述: <br>
+     * 获取格式为 2020-08-21T11:04:39.072+08:00 的 ISO带默认时区的时间字符串
+     * @Param: [localDateTime]
+     * @Return: java.lang.String
+     * @Author: wuzhenzhao
+     * @Date: 2020/8/21 11:08
+     */
+    private static String getISODateString(LocalDateTime localDateTime) {
+        SimpleDateFormat df1 = new SimpleDateFormat(ISO_DATETIME_TIME_ZONE_FORMAT);
+        String format = df1.format(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()));
+        return format;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getISODateString(LocalDateTime.now()));
     }
 }
