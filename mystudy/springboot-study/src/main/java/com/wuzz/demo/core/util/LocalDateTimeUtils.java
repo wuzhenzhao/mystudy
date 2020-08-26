@@ -113,10 +113,16 @@ public class LocalDateTimeUtils {
      * @Author: wuzhenzhao
      * @Date: 2020/8/21 11:08
      */
-    private static String getISODateString(LocalDateTime localDateTime) {
+    public static String getISODateString(LocalDateTime localDateTime) {
         SimpleDateFormat df1 = new SimpleDateFormat(ISO_DATETIME_TIME_ZONE_FORMAT);
         String format = df1.format(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()));
         return format;
+    }
+
+    public static String getDateStringByFormat(LocalDateTime localDateTime, String format) {
+        SimpleDateFormat df1 = new SimpleDateFormat(format);
+        String result = df1.format(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()));
+        return result;
     }
 
     public static void main(String[] args) {

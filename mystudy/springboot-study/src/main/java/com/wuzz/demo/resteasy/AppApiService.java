@@ -1,5 +1,8 @@
 package com.wuzz.demo.resteasy;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+
 /**
  * @description: 类功能描述
  * @author: wuzhenzhao
@@ -8,7 +11,10 @@ package com.wuzz.demo.resteasy;
  **/
 public class AppApiService implements IAppApiService {
     @Override
-    public String test() {
-        return "Hello  javax.ws.rs-api";
+    public Result test(HttpServletRequest request) {
+//        return "Hello  javax.ws.rs-api";
+        Result result = new Result();
+        result.setTime(LocalDateTime.now());
+        return result;
     }
 }
