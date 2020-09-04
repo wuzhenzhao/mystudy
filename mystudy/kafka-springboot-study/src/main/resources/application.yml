@@ -1,3 +1,4 @@
+
 #kafka配置信息
 kafka:
   producer:
@@ -19,3 +20,5 @@ kafka:
     batch-listener: true                                #是否开启批量消费，true表示批量消费
     concurrencys: 3,6                                   #设置消费的线程数
     poll-timeout: 1500                                  #只限自动提交，
+server:
+  port: 8678

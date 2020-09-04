@@ -30,7 +30,8 @@ public class KafkaSender {
         message.setId(System.currentTimeMillis());
         message.setMsg(UUID.randomUUID().toString());
         message.setSendTime(new Date());
+        String topics = System.getProperty("topics");
         System.out.println("+++++++++++++++++++++  message = {}"+gson.toJson(message));
-        kafkaTemplate.send("wuzzTopic", gson.toJson(message));
+        kafkaTemplate.send(topics, gson.toJson(message));
     }
 }

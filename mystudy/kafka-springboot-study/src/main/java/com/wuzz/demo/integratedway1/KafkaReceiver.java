@@ -3,6 +3,7 @@ package com.wuzz.demo.integratedway1;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,11 @@ import static org.apache.kafka.common.requests.DeleteAclsResponse.log;
  * ClassPath:com.wuzz.demo.integratedway1.KafkaReceiver
  */
 @Component
+@DependsOn("kafkaTopicConfig")
 public class KafkaReceiver {
     private static Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
 
-    @KafkaListener(containerFactory = "kafkaBatchListener6", topics = {"testCopyTopic"}, groupId = "testGroup")
+    @KafkaListener(containerFactory = "kafkaBatchListener6", topics = {"#{'${topics}'}"}, groupId = "testGroup")
     public void listen(ConsumerRecord<?, ?> record, Acknowledgment ack) {
         try {
             Optional<?> kafkaMessage = Optional.ofNullable(record.value());
