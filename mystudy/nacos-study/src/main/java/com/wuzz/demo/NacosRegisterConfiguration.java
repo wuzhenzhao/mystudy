@@ -26,6 +26,7 @@ public class NacosRegisterConfiguration {
     @NacosInjected
     private NamingService namingService;
 
+    //restTemplate.getForObject("http://nacos-provider/get", String.class); 调用
     @PostConstruct
     public void registerInstance() throws NacosException {
         namingService.registerInstance(applicationName, "127.0.0.1", serverPort, "DEFAULT");
