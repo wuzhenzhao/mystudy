@@ -12,5 +12,5 @@ eureka:
     registerWithEureka: false #表示是否注册Eureka服务器,因为自身作为服务注册中心，所以为false
     fetchRegistry: false #是否从eureka上获取注册信息,因为自身作为服务注册中心，所以为false
     serviceUrl: #http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/ #集群版
-      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+      defaultZone: http://localhost:7001/eureka/
 
