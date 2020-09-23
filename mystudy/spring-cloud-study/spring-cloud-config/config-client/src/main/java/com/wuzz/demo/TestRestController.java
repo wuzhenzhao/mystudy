@@ -19,16 +19,16 @@ public class TestRestController {
     @Value("${foo}")
     String foo;
 
+    @Value("${custom.property.hello}")
+    private String txt;
+
     @RequestMapping(value = "/hello")
-    public String hello(){
+    public String hello() {
         return foo;
     }
 
-    public static void main(String[] args) {
-
-        int a = Math.abs("anonymous.8c5d85b0-6ded-4dba-8dc2-ebe2fcd38081".hashCode()) % 50;
-        int b = Math.abs("anonymous.1d59a2da-cf76-4b43-99bb-49fab0645de7".hashCode()) % 50;
-        System.out.println(a);
-        System.out.println(b);
+    @RequestMapping(value = "/txt")
+    public String test() {
+        return txt;
     }
 }
