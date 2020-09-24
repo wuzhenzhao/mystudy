@@ -7,6 +7,7 @@ import com.netflix.hystrix.contrib.javanica.command.AsyncResult;
 import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import com.wuzz.demo.ClientService;
+import com.wuzz.demo.custom.hystrix.WuzzHystrixCommand;
 import com.wuzz.demo.service.HelloCollapseCommand;
 import com.wuzz.demo.service.HelloCollapseService;
 import com.wuzz.demo.service.HelloCommand;
@@ -47,6 +48,19 @@ public class RibbonController {
 
     @Autowired
     private ClientService clientService;
+
+    @WuzzHystrixCommand(fallback = "customFallback", timeout = 3000)
+    @GetMapping("/custom/hystrix/test")
+    public String test() {
+        Map map = new HashMap<>();
+        map.put("id", 666);
+        return restTemplate.getForObject(REST_URL_PREFIX + "/hello?id={id}", String.class, map);
+    }
+
+    public String customFallback() {
+        return "custom 请求被降级";
+    }
+
 
     @GetMapping("/hystrix/feign")
     public String feign() throws InterruptedException {

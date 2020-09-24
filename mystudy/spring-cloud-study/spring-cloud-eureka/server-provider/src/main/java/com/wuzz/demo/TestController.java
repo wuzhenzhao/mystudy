@@ -30,6 +30,7 @@ public class TestController {
         if (StringUtils.isEmpty(id)) {
             throw new RuntimeException();
         }
+        Thread.sleep(3000);
         // 测试fegin 超时重试代码开始
 //        List<ServiceInstance> instances = client.getInstances("feign-server");
 //        //测试超时
