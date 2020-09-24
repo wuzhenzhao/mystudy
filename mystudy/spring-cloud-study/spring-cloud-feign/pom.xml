@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>feign-server</module>
+        <module>feign-service-api</module>
     </modules>
 
 

@@ -1,13 +1,17 @@
 package com.wuzz.demo.web;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.contrib.javanica.annotation.ObservableExecutionMode;
 import com.netflix.hystrix.contrib.javanica.command.AsyncResult;
+import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
+import com.wuzz.demo.ClientService;
 import com.wuzz.demo.service.HelloCollapseCommand;
 import com.wuzz.demo.service.HelloCollapseService;
 import com.wuzz.demo.service.HelloCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -41,6 +45,15 @@ public class RibbonController {
     @Autowired
     private HelloCollapseService helloCollapseService;
 
+    @Autowired
+    private ClientService clientService;
+
+    @GetMapping("/hystrix/feign")
+    public String feign() throws InterruptedException {
+        return clientService.hello("11115");
+    }
+
+
     @RequestMapping(value = "/batchHello")
     public List<String> batchHello() throws InterruptedException, ExecutionException {
         //需要开启HystrixRequest上下文，合并请求和缓存必须开启
@@ -68,12 +81,22 @@ public class RibbonController {
         HystrixRequestContext context = HystrixRequestContext.initializeContext();
         Future<String> stringFuture = helloCollapseService.find(id);
         Future<String> stringFuture2 = helloCollapseService.find("6");
-        return stringFuture.get()+"======"+stringFuture2.get();
+        return stringFuture.get() + "======" + stringFuture2.get();
     }
 
 
     //同步
-    @HystrixCommand(fallbackMethod = "processHystrix_Get")//熔断机制
+    @HystrixCommand(commandProperties = {
+            //HystrixCommandProperties 类中包含配置信息所有
+            //开启熔断
+            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+            //最小请求数
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+            //熔断5秒
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"),
+            //10秒内 最少请求 5次。若百分比超过 50 则触发熔断
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50")
+    }, fallbackMethod = "processHystrix_Get")//熔断机制
     @RequestMapping(value = "/hello")
     public String get(Long id) {
         Map map = new HashMap<>();
@@ -81,6 +104,77 @@ public class RibbonController {
         return restTemplate.getForObject(REST_URL_PREFIX + "/hello?id={id}", String.class, map);
     }
 
+    @HystrixCommand(fallbackMethod = "timeoutFallback", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+    })
+    @GetMapping("/hystrix/timeout")
+    public String queryTimeout() {
+        return restTemplate.getForObject(REST_URL_PREFIX + "/timeout", String.class);
+    }
+
+    public String timeoutFallback() {
+        return "timeOut Hystrix";
+    }
+
+    /**
+     * 信号量隔离实现
+     * 不会使用Hystrix管理的线程池处理请求。使用容器（Tomcat）的线程处理请求逻辑。
+     * 不涉及线程切换，资源调度，上下文的转换等，相对效率高。
+     * 信号量隔离也会启动熔断机制。如果请求并发数超标，则触发熔断，返回fallback数据。
+     * commandProperties - 命令配置，HystrixPropertiesManager中的常量或字符串来配置。
+     * execution.isolation.strategy - 隔离的种类，可选值只有THREAD（线程池隔离）和SEMAPHORE（信号量隔离）。默认是THREAD线程池隔离。
+     * 设置信号量隔离后，线程池相关配置失效。
+     * execution.isolation.semaphore.maxConcurrentRequests - 信号量最大并发数。默认值是10。常见配置500~1000。
+     * 如果并发请求超过配置，其他请求进入fallback逻辑。
+     *   
+     */
+    @HystrixCommand(fallbackMethod = "semaphoreFallback",
+            commandProperties = {
+                    // 信号量隔离
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_STRATEGY, value = "SEMAPHORE"),
+                    // 信号量最大并发数
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_SEMAPHORE_MAX_CONCURRENT_REQUESTS, value = "5"),
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_TIMEOUT_ENABLED, value = "true"),
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "3000")
+            }
+    )
+    @GetMapping("/hystrix/semaphore")
+    public String semaphore() {
+        Map map = new HashMap<>();
+        map.put("id", "1");
+        return restTemplate.getForObject(REST_URL_PREFIX + "/hello?id={id}", String.class, map);
+    }
+
+    @HystrixCommand(
+//            groupKey = "order-service", commandKey = "queryOrder", threadPoolKey = "order-service",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "30"),//线程池大小
+                    @HystrixProperty(name = "maxQueueSize", value = "100"),//最大队列长度
+                    @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),//线程存活时间
+                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "15")//拒绝请求
+            },
+            commandProperties = {
+                    // 隔离
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_STRATEGY, value = "THREAD"),
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_TIMEOUT_ENABLED, value = "true"),
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_INTERRUPT_ON_TIMEOUT, value = "3000"),
+            },
+            fallbackMethod = "semaphoreFallback")
+    @GetMapping("/hystrix/thread")
+    public String thread() {
+        Map map = new HashMap<>();
+        map.put("id", "1");
+        return restTemplate.getForObject(REST_URL_PREFIX + "/hello?id={id}", String.class, map);
+    }
+
+    public String semaphoreFallback() {
+        System.out.println("semaphore Hystrix");
+        return "semaphore Hystrix";
+    }
+
+    public String threadFallback() {
+        return "thread Hystrix";
+    }
 
     //继承HystrixCommand的实现
     @RequestMapping(value = "/helloCommand")

@@ -1,6 +1,5 @@
-package com.wuzz.demo.service;
+package com.wuzz.demo;
 
-import com.wuzz.demo.config.HystrixClientService;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -26,7 +26,7 @@ public class RxJavaTest {
         Subscriber<String> subscriber = new Subscriber<String>() {
             @Override
             public void onCompleted() {
-
+                System.out.println("Subscriber : onCompleted");
             }
 
             @Override

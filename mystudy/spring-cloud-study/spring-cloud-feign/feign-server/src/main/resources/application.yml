@@ -21,7 +21,7 @@ eureka:
     prefer-ip-address: true #访问路径显示IP地址
 feign:
   hystrix:
-    enabled: false
+    enabled: true
 
 logging:
   level:

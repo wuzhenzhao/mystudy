@@ -1,6 +1,5 @@
-package com.wuzz.demo.config;
+package com.wuzz.demo;
 
-import com.wuzz.demo.service.ClientService;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,8 @@ public class HystrixClientService implements FallbackFactory<ClientService> {
         return new ClientService() {
             @Override
             public String hello(String id) {
-                return "服务降级";
+                System.out.println("feign 服务降级");
+                return "feign 服务降级";
             }
         };
     }

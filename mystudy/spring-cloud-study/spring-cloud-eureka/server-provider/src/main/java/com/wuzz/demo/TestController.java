@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Create with IntelliJ IDEA
@@ -25,9 +27,9 @@ public class TestController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(String id) throws InterruptedException {
-//        if (StringUtils.isEmpty(id)) {
-//            throw new RuntimeException();
-//        }
+        if (StringUtils.isEmpty(id)) {
+            throw new RuntimeException();
+        }
         // 测试fegin 超时重试代码开始
 //        List<ServiceInstance> instances = client.getInstances("feign-server");
 //        //测试超时
@@ -37,7 +39,13 @@ public class TestController {
 //        System.out.println("/hello, host:" + instances.get(0).getHost() +
 //                instances.get(0).getServiceId());
         // 测试fegin 超时重试代码结束
-        return "Hello Eureka Provider"+ id;
+        return "Hello Eureka Provider" + id;
+    }
+
+    @RequestMapping(value = "/timeout", method = RequestMethod.GET)
+    public String timeout() throws InterruptedException {
+        Thread.sleep(4000);
+        return "Hello Eureka Provider";
     }
 
     @GetMapping("/hi")

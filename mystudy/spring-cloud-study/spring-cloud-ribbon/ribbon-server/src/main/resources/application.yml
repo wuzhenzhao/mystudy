@@ -1,19 +1,50 @@
 server:
   port: 9001
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,hystrix.stream
 spring:
-  rabbitmq:
-    host: 192.168.1.101
-    username: guest
-    password: guest
-    port: 5672
+  #  rabbitmq:
+  #    host: 192.168.1.101
+  #    username: guest
+  #    password: guest
+  #    port: 5672
   application:
     name: ribbon-server #服务注册到Eureka上使用的名称
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+      defaultZone: http://localhost:7001/eureka/
   instance:
     instance-id: ribbon-server-9001
     prefer-ip-address: true #访问路径显示IP地址
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:  #全局配置， feignclient#method(param)
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+#    ClientService#hello(String):
+#      execution:
+#        isolation:
+#          strategy: SEMAPHORE
+#          semaphore:
+#            maxConcurrentRequests: 10
+    ClientService#hello(String):
+      execution:
+        isolation:
+          strategy: THREAD
+  threadpool:
+    cloud-provider:
+      coreSize: 2
+      maxQueueSize: 1000
+      queueSizeRejectionThreshold:  800
