@@ -23,6 +23,7 @@
         <module>spring-cloud-sleuth</module>
         <module>spring-cloud-consul</module>
         <module>spring-cloud-oauth2</module>
+        <module>spring-cloud-gateway</module>
     </modules>
 
     <properties>
