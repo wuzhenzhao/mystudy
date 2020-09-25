@@ -12,13 +12,18 @@ spring:
           enabled: false #gateway\u5F00\u542F\u670D\u52A1\u6CE8\u518C\u548C\u53D1\u73B0\u7684\u529F\u80FD
           lowerCaseServiceId: true #\u8BF7\u6C42\u8DEF\u5F84\u4E0A\u7684\u670D\u52A1\u540D\u914D\u7F6E\u4E3A\u5C0F\u5199
       routes:
-        - id: ribbon-server
-          uri: lb://RIBBON-SERVER #uri\u4EE5lb://\u5F00\u5934\uFF08lb\u4EE3\u8868\u4ECE\u6CE8\u518C\u4E2D\u5FC3\u83B7\u53D6\u670D\u52A1\uFF09\uFF0C\u540E\u9762\u63A5\u7684\u5C31\u662F\u4F60\u9700\u8981\u8F6C\u53D1\u5230\u7684\u670D\u52A1\u540D\u79F0
+#        - id: ribbon-server
+#          uri: lb://RIBBON-SERVER #uri\u4EE5lb://\u5F00\u5934\uFF08lb\u4EE3\u8868\u4ECE\u6CE8\u518C\u4E2D\u5FC3\u83B7\u53D6\u670D\u52A1\uFF09\uFF0C\u540E\u9762\u63A5\u7684\u5C31\u662F\u4F60\u9700\u8981\u8F6C\u53D1\u5230\u7684\u670D\u52A1\u540D\u79F0
+#          predicates:
+#            - Path=/demo/**
+#          filters:
+#            - StripPrefix=1 # \u4EE3\u8868 Path \u7684\u503C\u4E2D\u5C06\u7B2C\u4E00\u6BB5\u820D\u5F03\uFF0C\u672C\u4F8B\u5B50\u5C31\u662F\u8F6C\u53D1\u7684\u65F6\u5019\u4E3A /** \u5C06/demo \u53BB\u9664\u3002
+        - id: cookie_route
           predicates:
-            - Path=/demo/**
+            - Auth=Authorization,token
           filters:
             - StripPrefix=1
-
+          uri: lb://RIBBON-SERVER
 eureka:
   client:
     service-url:
