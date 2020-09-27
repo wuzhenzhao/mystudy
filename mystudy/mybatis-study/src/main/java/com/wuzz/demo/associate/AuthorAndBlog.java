@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Author: qingshan
- * @Date: 2019/4/13 19:05
- * @Description: 咕泡学院，只为更好的你
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public class AuthorAndBlog implements Serializable {
     Integer authorId; // 作者ID

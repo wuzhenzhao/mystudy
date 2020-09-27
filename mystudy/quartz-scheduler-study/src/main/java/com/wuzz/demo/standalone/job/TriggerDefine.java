@@ -3,9 +3,11 @@ package com.wuzz.demo.standalone.job;
 import org.quartz.*;
 
 /**
- * @Author: qingshan
- * @Date: 2019/9/4 17:49
- * @Description: 咕泡学院，只为更好的你
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public class TriggerDefine {
     public static void main(String[] args) {

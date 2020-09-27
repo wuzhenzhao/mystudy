@@ -5,9 +5,11 @@ import com.wuzz.demo.entity.Author;
 import java.io.Serializable;
 
 /**
- * @Author: qingshan
- * @Date: 2019/4/13 19:37
- * @Description: 咕泡学院，只为更好的你
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public class BlogAndAuthor implements Serializable {
     Integer bid; // 文章ID

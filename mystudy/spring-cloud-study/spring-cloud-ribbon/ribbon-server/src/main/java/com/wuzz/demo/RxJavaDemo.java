@@ -8,10 +8,12 @@ import rx.functions.Func0;
 import java.util.concurrent.ExecutionException;
 
 /**
- * 咕泡学院，只为更好的你
- * 咕泡学院-Mic: 2227324689
- * http://www.gupaoedu.com
- **/
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
+ */
 public class RxJavaDemo {
 
     // ReactiveX Java  响应式编程框架(android）

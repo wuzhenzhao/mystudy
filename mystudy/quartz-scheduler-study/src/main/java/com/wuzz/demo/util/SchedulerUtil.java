@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 /**
- * Quartz工具类
- * qingshan
- * 咕泡学院，只为更好的你
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public class SchedulerUtil {
     private static Logger logger = LoggerFactory.getLogger(SchedulerUtil.class);

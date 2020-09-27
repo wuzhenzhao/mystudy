@@ -8,9 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Author: qingshan
- * @Date: 2018/9/11 17:15
- * @Description: 咕泡学院，只为更好的你
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:
  */
 public class TestTask2 implements BaseJob {
     @Override

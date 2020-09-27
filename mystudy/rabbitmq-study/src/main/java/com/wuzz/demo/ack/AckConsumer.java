@@ -4,12 +4,12 @@ import com.rabbitmq.client.*;
 import com.wuzz.demo.message.ResourceUtil;
 
 import java.io.IOException;
-
 /**
- * @Author: qingshan
- * @Date: 2018/9/21 10:53
- * @Description: 咕泡学院，只为更好的你
- * 消息消费者，用于测试消费者手工应答和重回队列
+ * Create with IntelliJ IDEA
+ * User: Wuzhenzhao
+ * Date: 2019/3/13
+ * Time: 18:13
+ * Description:消息消费者，用于测试消费者手工应答和重回队列
  */
 public class AckConsumer {
     private final static String QUEUE_NAME = "TEST_ACK_QUEUE";
