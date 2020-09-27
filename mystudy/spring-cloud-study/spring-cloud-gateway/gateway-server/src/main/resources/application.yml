@@ -18,12 +18,35 @@ spring:
 #            - Path=/demo/**
 #          filters:
 #            - StripPrefix=1 # \u4EE3\u8868 Path \u7684\u503C\u4E2D\u5C06\u7B2C\u4E00\u6BB5\u820D\u5F03\uFF0C\u672C\u4F8B\u5B50\u5C31\u662F\u8F6C\u53D1\u7684\u65F6\u5019\u4E3A /** \u5C06/demo \u53BB\u9664\u3002
-        - id: cookie_route
+#        - id: cookie_route
+#          predicates:
+#            - Auth=Authorization,token
+#          filters:
+#            - StripPrefix=1
+#          uri: lb://RIBBON-SERVER
+        - id: config_route
           predicates:
-            - Auth=Authorization,token
+            - Path=/demo/**
           filters:
             - StripPrefix=1
+            - WuzzDefine=Hello Wuzz
           uri: lb://RIBBON-SERVER
+        - id: ratelimiter_route
+          predicates:
+            - Path=/ratelimiter/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                deny-empty-key: true
+                keyResolver: '#{@ipAddressKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+          uri: lb://RIBBON-SERVER
+  redis:
+    host: 192.168.1.101
+    port: 6379
+    password: wuzhenzhao
 eureka:
   client:
     service-url:
@@ -31,3 +54,8 @@ eureka:
   instance:
     instance-id: gateway-service
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
