@@ -1,10 +1,10 @@
 package com.wuzz.demo;
 
-import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * Create with IntelliJ IDEA
@@ -13,14 +13,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Time: 14:13
  * Description 描述:
  */
-@DubboComponentScan(basePackages = "com.wuzz.demo")
+@EnableDiscoveryClient
 @SpringBootApplication
-public class SpringBootDubboProviderApp {
+public class SpringCloudAlibabaDubboProviderApp {
 
-    private final static Logger log = LoggerFactory.getLogger(SpringBootDubboProviderApp.class);
+    private final static Logger log = LoggerFactory.getLogger(SpringCloudAlibabaDubboProviderApp.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootDubboProviderApp.class, args);
+        SpringApplication.run(SpringCloudAlibabaDubboProviderApp.class, args);
         log.info("服务启动成功");
 
     }

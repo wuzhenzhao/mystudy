@@ -16,6 +16,8 @@
         <module>dubbo-client-2.7.2</module>
         <module>springboot-dubbo-server</module>
         <module>springboot-dubbo-client</module>
+        <module>spring-cloud-alibaba-dubbo-server</module>
+        <module>spring-cloud-alibaba-dubbo-client</module>
     </modules>
 
     <properties>

@@ -1,7 +1,6 @@
 package com.wuzz.demo.consumer;
 
 import com.wuzz.demo.api.HelloService;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DubboController {
     //Dubbo提供的注解
-    @DubboReference(loadbalance = "roundrobin",
-              timeout = 9000, cluster = "failfast",
-              mock = "com.wuzz.demo.mock.HelloServiceMock", check = false)
+    @Reference(loadbalance = "roundrobin",
+            timeout = 1, cluster = "failfast",
+            mock = "com.wuzz.demo.mock.HelloServiceMock", check = false)
     HelloService helloService;
 
     @GetMapping("/sayhello")
