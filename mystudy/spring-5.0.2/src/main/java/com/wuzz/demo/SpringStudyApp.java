@@ -23,7 +23,9 @@ public class SpringStudyApp {
     public static void main(String[] args) {
         SpringApplication.run(SpringStudyApp.class, args);
         log.info("服务启动成功");
-
     }
+
+    //  BeanDefinitionRegistryPostProcessor
+    //  BeanFactoryPostProcessor
 
 }

@@ -1,5 +1,8 @@
 package com.wuzz.demo.api;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
 /**
  * Create with IntelliJ IDEA
  * User: Wuzhenzhao
@@ -7,7 +10,10 @@ package com.wuzz.demo.api;
  * Time: 14:18
  * Description 描述:
  */
+@Path("/")
 public interface HelloService {
 
+    @GET
+    @Path("/sayRest")
     String sayHello() throws Exception;
 }
