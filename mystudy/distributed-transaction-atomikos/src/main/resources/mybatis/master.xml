@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuzz.demo.mapper.mapper1.UserMapper1" >
+    <resultMap id="BaseResultMap" type="com.wuzz.demo.domain.User" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.wuzz.demo.domain.User" >
+       INSERT INTO
+            user
+            (id,name)
+        VALUES
+            (#{id}, #{name})
+    </insert>
+
+</mapper>

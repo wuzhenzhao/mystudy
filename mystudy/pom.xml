@@ -35,6 +35,7 @@
         <module>elastic-job-study</module>
         <module>dynamic-datasource</module>
         <module>sharding-jdbc-study</module>
+        <module>distributed-transaction-atomikos</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
