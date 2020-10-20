@@ -2,7 +2,7 @@ package com.wuzz.demo.interpreter;
 
 /**
  * @description: 解释器模式
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 11:03
  * @since 1.0
  **/

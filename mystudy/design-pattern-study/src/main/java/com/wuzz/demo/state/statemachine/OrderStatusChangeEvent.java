@@ -2,7 +2,7 @@ package com.wuzz.demo.state.statemachine;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 11:40
  * @since 1.0
  **/

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/23 10:47
  * @since 1.0
  **/

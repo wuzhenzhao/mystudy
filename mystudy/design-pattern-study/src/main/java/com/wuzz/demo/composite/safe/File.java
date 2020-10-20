@@ -2,7 +2,7 @@ package com.wuzz.demo.composite.safe;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/24 19:32
  * @since 1.0
  **/

@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/24 19:05
  * @since 1.0
  **/

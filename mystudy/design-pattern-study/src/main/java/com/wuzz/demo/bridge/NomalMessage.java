@@ -2,7 +2,7 @@ package com.wuzz.demo.bridge;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/24 17:19
  * @since 1.0
  **/

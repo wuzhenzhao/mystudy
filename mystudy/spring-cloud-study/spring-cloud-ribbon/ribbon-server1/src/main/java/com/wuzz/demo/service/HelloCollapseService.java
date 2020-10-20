@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/16 11:14
  * @since 1.0
  **/

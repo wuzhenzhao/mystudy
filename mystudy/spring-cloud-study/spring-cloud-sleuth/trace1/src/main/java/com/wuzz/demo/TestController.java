@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/23 14:27
  * @since 1.0
  **/

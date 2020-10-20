@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * @description:跟IntegrationSinkSender需要放在两个应用里。
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/22 15:27
  * @since 1.0
  **/

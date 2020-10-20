@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 11:42
  * @since 1.0
  **/

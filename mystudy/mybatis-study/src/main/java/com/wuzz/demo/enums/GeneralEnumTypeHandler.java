@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/2/8 0:19
  * @since 1.0
  **/
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class GeneralEnumTypeHandler<E extends BaseEnum> extends BaseTypeHandler<E> {
 
     //<result column="es_type" property="esType"
-    // typeHandler="com.hikvision.cms.screen.enums.process.GeneralEnumTypeHandler"/>
+    // typeHandler="com.wuzz.demo.screen.enums.process.GeneralEnumTypeHandler"/>
 
     // 在mybatis-plus里面还需要再配置文件中配置
     //mybatis-plus.configuration.default-enum-type-handler= com.....GeneralEnumTypeHandler

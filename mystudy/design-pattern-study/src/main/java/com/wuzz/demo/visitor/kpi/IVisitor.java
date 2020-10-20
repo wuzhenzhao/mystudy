@@ -2,7 +2,7 @@ package com.wuzz.demo.visitor.kpi;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/23 19:57
  * @since 1.0
  **/

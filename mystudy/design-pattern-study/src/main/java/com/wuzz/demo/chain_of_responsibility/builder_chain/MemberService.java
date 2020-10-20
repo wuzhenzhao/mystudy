@@ -5,7 +5,7 @@ import com.wuzz.demo.chain_of_responsibility.Member;
 
 /**
  * @description:建造者+责任链
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/23 19:09
  * @since 1.0
  **/

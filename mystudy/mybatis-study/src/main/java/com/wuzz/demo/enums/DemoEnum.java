@@ -2,7 +2,7 @@ package com.wuzz.demo.enums;
 
 /**
  * @description:告警类型
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/2/7 23:50
  * @since 1.0
  **/

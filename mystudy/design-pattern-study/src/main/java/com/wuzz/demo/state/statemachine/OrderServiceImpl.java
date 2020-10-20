@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 11:43
  * @since 1.0
  **/

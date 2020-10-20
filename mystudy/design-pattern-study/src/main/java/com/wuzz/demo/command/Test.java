@@ -7,7 +7,7 @@ import com.wuzz.demo.command.actions.StopAction;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/23 19:36
  * @since 1.0
  **/

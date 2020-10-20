@@ -2,7 +2,7 @@ package com.wuzz.demo.interpreter;
 
 /**
  * @description:解释器顶层接口
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 10:44
  * @since 1.0
  **/

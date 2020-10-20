@@ -2,7 +2,7 @@ package com.wuzz.demo.builder;
 
 /**
  * @description: 建造者模式，比如mybatis的SqlSessionFactoryBuilser，还有Quartz
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/23 16:13
  * @since 1.0
  **/

@@ -2,7 +2,7 @@ package com.wuzz.demo.facade;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/24 11:47
  * @since 1.0
  **/

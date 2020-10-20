@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/16 11:12
  * @since 1.0
  **/

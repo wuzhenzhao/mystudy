@@ -6,7 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 11:44
  * @since 1.0
  **/

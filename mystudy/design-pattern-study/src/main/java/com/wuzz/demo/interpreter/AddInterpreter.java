@@ -1,7 +1,7 @@
 package com.wuzz.demo.interpreter;
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 10:50
  * @since 1.0
  **/

@@ -6,8 +6,8 @@ import org.springframework.util.StringUtils;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
- * @time 2020/3/23 18:00
+ * @author: Wuzhenzhao
+ *  * @time 2020/3/23 18:00
  * @since 1.0
  **/
 public class MemberService {

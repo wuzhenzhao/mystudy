@@ -6,7 +6,7 @@ import rx.functions.Action1;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/14 20:39
  * @since 1.0
  **/

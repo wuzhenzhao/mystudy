@@ -2,7 +2,7 @@ package com.wuzz.demo.chain_of_responsibility;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/23 18:00
  * @since 1.0
  **/

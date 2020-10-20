@@ -20,8 +20,8 @@ import java.util.Map;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
- * @time 2020/4/22 15:29
+ * @author: Wuzhenzhao
+ *  * @time 2020/4/22 15:29
  * @since 1.0
  **/
 @EnableBinding(value = {Processor.class})

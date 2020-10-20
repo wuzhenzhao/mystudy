@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/4/16 10:00
  * @since 1.0
  **/

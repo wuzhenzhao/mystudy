@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/23 18:06
  * @since 1.0
  **/

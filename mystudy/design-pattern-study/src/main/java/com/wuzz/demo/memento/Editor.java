@@ -2,7 +2,7 @@ package com.wuzz.demo.memento;
 
 /**
  * @description:
- * @author: Wuzhenzhao@hikvision.com.cn
+ * @author: Wuzhenzhao
  * @time 2020/3/25 14:25
  * @since 1.0
  **/
