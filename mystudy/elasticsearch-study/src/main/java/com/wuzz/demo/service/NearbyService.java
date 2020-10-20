@@ -215,7 +215,7 @@ public class NearbyService {
         Float usetime = response.getTook().getMillis() / 1000f;
 
 
-        result.setTotal(hits.getTotalHits());
+        result.setTotal(hits.getTotalHits().value);
         result.setUseTime(usetime);
         result.setDistance(DistanceUnit.METERS.toString());
         result.setData(new ArrayList<Map<String, Object>>());
