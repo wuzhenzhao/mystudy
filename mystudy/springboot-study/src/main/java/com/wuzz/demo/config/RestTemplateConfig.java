@@ -34,6 +34,8 @@ public class RestTemplateConfig {
 
     private RestTemplate restTemplate = new RestTemplate(getHttpComponentsClientHttpRequestFactory());
 
+    // 获取流 ResponseEntity<org.springframework.core.io.Resource>
+    // inputStream = entity.getBody().getInputStream();
 
     public HttpComponentsClientHttpRequestFactory getHttpComponentsClientHttpRequestFactory(){
         HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory =
