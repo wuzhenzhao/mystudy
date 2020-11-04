@@ -68,7 +68,7 @@ public class LocalDateTimeUtils {
     public static LocalDateTime plus(LocalDateTime time, long number, TemporalUnit field) {
         return time.plus(number, field);
     }
-
+    //localDate.minus( 1, ChronoUnit.YEARS )
     //日期减去一个数,根据field不同减不同值,field参数为ChronoUnit.*
     public static LocalDateTime minu(LocalDateTime time, long number, TemporalUnit field) {
         return time.minus(number, field);
