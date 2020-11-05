@@ -1,10 +1,10 @@
 package com.wuzz.demo.web;
 
 import com.wuzz.demo.core.Result;
-import org.apache.commons.compress.utils.IOUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -33,6 +33,15 @@ public class FileController {
         InputStream ins = multipartFile.getInputStream();
         File file = new File(multipartFile.getOriginalFilename());
         inputStreamToFile(ins, file);
+        // 3.8版本的POI对excel的导出操作，一般只使用HSSFWorkbook以及 SXSSFWorkbook，
+        // HSSFWorkbook用来处理较少的数据量， SXSSFWorkbook用来处理大数据量以及超大数据量的导出。
+//        SXSSFWorkbook wk = new SXSSFWorkbook();
+        //dispose of temporary files backing this workbook on disk
+        //处理磁盘上备份此工作簿的临时文件
+//        wk.dispose();
+        // 关闭
+//        wk.close();
+        //该类会出现内存溢出
         XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
         XSSFSheet sheet = null;
 
