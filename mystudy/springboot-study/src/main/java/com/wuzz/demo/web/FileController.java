@@ -35,6 +35,9 @@ public class FileController {
         inputStreamToFile(ins, file);
         // 3.8版本的POI对excel的导出操作，一般只使用HSSFWorkbook以及 SXSSFWorkbook，
         // HSSFWorkbook用来处理较少的数据量， SXSSFWorkbook用来处理大数据量以及超大数据量的导出。
+        // 值得注意的是SXSSFWorkbook只能写不能读。
+        // POI之前的版本不支持大数据量处理，如果数据过多则经常报OOM错误，有时候调整JVM大小效果也不是太好。
+        // 3.8版本的POI新出来了SXSSFWorkbook,可以支持大数据量的操作，只是 SXSSFWorkbook只支持.xlsx格式，不支持.xls格式。
 //        SXSSFWorkbook wk = new SXSSFWorkbook();
         //dispose of temporary files backing this workbook on disk
         //处理磁盘上备份此工作簿的临时文件
