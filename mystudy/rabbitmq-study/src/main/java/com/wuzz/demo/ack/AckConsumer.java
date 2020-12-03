@@ -16,16 +16,31 @@ public class AckConsumer {
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setUri(ResourceUtil.getKey("rabbitmq.uri"));
-
+//        factory.setUri(ResourceUtil.getKey("rabbitmq.uri"));
+// 连接IP
+        factory.setHost("10.33.43.14");
+        // 连接端口
+        factory.setPort(6005);
+        // 虚拟机
+//			factory.setVirtualHost("/");
+        // 用户
+        factory.setUsername("root");
+        factory.setPassword("wYgmafFg");
+//            factory.setConnectionTimeout(30000);
+        factory.setHandshakeTimeout(30000);
         // 建立连接
         Connection conn = factory.newConnection();
         // 创建消息通道
         final Channel channel = conn.createChannel();
 
         // 声明队列（默认交换机AMQP default，Direct）
+        channel.exchangeDeclare("air.task.result.exchange","direct",true, false, null);
+        // 声明队列
         // String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        channel.queueDeclare("air.task.result", true, false, false, null);
+
+        // 绑定队列和交换机
+        channel.queueBind("air.task.result","air.task.result.exchange","air.task.result");
         System.out.println(" Waiting for message....");
 
         // 创建消费者，并接收消息
