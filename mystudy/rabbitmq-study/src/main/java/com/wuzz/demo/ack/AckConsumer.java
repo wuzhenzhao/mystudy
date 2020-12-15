@@ -25,7 +25,7 @@ public class AckConsumer {
 //			factory.setVirtualHost("/");
         // 用户
         factory.setUsername("root");
-        factory.setPassword("wYgmafFg");
+        factory.setPassword("Pbjm6aCM");
 //            factory.setConnectionTimeout(30000);
         factory.setHandshakeTimeout(30000);
         // 建立连接
@@ -37,10 +37,10 @@ public class AckConsumer {
         channel.exchangeDeclare("air.task.result.exchange","direct",true, false, null);
         // 声明队列
         // String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
-        channel.queueDeclare("air.task.result", true, false, false, null);
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         // 绑定队列和交换机
-        channel.queueBind("air.task.result","air.task.result.exchange","air.task.result");
+        channel.queueBind(QUEUE_NAME,"air.task.result.exchange","air.task.result");
         System.out.println(" Waiting for message....");
 
         // 创建消费者，并接收消息

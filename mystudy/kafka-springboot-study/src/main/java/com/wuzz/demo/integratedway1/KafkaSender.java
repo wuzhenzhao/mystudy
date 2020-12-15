@@ -25,13 +25,17 @@ public class KafkaSender {
     private Gson gson = new GsonBuilder().create();
 
     //发送消息方法
+//    @Transactional
     public void send() {
         Message message = new Message();
         message.setId(System.currentTimeMillis());
         message.setMsg(UUID.randomUUID().toString());
         message.setSendTime(new Date());
         String topics = System.getProperty("topics");
-        System.out.println("+++++++++++++++++++++  message = {}"+gson.toJson(message));
+        System.out.println("+++++++++++++++++++++  message = {}" + gson.toJson(message));
+        kafkaTemplate.executeInTransaction(t -> {
+            return true;
+        });
         kafkaTemplate.send(topics, gson.toJson(message));
     }
 }

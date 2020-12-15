@@ -21,10 +21,10 @@ public class UserServiceImpl implements com.wuzz.demo.service.impl.UserService {
     private UserMapper2 userMapper2;
 
     @Override
-    @Transactional(transactionManager = "xatx")
+    @Transactional
     public int insert(User user) {
         userMapper1.insert(user);
-//        int k =1/0;
+        int k =1/0;
         userMapper2.insert(user);
 
 
