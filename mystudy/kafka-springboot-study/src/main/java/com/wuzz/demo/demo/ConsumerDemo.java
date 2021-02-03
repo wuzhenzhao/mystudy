@@ -60,6 +60,6 @@ public class ConsumerDemo extends Thread{
     }
 
     public static void main(String[] args) {
-        new ConsumerDemo("testCopyTopic").start();
+        new ConsumerDemo("cem_test_topic").start();
     }
 }

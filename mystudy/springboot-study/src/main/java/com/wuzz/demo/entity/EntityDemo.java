@@ -6,6 +6,7 @@ import com.wuzz.demo.core.Result;
 import com.wuzz.demo.core.validate.DefaultValidate;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -24,7 +25,7 @@ public class EntityDemo extends DefaultValidate implements Serializable {
     @NotNull(message = "名称不能为空")
     public String name;
 
-
+//    @Pattern(regexp = "")
     private Double age;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")

@@ -13,19 +13,19 @@ import java.io.IOException;
  */
 public class AckConsumer {
     private final static String QUEUE_NAME = "TEST_ACK_QUEUE";
-
+//host:10.19.132.8, port:6005, username:root, password:bGeyQJfN
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
 //        factory.setUri(ResourceUtil.getKey("rabbitmq.uri"));
 // 连接IP
-        factory.setHost("10.33.43.14");
+        factory.setHost("10.19.132.8");
         // 连接端口
         factory.setPort(6005);
         // 虚拟机
 //			factory.setVirtualHost("/");
         // 用户
         factory.setUsername("root");
-        factory.setPassword("Pbjm6aCM");
+        factory.setPassword("bGeyQJfN");
 //            factory.setConnectionTimeout(30000);
         factory.setHandshakeTimeout(30000);
         // 建立连接
@@ -34,13 +34,13 @@ public class AckConsumer {
         final Channel channel = conn.createChannel();
 
         // 声明队列（默认交换机AMQP default，Direct）
-        channel.exchangeDeclare("air.task.result.exchange","direct",true, false, null);
+        channel.exchangeDeclare("cbdm_consumer_exchange","direct",true, false, null);
         // 声明队列
         // String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         // 绑定队列和交换机
-        channel.queueBind(QUEUE_NAME,"air.task.result.exchange","air.task.result");
+        channel.queueBind(QUEUE_NAME,"cbdm_consumer_exchange","cbdm_consumer_routingKey");
         System.out.println(" Waiting for message....");
 
         // 创建消费者，并接收消息

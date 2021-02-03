@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Create with IntelliJ IDEA
- * User: Wuzhenzhao
+ * : Wuzhenzhao
  * Date: 2019/3/13
  * Time: 18:13
  * Description:
