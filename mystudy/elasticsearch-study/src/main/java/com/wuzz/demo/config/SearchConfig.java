@@ -2,7 +2,6 @@ package com.wuzz.demo.config;
 
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class SearchConfig {
     public TransportClient client() throws UnknownHostException {
 
 
-        InetSocketTransportAddress node = new InetSocketTransportAddress(
+        TransportAddress node = new TransportAddress(
                 InetAddress.getByName(esConfig.getIp()),
                 esConfig.getPort()
         );
