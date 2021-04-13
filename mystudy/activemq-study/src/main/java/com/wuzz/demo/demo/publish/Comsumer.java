@@ -21,7 +21,7 @@ public class Comsumer {
 
         ConnectionFactory connectionFactory =
                 new ActiveMQConnectionFactory
-                        ("admin","NikCxkoi","tcp://10.19.132.8:7018");
+                        ("admin","hTud96KJ","tcp://10.19.132.8:7018");
         Connection connection = null;
         try {
             connection = connectionFactory.createConnection();
@@ -30,7 +30,7 @@ public class Comsumer {
             Session session = connection.createSession
                     (Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
             //创建目的地
-            Topic destination = session.createTopic("iac.ifoottraffic.flow_density_data.topic");
+            Topic destination = session.createTopic("cem_hengdian_message");
 //            Topic destination = session.createTopic("cem.cemweb.entrance.guard.sub.event.topic");
 //            Topic destination = session.createTopic("iac.esc.thermalImaging.topic");
             //创建接收者

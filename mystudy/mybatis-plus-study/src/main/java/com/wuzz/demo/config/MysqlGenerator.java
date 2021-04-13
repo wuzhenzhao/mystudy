@@ -39,7 +39,7 @@ public class MysqlGenerator {
      * JDBC相关配置
      */
     private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://127.0.0.1:5432/eemva";
+    private static final String URL = "jdbc:postgresql://127.0.0.1:5432/cem";
     private static final String USER_NAME = "postgres";
     private static final String PASSWORD = "zhenzhao123456";
 
