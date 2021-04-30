@@ -29,7 +29,7 @@ public class MysqlGenerator {
     /**
      * 模块名称
      */
-    private static final String MODULE_NAME = "biz";
+    private static final String MODULE_NAME = "api";
     /**
      * 代码生成者
      */

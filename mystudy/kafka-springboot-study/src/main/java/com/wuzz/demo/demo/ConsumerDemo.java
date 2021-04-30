@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * Create with IntelliJ IDEA
@@ -27,8 +28,8 @@ public class ConsumerDemo extends Thread{
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "192.168.1.101:9092");//,192.168.1.102:9092,192.168.1.103:9092
         // 消费者分组
-        properties.put(ConsumerConfig.GROUP_ID_CONFIG,"KafkaConsumerDemo");
-        properties.put(ConsumerConfig.CLIENT_ID_CONFIG,"KafkaConsumerDemo1");
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString()+"KafkaConsumerDemo");
+        properties.put(ConsumerConfig.CLIENT_ID_CONFIG,UUID.randomUUID().toString()+"KafkaConsumerDemo1");
         //确认自动提交
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,"true");
         // 自动提交间隔

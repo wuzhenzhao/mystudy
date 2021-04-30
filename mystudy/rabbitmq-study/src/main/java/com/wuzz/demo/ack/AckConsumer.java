@@ -18,14 +18,14 @@ public class AckConsumer {
         ConnectionFactory factory = new ConnectionFactory();
 //        factory.setUri(ResourceUtil.getKey("rabbitmq.uri"));
 // 连接IP
-        factory.setHost("10.19.132.8");
+        factory.setHost("10.19.189.56");
         // 连接端口
         factory.setPort(6005);
         // 虚拟机
 //			factory.setVirtualHost("/");
         // 用户
         factory.setUsername("root");
-        factory.setPassword("bGeyQJfN");
+        factory.setPassword("wdEfEeC7");
 //            factory.setConnectionTimeout(30000);
         factory.setHandshakeTimeout(30000);
         // 建立连接
@@ -34,13 +34,13 @@ public class AckConsumer {
         final Channel channel = conn.createChannel();
 
         // 声明队列（默认交换机AMQP default，Direct）
-        channel.exchangeDeclare("cbdm_consumer_exchange","direct",true, false, null);
+        channel.exchangeDeclare("cem_test_exchange","direct",true, false, null);
         // 声明队列
         // String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         // 绑定队列和交换机
-        channel.queueBind(QUEUE_NAME,"cbdm_consumer_exchange","cbdm_consumer_routingKey");
+        channel.queueBind(QUEUE_NAME,"cem_test_exchange","cem_test_consumer_routingKey");
         System.out.println(" Waiting for message....");
 
         // 创建消费者，并接收消息
