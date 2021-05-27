@@ -1,6 +1,7 @@
 package com.wuzz.demo.provider;
 
 import com.wuzz.demo.api.HelloService;
+import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.config.annotation.Argument;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Method;
@@ -16,8 +17,9 @@ import org.apache.dubbo.config.annotation.Method;
         timeout = 50000, //超时
         cluster = "failsafe", // 服务容错
         protocol = {"dubbo", "rest"}, //多协议支持
-        registry = {"hangzhou", "wenzhou"}//多注册中心
-)
+//        registry = {"hangzhou", "wenzhou"}//多注册中心
+        registry = {"wenzhou"}//多注册中心
+)@Activate
 public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello() throws Exception {
