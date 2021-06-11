@@ -1,8 +1,10 @@
 package com.wuzz.demo.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wuzz.demo.model.FastJsonTestModel;
 import com.wuzz.demo.model.JacksonTestModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,8 @@ public class JsonPropertySerializationController {
     public JacksonTestModel serialization() throws JsonProcessingException {
         JacksonTestModel test = new JacksonTestModel();
         logger.info(ObjectMapper.writeValueAsString(test));
-
+        FastJsonTestModel model =new FastJsonTestModel();
+        logger.info(JSONObject.toJSONString(model));
         return test;
     }
 }
