@@ -36,6 +36,7 @@
         <module>dynamic-datasource</module>
         <module>sharding-jdbc-study</module>
         <module>distributed-transaction-atomikos</module>
+        <module>pulsar-study</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
