@@ -49,40 +49,40 @@ public class ForkJoinPoolTest {
         }
 
     }
-//    //有返回值
-//    static class AddTask2 extends RecursiveTask<Long> {
-//        int start, end;
-//
-//        private AddTask2(int start, int end) {
-//            this.start = start;
-//            this.end = end;
-//        }
-//        @Override
-//        protected Long compute() {
-//            if(end -start <MAX_NUM) {
-//                long sum =0L;
-//                for(int i=start;i<end ;i++) sum += nums[i];
-//                return sum;
-//            }
-//            int middle =start +(end-start)/2;
-//            AddTask2 task1 = new AddTask2(start, middle);
-//            AddTask2 task2 = new AddTask2(middle, end);
-//            task1.fork();//启动新线程
-//            task2.fork();
-//            return task1.join() + task2.join();
-//
-//        }
+    //有返回值
+    static class AddTask2 extends RecursiveTask<Long> {
+        int start, end;
 
-//    }
+        private AddTask2(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+        @Override
+        protected Long compute() {
+            if(end -start <MAX_NUM) {
+                long sum =0L;
+                for(int i=start;i<end ;i++) sum += nums[i];
+                return sum;
+            }
+            int middle =start +(end-start)/2;
+            AddTask2 task1 = new AddTask2(start, middle);
+            AddTask2 task2 = new AddTask2(middle, end);
+            task1.fork();//启动新线程
+            task2.fork();
+            return task1.join() + task2.join();
+
+        }
+
+    }
     public static void main(String[] args) throws IOException {
         ForkJoinPool fjp = new ForkJoinPool();
 
-        AddTask task = new AddTask(0, nums.length);
-        fjp.execute(task);
-//        AddTask2 task2 = new AddTask2(0, nums.length);
-//        fjp.execute(task2);
-//        long result= task2.join();//阻塞的
-//        System.out.println(result);
+//        AddTask task = new AddTask(0, nums.length);
+//        fjp.execute(task);
+        AddTask2 task2 = new AddTask2(0, nums.length);
+        fjp.execute(task2);
+        long result= task2.join();//阻塞的
+        System.out.println(result);
         System.in.read();
     }
 }

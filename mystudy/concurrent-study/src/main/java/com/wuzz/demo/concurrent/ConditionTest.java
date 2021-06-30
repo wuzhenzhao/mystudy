@@ -13,6 +13,7 @@ public class ConditionTest {
 
     public static void main(String[] args) {
         ReentrantLock lock = new ReentrantLock();
+        // Condition 等同于Synchronized底层 所提供的 _WaitSet  队列
         Condition condition = lock.newCondition();
         ConditionDemoWait waitThread = new ConditionDemoWait(lock, condition);
         waitThread.start();
