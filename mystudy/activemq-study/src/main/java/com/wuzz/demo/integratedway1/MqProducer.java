@@ -4,7 +4,6 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsMessagingTemplate;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -24,11 +23,8 @@ public class MqProducer {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
 
-
-   /**
+    /**
      * 发送字符串消息队列
      *
      * @param queueName 队列名称
@@ -36,7 +32,6 @@ public class MqProducer {
      */
     public void sendStringQueue(String queueName, String message) {
         this.jmsMessagingTemplate.convertAndSend(new ActiveMQQueue(queueName), message);
-//        jmsTemplate.convertAndSend(new ActiveMQQueue(queueName), message);
     }
 
 

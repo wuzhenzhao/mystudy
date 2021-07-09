@@ -1,10 +1,10 @@
 package com.wuzz.demo.integratedway1;
 
+import org.apache.activemq.command.ActiveMQMessage;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-import javax.jms.ObjectMessage;
-import java.util.List;
+import javax.jms.Session;
 
 /**
  * User: Wuzhenzhao
@@ -16,10 +16,19 @@ import java.util.List;
 @Component
 public class QueueConsumer {
 
+
     @JmsListener(destination = "stringQueue", containerFactory = "jmsListenerContainerQueue")
-    public void receiveStringQueue(String msg) {
-        System.out.println("接收到消息...." + msg);
+    public void consumer(ActiveMQMessage message, Session session) throws Exception {
+        System.out.println(session.getAcknowledgeMode());
+        System.out.println(session.getTransacted());
+        System.out.println("接受队列消息，内容为：{}" + message);
+        message.acknowledge();
     }
+
+//    @JmsListener(destination = "stringQueue", containerFactory = "jmsListenerContainerQueue")
+//    public void receiveStringQueue(String msg) {
+//        System.out.println("接收到消息...." + msg);
+//    }
 
 
 //    @JmsListener(destination = "stringListQueue", containerFactory = "jmsListenerContainerQueue")

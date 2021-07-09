@@ -1,15 +1,13 @@
 package com.wuzz.demo.integratedway1.config;
 
-import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.core.JmsTemplate;
 
 import javax.jms.ConnectionFactory;
-import javax.jms.Queue;
 
 /**
  * User: Wuzhenzhao
@@ -21,38 +19,49 @@ import javax.jms.Queue;
 @Configuration
 public class ActiveMqConfig {
 
+    @Value("${spring.activemq.broker-url}")
+    private String brokerUrl;
+
+    @Value("${spring.activemq.user}")
+    private String username;
+
+    @Value("${spring.activemq.password}")
+    private String password;
+
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
+//        RedeliveryPolicy policy=new RedeliveryPolicy();
+//        policy.setUseExponentialBackOff(Boolean.TRUE);
+//        policy.setMaximumRedeliveries(2);
+//        policy.setInitialRedeliveryDelay(1000L);
+//        activeMQConnectionFactory.setRedeliveryPolicy(policy);
+        return connectionFactory;
+
+
+    }
 
     // queue模式的ListenerContainer
     @Bean
-    public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory activeMQConnectionFactory) {
+    public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
         //使用异步发送
 //        ((ActiveMQConnectionFactory) activeMQConnectionFactory).setUseAsyncSend(true);
         //使用异步发送
 //        ((ActiveMQConnection)activeMQConnectionFactory).setUseAsyncSend(true);
-        bean.setConnectionFactory(activeMQConnectionFactory);
+        //手动应答
+        bean.setSessionAcknowledgeMode(4);
+        bean.setConnectionFactory(connectionFactory);
         return bean;
     }
-
 
     // topic模式的ListenerContainer
     @Bean
-    public JmsListenerContainerFactory<?> jmsListenerContainerTopic(ConnectionFactory activeMQConnectionFactory) {
+    public JmsListenerContainerFactory<?> jmsListenerContainerTopic(ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
         bean.setPubSubDomain(true);
-        bean.setConnectionFactory(activeMQConnectionFactory);
+        bean.setConnectionFactory(connectionFactory);
         return bean;
     }
-
-//    @Bean
-//    public JmsTemplate jmsTemplate(ActiveMQConnectionFactory activeMQConnectionFactory, Queue queue){
-//        JmsTemplate jmsTemplate=new JmsTemplate();
-//        jmsTemplate.setDeliveryMode(2);//进行持久化配置 1表示非持久化，2表示持久化
-//        jmsTemplate.setConnectionFactory(activeMQConnectionFactory);
-//        jmsTemplate.setDefaultDestination(queue); //此处可不设置默认，在发送消息时也可设置队列
-//        jmsTemplate.setSessionAcknowledgeMode(4);//客户端签收模式
-//        return jmsTemplate;
-//    }
-
-
 }
