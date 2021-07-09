@@ -18,10 +18,13 @@ public class MyProducer {
     private RabbitTemplate rabbitTemplate;
 
     public void send() {
-        rabbitTemplate.convertAndSend("DIRECT_EXCHANGE", "wuzz.test", "DIRECT_EXCHANGE message");
-        rabbitTemplate.convertAndSend("TOPIC_EXCHANGE", "hangzhou.wuzz.test", "TOPIC_EXCHANGE hangzhou message");
-        rabbitTemplate.convertAndSend("TOPIC_EXCHANGE", "wenzhou.wuzz.test", "TOPIC_EXCHANGE wenzhou message");
-        rabbitTemplate.convertAndSend("FANOUT_EXCHANGE", "", "FANOUT_EXCHANGE message");
+        for (int i = 1; i <= 2; i++) {
+            rabbitTemplate.convertAndSend("DIRECT_EXCHANGE", "wuzz.test", "DIRECT_EXCHANGE message" + i);
+
+        }
+//        rabbitTemplate.convertAndSend("TOPIC_EXCHANGE", "hangzhou.wuzz.test", "TOPIC_EXCHANGE hangzhou message");
+//        rabbitTemplate.convertAndSend("TOPIC_EXCHANGE", "wenzhou.wuzz.test", "TOPIC_EXCHANGE wenzhou message");
+//        rabbitTemplate.convertAndSend("FANOUT_EXCHANGE", "", "FANOUT_EXCHANGE message");
 
     }
 }
