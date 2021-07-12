@@ -2,6 +2,7 @@ package com.wuzz.demo.integratedway1.controller;
 
 
 import com.wuzz.demo.integratedway1.MyProducer;
+import com.wuzz.demo.integratedway1.ProducerMessageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +21,13 @@ public class TestController {
     @Autowired
     private MyProducer MyProducer;
 
+    @Autowired
+    private ProducerMessageServiceImpl producerMessageService;
+
     @RequestMapping(value = "/testStringQueue.json", method = {RequestMethod.GET})
     public void testStringQueue() {
-        MyProducer.send();
-
+//        MyProducer.send();
+        producerMessageService.send();
     }
 
 }

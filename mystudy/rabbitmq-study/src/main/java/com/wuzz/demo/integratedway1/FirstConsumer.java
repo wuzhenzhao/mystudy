@@ -40,16 +40,16 @@ public class FirstConsumer {
              * deliveryTag:该消息的index <br>
              * multiple：是否批量.true:将一次性ack所有小于deliveryTag的消息 <br>
              */
-//            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 
-            if(msg.contains("2")){
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(),
-                        false, true);
-                System.out.println("get msg2 basicNack msg = "+msg);
-            }else{
-                channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-                System.out.println("get msg2 basicAck msg = "+msg);
-            }
+//            if(msg.contains("2")){
+//                channel.basicNack(message.getMessageProperties().getDeliveryTag(),
+//                        false, true);
+//                System.out.println("get msg2 basicNack msg = "+msg);
+//            }else{
+//                channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+//                System.out.println("get msg2 basicAck msg = "+msg);
+//            }
 
 
         } catch (Exception e) {
