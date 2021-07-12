@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
+import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.jms.core.JmsTemplate;
 
 import javax.jms.ConnectionFactory;
 
@@ -75,4 +77,23 @@ public class ActiveMqConfig {
         bean.setConnectionFactory(connectionFactory);
         return bean;
     }
+
+//    @Bean
+//    public JmsTemplate jmsTemplate() {
+//        JmsTemplate jmsTemplate =new JmsTemplate();
+//        jmsTemplate.setPriority(1);
+//        jmsTemplate.setTimeToLive(1000);
+//        jmsTemplate.setSessionAcknowledgeMode(4);
+//        return jmsTemplate;
+//    }
+//
+//    @Bean
+//    public JmsMessagingTemplate jmsMessagingTemplate() {
+//        JmsMessagingTemplate jmsMessagingTemplate =new JmsMessagingTemplate();
+//        jmsMessagingTemplate.setJmsTemplate(jmsTemplate());
+//        jmsMessagingTemplate.setConnectionFactory(connectionFactory());
+//        return jmsMessagingTemplate;
+//    }
+
+
 }
