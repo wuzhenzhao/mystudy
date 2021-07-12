@@ -19,10 +19,15 @@ public class QueueConsumer {
 
     @JmsListener(destination = "stringQueue", containerFactory = "jmsListenerContainerQueue")
     public void consumer(ActiveMQMessage message, Session session) throws Exception {
-        System.out.println(session.getAcknowledgeMode());
-        System.out.println(session.getTransacted());
-        System.out.println("接受队列消息，内容为：{}" + message);
-        message.acknowledge();
+        try {
+            System.out.println(session.getAcknowledgeMode());
+            System.out.println(session.getTransacted());
+            System.out.println("接受队列消息，内容为：{}" + message);
+            int i = 1 / 0;
+            message.acknowledge();
+        }catch (Exception e){
+            session.recover();
+        }
     }
 
 //    @JmsListener(destination = "stringQueue", containerFactory = "jmsListenerContainerQueue")

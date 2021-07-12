@@ -27,7 +27,7 @@ public class TestController {
     @RequestMapping(value = "/testStringQueue.json", method = {RequestMethod.GET})
     public void testStringQueue() {
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 1; i++) {
             System.out.println("第" + i + "次发送字符串队列消息");
             mqProducer.sendStringQueue("stringQueue", "消息：" + i);
         }
