@@ -36,7 +36,7 @@ public class ProducerMessageServiceImpl implements RabbitTemplate.ConfirmCallbac
 
     public void send() {
 
-        rabbitTemplate.convertAndSend("DIRECT_EXCHANGE", "wuzeeeeer", "DIRECT_EXCHANGE message2");
+        rabbitTemplate.convertAndSend("DIRECT_EXCHANGE", "wuzz.test", "DIRECT_EXCHANGE message2");
 
     }
 
@@ -44,7 +44,6 @@ public class ProducerMessageServiceImpl implements RabbitTemplate.ConfirmCallbac
     // 确认消息是否到达 Broker 服务器，也就是只确认是否正确到达 Exchange 中
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        log.info("---- confirm ----ack=" + ack + "  cause=" + String.valueOf(cause));
         if (ack) {
             log.info("---- confirm ----ack==true  cause=" + cause);
         } else {

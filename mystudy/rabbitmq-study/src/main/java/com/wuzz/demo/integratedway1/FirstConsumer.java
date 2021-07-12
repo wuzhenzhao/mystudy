@@ -33,7 +33,8 @@ public class FirstConsumer {
         }
 
         System.out.println("get msg1 success msg = " + msg + "  DeliveryTag :" + message.getMessageProperties().getDeliveryTag());
-        try {
+//        try {
+            int i = 1 / 0;
             /**
              * 确认一条消息：<br>
              * channel.basicAck(deliveryTag, false); <br>
@@ -52,7 +53,7 @@ public class FirstConsumer {
 //            }
 
 
-        } catch (Exception e) {
+//        } catch (Exception e) {
             //消费者处理出了问题，需要告诉队列信息消费失败
             /**
              * 拒绝确认消息:<br>
@@ -61,9 +62,9 @@ public class FirstConsumer {
              * multiple：是否批量.true:将一次性拒绝所有小于deliveryTag的消息。<br>
              * requeue：被拒绝的是否重新入队列 <br>
              */
-            channel.basicNack(message.getMessageProperties().getDeliveryTag(),
-                    false, true);
-            System.err.println("get msg1 failed msg = " + msg);
+//            channel.basicNack(message.getMessageProperties().getDeliveryTag(),
+//                    false, false);
+//            System.err.println("get msg1 failed msg = " + msg);
 
             /**
              * 拒绝一条消息：<br>
@@ -71,7 +72,7 @@ public class FirstConsumer {
              * deliveryTag:该消息的index<br>
              * requeue：被拒绝的是否重新入队列
              */
-            //channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
-        }
+//            channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
+//        }
     }
 }
